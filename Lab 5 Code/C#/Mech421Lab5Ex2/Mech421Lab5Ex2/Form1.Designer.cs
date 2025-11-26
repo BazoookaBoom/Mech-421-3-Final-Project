@@ -37,6 +37,10 @@
             this.ControllerModeLabel = new System.Windows.Forms.Label();
             this.SpeedControl = new System.Windows.Forms.Label();
             this.ZeroedButton = new System.Windows.Forms.Button();
+            this.comboBoxCOM = new System.Windows.Forms.ComboBox();
+            this.RefreshCOMButton = new System.Windows.Forms.Button();
+            this.CWSpinLabel = new System.Windows.Forms.Label();
+            this.CCWSpinLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -65,10 +69,12 @@
             // 
             // trackBar1
             // 
-            this.trackBar1.Location = new System.Drawing.Point(37, 214);
+            this.trackBar1.Location = new System.Drawing.Point(84, 214);
+            this.trackBar1.Maximum = 255;
             this.trackBar1.Name = "trackBar1";
             this.trackBar1.Size = new System.Drawing.Size(132, 45);
             this.trackBar1.TabIndex = 2;
+            this.trackBar1.Value = 127;
             this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
             // 
             // ControllerModeButton
@@ -89,33 +95,69 @@
             this.ControllerModeLabel.Size = new System.Drawing.Size(104, 13);
             this.ControllerModeLabel.TabIndex = 4;
             this.ControllerModeLabel.Text = "ControllerModeLabel";
-            this.ControllerModeLabel.Click += new System.EventHandler(this.ControllerModeLabel_Click);
             // 
             // SpeedControl
             // 
             this.SpeedControl.AutoSize = true;
-            this.SpeedControl.Location = new System.Drawing.Point(68, 198);
+            this.SpeedControl.Location = new System.Drawing.Point(115, 198);
             this.SpeedControl.Name = "SpeedControl";
             this.SpeedControl.Size = new System.Drawing.Size(74, 13);
             this.SpeedControl.TabIndex = 5;
             this.SpeedControl.Text = "Speed Control";
-            this.SpeedControl.Click += new System.EventHandler(this.SpeedControl_Click);
             // 
             // ZeroedButton
             // 
-            this.ZeroedButton.Location = new System.Drawing.Point(97, 251);
+            this.ZeroedButton.Location = new System.Drawing.Point(125, 246);
             this.ZeroedButton.Name = "ZeroedButton";
-            this.ZeroedButton.Size = new System.Drawing.Size(16, 25);
+            this.ZeroedButton.Size = new System.Drawing.Size(50, 34);
             this.ZeroedButton.TabIndex = 6;
-            this.ZeroedButton.Text = "Zeroed";
+            this.ZeroedButton.Text = "Zero Speed";
             this.ZeroedButton.UseVisualStyleBackColor = true;
             this.ZeroedButton.Click += new System.EventHandler(this.ZeroedButton_Click);
+            // 
+            // comboBoxCOM
+            // 
+            this.comboBoxCOM.FormattingEnabled = true;
+            this.comboBoxCOM.Location = new System.Drawing.Point(37, 25);
+            this.comboBoxCOM.Name = "comboBoxCOM";
+            this.comboBoxCOM.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxCOM.TabIndex = 10;
+            // 
+            // RefreshCOMButton
+            // 
+            this.RefreshCOMButton.Location = new System.Drawing.Point(170, 25);
+            this.RefreshCOMButton.Name = "RefreshCOMButton";
+            this.RefreshCOMButton.Size = new System.Drawing.Size(75, 23);
+            this.RefreshCOMButton.TabIndex = 11;
+            this.RefreshCOMButton.Text = "Refresh";
+            this.RefreshCOMButton.UseVisualStyleBackColor = true;
+            this.RefreshCOMButton.Click += new System.EventHandler(this.RefreshCOMButton_Click);
+            // 
+            // CWSpinLabel
+            // 
+            this.CWSpinLabel.AutoSize = true;
+            this.CWSpinLabel.Location = new System.Drawing.Point(221, 216);
+            this.CWSpinLabel.Name = "CWSpinLabel";
+            this.CWSpinLabel.Size = new System.Drawing.Size(35, 13);
+            this.CWSpinLabel.TabIndex = 12;
+            this.CWSpinLabel.Text = "CW";
+            // 
+            // CCWSpinLabel
+            // 
+            this.CCWSpinLabel.AutoSize = true;
+            this.CCWSpinLabel.Location = new System.Drawing.Point(43, 216);
+            this.CCWSpinLabel.Name = "CCWSpinLabel";
+            this.CCWSpinLabel.Size = new System.Drawing.Size(35, 13);
+            this.CCWSpinLabel.TabIndex = 13;
+            this.CCWSpinLabel.Text = "CCW";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(382, 452);
+            this.Controls.Add(this.CCWSpinLabel);
+            this.Controls.Add(this.CWSpinLabel);
             this.Controls.Add(this.ZeroedButton);
             this.Controls.Add(this.SpeedControl);
             this.Controls.Add(this.ControllerModeLabel);
@@ -123,6 +165,8 @@
             this.Controls.Add(this.trackBar1);
             this.Controls.Add(this.CCWOneStepButton);
             this.Controls.Add(this.CWOneStepButton);
+            this.Controls.Add(this.comboBoxCOM);
+            this.Controls.Add(this.RefreshCOMButton);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -142,6 +186,10 @@
         private System.Windows.Forms.Label ControllerModeLabel;
         private System.Windows.Forms.Label SpeedControl;
         private System.Windows.Forms.Button ZeroedButton;
+        private System.Windows.Forms.ComboBox comboBoxCOM;
+        private System.Windows.Forms.Button RefreshCOMButton;
+        private System.Windows.Forms.Label CWSpinLabel;
+        private System.Windows.Forms.Label CCWSpinLabel;
     }
 }
 

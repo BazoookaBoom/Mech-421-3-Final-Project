@@ -18,67 +18,96 @@ namespace Mech421Lab5Ex2
         }
 
         int speed = 0;
+        byte forwardStep = 1; // command for forward one step
+        byte backwardStep = 2; // command for backward one step
+        byte speedMode = 3; // command for speed mode
+        byte stopMotor = 4; // command to stop motor
+
+        private bool inContinuousMode = false;
         private void CWOneStepButton_Click(object sender, EventArgs e)
         {
-            //TD Lab 5 Exercise 2: Add code to make the stepper motor take one step clockwise
-            //Should be implemented by just sending a letter to make the firmware do one step
-            //No encoding on this side
+            if (!inContinuousMode)
+                SendPacket(forwardStep, 127);   // command: forward one step
         }
 
         private void CCWOneStepButton_Click(object sender, EventArgs e)
         {
-            //TD Lab 5 Exercise 2: Add code to make the stepper motor take one step clockwise
+            if (!inContinuousMode)
+                SendPacket(backwardStep, 127);   // command: backward one step
         }
-
-        private void trackBar1_Scroll(object sender, EventArgs e)
-        {
-
-        }
-
         private void ControllerModeButton_Click(object sender, EventArgs e)
         {
-            if(ControllerModeButton.Text == "Step")
+            inContinuousMode = !inContinuousMode;
+
+            if (inContinuousMode)
             {
-                //TD Lab 5 Exercise 2: Add code to enter controller mode
-                //This will likely involve sending a character to the firmware
-                //and changing the button text to "Exit Controller Mode"
-                ControllerModeButton.Text = "Continuous Speed";
+                ControllerModeButton.Text = "Continuous";
+                speed = 127;
+                SendPacket(speedMode, ((byte)speed)); // Enter speed mode, 0 speed at start
+                trackBar1.Value = speed;
             }
             else
             {
-                //TD Lab 5 Exercise 2: Add code to exit controller mode
-                //This will likely involve sending a character to the firmware
-                //and changing the button text to "Enter Controller Mode"
                 ControllerModeButton.Text = "Step";
+                SendPacket(stopMotor, 127); // Stop motor on exit
             }
         }
 
+
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            RefreshCOMButton_Click(null, null);
         }
-
-        private void ControllerModeLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void SpeedControl_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void ZeroedButton_Click(object sender, EventArgs e)
         {
-            speed = 0;
+            speed = 127;
             trackBar1.Value = speed;
-        }
 
-        private void trackBar1_Scroll_1(object sender, EventArgs e)
+            if (inContinuousMode)
+                SendPacket(3, 127);
+        }
+        private void trackBar1_Scroll(object sender, EventArgs e)
         {
             speed = trackBar1.Value;
-            //TD Lab 5 Exercise 2: Add code to send the speed value to the firmware
+
+            if (inContinuousMode)
+                SendPacket(3, (byte)speed);  // command = speed mode
         }
 
+        private void SendPacket(byte command, byte speedByte)
+        {
+            if (!serialPort1.IsOpen)
+            {
+                //try
+                //{
+                //    serialPort1.PortName = comboBoxCOM.SelectedItem.ToString();
+                //    serialPort1.Open();
+                //}
+                //catch
+                //{
+                //    MessageBox.Show("Unable to open COM port!");
+                    return;
+                //}
+            }
+
+            byte startByte = 255;
+
+            byte[] packet = new byte[3];
+            packet[0] = startByte;
+            packet[1] = command;
+            packet[2] = speedByte;
+
+            serialPort1.Write(packet, 0, 3);
+        }
+        private void RefreshCOMButton_Click(object sender, EventArgs e)
+        {
+            comboBoxCOM.Items.Clear();
+            comboBoxCOM.Items.AddRange(System.IO.Ports.SerialPort.GetPortNames());
+
+            if (comboBoxCOM.Items.Count > 0)
+                comboBoxCOM.SelectedIndex = 0;
+        }
+
+        
     }
 }
