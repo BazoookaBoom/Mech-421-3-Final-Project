@@ -1,0 +1,11 @@
+C:\Users\Centr\source\repos\Mech421Lab1Ex4\Mech421Lab1Ex4\bin\Debug\Mech421Lab1Ex4.exe.config
+C:\Users\Centr\source\repos\Mech421Lab1Ex4\Mech421Lab1Ex4\bin\Debug\Mech421Lab1Ex4.exe
+C:\Users\Centr\source\repos\Mech421Lab1Ex4\Mech421Lab1Ex4\bin\Debug\Mech421Lab1Ex4.pdb
+C:\Users\Centr\source\repos\Mech421Lab1Ex4\Mech421Lab1Ex4\obj\Debug\Mech421Lab1Ex4.csproj.AssemblyReference.cache
+C:\Users\Centr\source\repos\Mech421Lab1Ex4\Mech421Lab1Ex4\obj\Debug\Mech421Lab1Ex4.Form1.resources
+C:\Users\Centr\source\repos\Mech421Lab1Ex4\Mech421Lab1Ex4\obj\Debug\Mech421Lab1Ex4.Properties.Resources.resources
+C:\Users\Centr\source\repos\Mech421Lab1Ex4\Mech421Lab1Ex4\obj\Debug\Mech421Lab1Ex4.csproj.GenerateResource.cache
+C:\Users\Centr\source\repos\Mech421Lab1Ex4\Mech421Lab1Ex4\obj\Debug\Mech421Lab1Ex4.csproj.CoreCompileInputs.cache
+C:\Users\Centr\source\repos\Mech421Lab1Ex4\Mech421Lab1Ex4\obj\Debug\Mech421Lab1Ex4.exe
+C:\Users\Centr\source\repos\Mech421Lab1Ex4\Mech421Lab1Ex4\obj\Debug\Mech421Lab1Ex4.pdb
+C:\Users\Centr\source\repos\Mech421Lab1Ex4\Mech421Lab1Ex4\obj\Debug\Mech421Lab1Ex4.exe.config

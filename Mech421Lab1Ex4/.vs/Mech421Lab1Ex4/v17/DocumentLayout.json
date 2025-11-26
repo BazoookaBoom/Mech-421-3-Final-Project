@@ -1,0 +1,68 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Centr\\source\\repos\\Mech421Lab1Ex4\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{201C1493-5628-4303-B7D1-28168C2960A6}|Mech421Lab1Ex4\\Mech421Lab1Ex4.csproj|c:\\users\\centr\\source\\repos\\mech421lab1ex4\\mech421lab1ex4\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{201C1493-5628-4303-B7D1-28168C2960A6}|Mech421Lab1Ex4\\Mech421Lab1Ex4.csproj|solutionrelative:mech421lab1ex4\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{201C1493-5628-4303-B7D1-28168C2960A6}|Mech421Lab1Ex4\\Mech421Lab1Ex4.csproj|C:\\Users\\Centr\\source\\repos\\Mech421Lab1Ex4\\mech421lab1ex4\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{201C1493-5628-4303-B7D1-28168C2960A6}|Mech421Lab1Ex4\\Mech421Lab1Ex4.csproj|solutionrelative:mech421lab1ex4\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{201C1493-5628-4303-B7D1-28168C2960A6}|Mech421Lab1Ex4\\Mech421Lab1Ex4.csproj|C:\\Users\\Centr\\source\\repos\\Mech421Lab1Ex4\\mech421lab1ex4\\form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{201C1493-5628-4303-B7D1-28168C2960A6}|Mech421Lab1Ex4\\Mech421Lab1Ex4.csproj|solutionrelative:mech421lab1ex4\\form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Form1.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\Centr\\source\\repos\\Mech421Lab1Ex4\\Mech421Lab1Ex4\\Form1.Designer.cs",
+              "RelativeDocumentMoniker": "Mech421Lab1Ex4\\Form1.Designer.cs",
+              "ToolTip": "C:\\Users\\Centr\\source\\repos\\Mech421Lab1Ex4\\Mech421Lab1Ex4\\Form1.Designer.cs",
+              "RelativeToolTip": "Mech421Lab1Ex4\\Form1.Designer.cs",
+              "ViewState": "AgIAAJYAAAAAAAAAAAAqwIgAAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-08T03:33:57.468Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Form1.cs",
+              "DocumentMoniker": "C:\\Users\\Centr\\source\\repos\\Mech421Lab1Ex4\\Mech421Lab1Ex4\\Form1.cs",
+              "RelativeDocumentMoniker": "Mech421Lab1Ex4\\Form1.cs",
+              "ToolTip": "C:\\Users\\Centr\\source\\repos\\Mech421Lab1Ex4\\Mech421Lab1Ex4\\Form1.cs",
+              "RelativeToolTip": "Mech421Lab1Ex4\\Form1.cs",
+              "ViewState": "AgIAAFQAAAAAAAAAAAAmwFAAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-08T03:32:51.018Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Form1.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\Centr\\source\\repos\\Mech421Lab1Ex4\\Mech421Lab1Ex4\\Form1.cs",
+              "RelativeDocumentMoniker": "Mech421Lab1Ex4\\Form1.cs",
+              "ToolTip": "C:\\Users\\Centr\\source\\repos\\Mech421Lab1Ex4\\Mech421Lab1Ex4\\Form1.cs [Design]",
+              "RelativeToolTip": "Mech421Lab1Ex4\\Form1.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-08T03:31:26.982Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
