@@ -14,8 +14,9 @@
 */
 
 // ------------------ CONFIG / TUNING ------------------
-#define PWM_PERIOD_TB0    1000u    // TB0 CCR0 (PWM period)  -> A phases (tune if needed)
-#define PWM_PERIOD_TB1    1000u    // TB1 CCR0 (PWM period)  -> B phases (tune if needed)
+// PWM Period Specification (PWM Frequency [Hz] = SMCLK_HZ / PWM_PERIOD)
+#define PWM_PERIOD_TB0    160000u    // TB0 CCR0 (PWM period)  -> A phases (tune if needed)
+#define PWM_PERIOD_TB1    160000u    // TB1 CCR0 (PWM period)  -> B phases (tune if needed)
 
 #define PERIOD_MAX        60000u   // safety: slowest step period (TA1 ticks)
 #define PERIOD_MIN         2000u   // safety: fastest step period (TA1 ticks). Start conservative.
@@ -42,19 +43,6 @@ volatile uint8_t rxCount = 0;
 volatile uint8_t halfIndex = 0;        // 0..7 (8 half-step states)
 volatile int8_t stepDirection = 0;     // +1 CW, -1 CCW, 0 = stopped (for continuous)
 volatile uint32_t stepPeriod = PERIOD_MAX; // TA1 ticks between steps (will be updated)
-
-// ------------------ Look-up table (8 half-step patterns) ------------------
-// Pattern bits: bit0 = A+, bit1 = A-, bit2 = B+, bit3 = B-
-// 1 -> energized (25%), 0 -> de-energized (0%).
-const uint8_t halfStepPatterns[8] = {
-    0b0101, // state 0: A+ (bit0) and B+ (bit2) energized  -> A+ B+
-    0b0100, // state 1: A+ only                            -> A+ 
-    0b0110, // state 2: A+ and B-? Wait ordering... we'll use conventional table below
-    // We'll use canonical half-step sequence below implemented explicitly for clarity.
-    0,0,0,0,0
-};
-
-// We'll not use the above short table; implement canonical sequence explicitly in setHalfStep()
 
 // ------------------ Forward declarations ------------------
 void initClock(void);
@@ -90,6 +78,7 @@ int main(void)
 }
 
 // ------------------ CLOCK ------------------
+// Configure clock for 8 MHz
 void initClock(void)
 {
     CSCTL0_H = 0xA5;
@@ -100,6 +89,7 @@ void initClock(void)
 }
 
 // ------------------ UART ------------------
+// Configure UART for 9600 baud UART
 void initUART(void)
 {
     // Configure P2.0/P2.1 for eUSCI_A0 UART
@@ -302,7 +292,7 @@ __interrupt void USCI_A0_ISR(void)
             if (b == 255u) {
                 rxBuffer[rxCount++] = b;
             } else {
-                // not synchronized; ignore
+                // not synchronized; ignore non 255s
             }
             return;
         }
@@ -329,6 +319,8 @@ __interrupt void TIMER1_A0_ISR(void)
 {
     if (stepDirection != 0) {
         // advance half-step index in chosen direction
+        // stepDirection = 1 for _____
+        // stepDirection = ___ for ___
         if (stepDirection > 0) halfIndex = (halfIndex + 1) & 0x07;
         else halfIndex = (halfIndex - 1) & 0x07;
 
