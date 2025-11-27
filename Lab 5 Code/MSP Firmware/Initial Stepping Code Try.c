@@ -21,8 +21,8 @@
 #define PERIOD_MAX        60000u   // safety: slowest step period (TA1 ticks)
 #define PERIOD_MIN         2000u   // safety: fastest step period (TA1 ticks). Start conservative.
 
-#define SPEED_CENTER      127u     // trackbar center = zero speed
-#define SPEED_MAX         255u
+#define SPEED_CENTER      127u      // Speed byte value corresponding to 0 (middle of range of possible values)
+#define SPEED_MAX         255u      // Maximum speed byte value
 
 // --- Timer / clock assumptions (match your initClock and TA1 prescaler)
 // SMCLK ~ 8 MHz, and TA1 uses ID__1 which divides by 2 -> f_timer = 4 MHz
@@ -288,23 +288,26 @@ __interrupt void USCI_A0_ISR(void)
     {
         uint8_t b = (uint8_t)UCA0RXBUF;
 
-        if (rxCount == 0) {
+        // Packet Start Byte Received (255)
+        if (rxCount == 0) { 
             if (b == 255u) {
                 rxBuffer[rxCount++] = b;
             } else {
-                // not synchronized; ignore non 255s
+                // packet start byte not received, ignore
             }
             return;
         }
-
-        if (rxCount == 1) {
+        // Packet Command Byte
+        else if (rxCount == 1) {
             rxBuffer[rxCount++] = b; // command
             return;
-        } else if (rxCount == 2) {
+        } 
+        // Packet Speed Byte
+        else if (rxCount == 2) {
             rxBuffer[rxCount++] = b; // speed
         }
-
-        if (rxCount == 3) {
+        // Process Packet, then return to waiting for start byte (state 0)
+        else if (rxCount == 3) {
             uint8_t cmd = rxBuffer[1];
             uint8_t speed = rxBuffer[2];
             processPacket(cmd, speed);
