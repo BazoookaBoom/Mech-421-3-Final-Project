@@ -113,12 +113,12 @@ void initPWMOutputs(void)
     TB0CTL = TBSSEL__SMCLK | MC__UP | TBCLR;
     TB0CCR0 = PWM_PERIOD_TB0 - 1;
     // TB0.1 -> P1.4
-    P1SEL |= BIT4;
+    P1SEL0 |= BIT4;
     P1DIR |= BIT4;
     TB0CCTL1 = OUTMOD_7;
     TB0CCR1 = 0;
     // TB0.2 -> P1.5
-    P1SEL |= BIT5;
+    P1SEL0 |= BIT5;
     P1DIR |= BIT5;
     TB0CCTL2 = OUTMOD_7;
     TB0CCR2 = 0;
