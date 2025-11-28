@@ -241,6 +241,15 @@ void updateStepPeriodFromSpeedByte(uint8_t speed)
 }
 
 // ------------------ Packet processing (matches C#) ------------------
+// Packet layout as shown
+// [255] [cmd] [speed]
+// cmd = 1  ->  half step CW
+// cmd = 2  ->  half step CCW
+// cmd = 3  ->  continuous, direction determined by speed
+// cmd = 4  ->  stop stepper motor
+// speed    ->  speed < 127 = __?__
+//              speed = 127 = stop/hold
+//              speed > 127 = __?__
 void processPacket(uint8_t cmd, uint8_t speed)
 {
     switch (cmd)
@@ -322,8 +331,8 @@ __interrupt void TIMER1_A0_ISR(void)
 {
     if (stepDirection != 0) {
         // advance half-step index in chosen direction
-        // stepDirection = 1 for _____
-        // stepDirection = ___ for ___
+        // stepDirection = 1 for __?__
+        // stepDirection = __?__ for __?__
         if (stepDirection > 0) halfIndex = (halfIndex + 1) & 0x07;
         else halfIndex = (halfIndex - 1) & 0x07;
 
