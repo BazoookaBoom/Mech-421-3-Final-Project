@@ -50,6 +50,12 @@ namespace Mech421Lab5Ex2
                 SendPacket(forwardStep, 127);   // command: forward one step
         }
 
+        private void CCWOneStepButton_Click(object sender, EventArgs e)
+        {
+            if (!inContinuousMode)
+                SendPacket(backwardStep, 127);   // command: forward one step
+        }
+
         // --- ControllerModeButton_Click ---
         // Toggles the control mode (continuous vs single-step)
         private void ControllerModeButton_Click(object sender, EventArgs e)
@@ -77,6 +83,8 @@ namespace Mech421Lab5Ex2
 
             if (inContinuousMode)
                 SendPacket(3, 127);
+
+            SpeedLabel.Text = "0";
         }
         private void TrackBar1_Scroll(object sender, EventArgs e)
         {
@@ -84,6 +92,8 @@ namespace Mech421Lab5Ex2
 
             if (inContinuousMode)
                 SendPacket(3, (byte)speed);  // command = speed mode
+
+            SpeedLabel.Text = ((speed - 127)/1.27).ToString();
         }
 
         // ===== SERIAL COMMUNICATION METHODS =====
@@ -195,5 +205,6 @@ namespace Mech421Lab5Ex2
             }
             catch { }
         }
+
     }
 }
