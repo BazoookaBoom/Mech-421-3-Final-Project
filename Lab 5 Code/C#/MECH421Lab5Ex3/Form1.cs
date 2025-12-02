@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.IO.Ports;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
+
+// Packet structure: [255], [posX], [posY], [speed]
 
 namespace MECH421Lab5Ex3
 {
@@ -19,12 +21,10 @@ namespace MECH421Lab5Ex3
         bool userWantsConnection = false;
 
         // --- Motor Control Vars ---
-        int speed = 0;
-        byte forwardStep = 1; // command for forward one step
-        byte backwardStep = 2; // command for backward one step
-        byte speedMode = 3; // command for speed mode
-        byte stopMotor = 4; // command to stop motor
-        private bool inContinuousMode = false;
+        sbyte speed = 0; // 0 = 0% speed
+        byte deltaX = 0; // relative X target
+        byte deltaY = 0; // relative Y target
+
 
         public Form1()
         {
@@ -74,6 +74,67 @@ namespace MECH421Lab5Ex3
                 ConnectButton.Text = "Disconnect";
             }
             catch { }
+        }
+
+        // --- ConnectButton_Click ---
+        // Triggers serial connection sequence
+        private void ConnectButton_Click(object sender, EventArgs e)
+        {
+            // Close serial port and reset button text to reflect new state
+            if (serialPort1.IsOpen)
+            {
+                userWantsConnection = false;
+                serialPort1.Close();
+                ConnectButton.Text = "Connect";
+                return;
+            }
+
+            // If connection attempted, but no COM ports are available to connect to, show error message
+            if (comboBoxCOMPorts.Text == "No COM ports!")
+            {
+                MessageBox.Show("No COM ports detected!");
+                return;
+            }
+
+            // If program has made it to this point, then:
+            // - serial port is currently closed
+            // - AND there must be a valid COM port to connect to
+
+            // Take dropdown-selected COM port as the connection target
+            serialPort1.PortName = comboBoxCOMPorts.Text;
+
+            // Attempt to connect to drop-down selected port. If connection failed, attempt auto-reconnects
+            try
+            {
+                serialPort1.Open();
+                ConnectButton.Text = "Disconnect";
+                userWantsConnection = true;
+            }
+            catch
+            {
+                MessageBox.Show("Failed to open port. Will auto-retry.");
+                userWantsConnection = true;
+            }
+        }
+
+        private void ControllerModeButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ZeroedButton_Click(object sender, EventArgs e)
+        {
+            trackBar1.Value = 0;
+        }
+
+        // --- MoveToTarget_Click ---
+        // Commands steppers to move to target coordinates (0-254)
+        private void MoveToTarget_Click(object sender, EventArgs e)
+        {
+            deltaX = Convert.ToByte(targetXVal.Text);
+            deltaY = Convert.ToByte(targetYVal.Text);
+            speed = Convert.ToSByte(trackBar1.Value);
+            
         }
     }
 }
