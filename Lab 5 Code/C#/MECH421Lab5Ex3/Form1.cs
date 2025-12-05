@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 
-// Packet structure: [255], [posX], [posY], [speed]
+// Packet structure: [255], [posX in mm], [posY in mm], [speed]
 
 namespace MECH421Lab5Ex3
 {
@@ -19,6 +19,7 @@ namespace MECH421Lab5Ex3
         // --- Auto-Reconnect Vars ---
         Timer autoReconnectTimer = new Timer();
         bool userWantsConnection = false;
+        Queue<byte> packetBytes = new Queue<byte>();
 
         // --- Motor Control Vars ---
         sbyte speed = 0; // 0 = 0% speed
@@ -122,19 +123,39 @@ namespace MECH421Lab5Ex3
 
         }
 
-        private void ZeroedButton_Click(object sender, EventArgs e)
+        private void AddSeqButton_Click(object sender, EventArgs e)
         {
-            trackBar1.Value = 0;
+            packetBytes.Enqueue(255);
+            packetBytes.Enqueue(Convert.ToByte(xCoord.Text));
+            packetBytes.Enqueue(Convert.ToByte(yCoord.Text));
+            packetBytes.Enqueue(Convert.ToByte(speedPercentage.Text));
+
+            string newPacketDisp = "(" + Convert.ToString(xCoord.Text) + ", " + Convert.ToString(yCoord.Text) + ", " + Convert.ToString(speedPercentage.Text) + ") ";
+
+            sequenceTextInput.Text += newPacketDisp;
         }
 
-        // --- MoveToTarget_Click ---
-        // Commands steppers to move to target coordinates (0-254)
-        private void MoveToTarget_Click(object sender, EventArgs e)
+        private void ClrSeqButton_Click(object sender, EventArgs e)
         {
-            deltaX = Convert.ToByte(targetXVal.Text);
-            deltaY = Convert.ToByte(targetYVal.Text);
-            speed = Convert.ToSByte(trackBar1.Value);
-            
+            packetBytes.Clear();
+
+            sequenceTextInput.Text = "";
+        }
+
+        private void executeSeqButton_Click(object sender, EventArgs e)
+        {
+            if (serialPort1.IsOpen)
+            {
+                for (int i = 0; i < packetBytes.Count; i++)
+                {
+                    byte txByte = packetBytes.Dequeue();
+                    serialPort1.Write(txByte.ToString());
+                }
+            }
+            else
+            {
+                MessageBox.Show("Serial port not open!");
+            }
         }
     }
 }
