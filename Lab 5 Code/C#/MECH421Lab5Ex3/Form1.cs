@@ -118,11 +118,6 @@ namespace MECH421Lab5Ex3
             }
         }
 
-        private void ControllerModeButton_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void AddSeqButton_Click(object sender, EventArgs e)
         {
             packetBytes.Enqueue(255);
