@@ -31,7 +31,7 @@ namespace MECH423Lab6Ex1
         }
         private void Form1_Load(object sender, EventArgs e)
         {
-            RefreshCOMPorts();
+            //RefreshCOMPorts();
         }
         private void ZeroedButton_Click(object sender, EventArgs e)
         {
@@ -150,7 +150,7 @@ namespace MECH423Lab6Ex1
             if (!userWantsConnection) return;
             if (serialPort1.IsOpen) return;
 
-            RefreshCOMPorts();
+            //RefreshCOMPorts();
 
             try
             {
@@ -160,5 +160,6 @@ namespace MECH423Lab6Ex1
             }
             catch { }
         }
+
     }
 }

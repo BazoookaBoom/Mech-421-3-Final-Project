@@ -47,7 +47,7 @@
             // 
             // serialPort1
             // 
-            this.serialPort1.PortName = "COM4";
+            this.serialPort1.PortName = "COM3";
             // 
             // trackBar1
             // 
@@ -76,6 +76,7 @@
             this.comboBoxCOMPorts.Name = "comboBoxCOMPorts";
             this.comboBoxCOMPorts.Size = new System.Drawing.Size(121, 21);
             this.comboBoxCOMPorts.TabIndex = 10;
+            this.comboBoxCOMPorts.Items.AddRange(new object[] { "COM3" });
             // 
             // ConnectButton
             // 
@@ -85,6 +86,7 @@
             this.ConnectButton.TabIndex = 11;
             this.ConnectButton.Text = "Connect";
             this.ConnectButton.UseVisualStyleBackColor = true;
+            this.ConnectButton.Click += new System.EventHandler(this.ConnectButton_Click);
             // 
             // CWSpinLabel
             // 
