@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
+using System.Drawing; 
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +16,8 @@ namespace MECH423Lab6Ex1
         // --- Auto-Reconnect Vars ---
         Timer autoReconnectTimer = new Timer();
         bool userWantsConnection = false;
+        int SpeedCenter = 32768;
+        int SpeedMax = 65536;
 
         // --- Motor Control Vars ---
         int speed = 0;
@@ -35,7 +37,7 @@ namespace MECH423Lab6Ex1
         }
         private void ZeroedButton_Click(object sender, EventArgs e)
         {
-            speed = 127;
+            speed = SpeedCenter;
             trackBar1.Value = speed;
 
             SendPacket((byte)speed);
@@ -47,8 +49,11 @@ namespace MECH423Lab6Ex1
         private void TrackBar1_Scroll(object sender, EventArgs e)
         {
             speed = trackBar1.Value;
-            SendPacket((byte)speed);
-            SpeedLabel.Text = ((int)((speed - 127) / 1.27)).ToString();
+            if (speed <= 0){
+                speed = 1;
+            }
+            SendPacket(speed);
+            SpeedLabel.Text = (((double)(speed - SpeedCenter) / SpeedCenter)*100).ToString();
             Console.WriteLine("Speed set to: " + SpeedLabel.Text + " %");
         }
         
@@ -56,7 +61,7 @@ namespace MECH423Lab6Ex1
 
         // --- SendPacket ---
         // Sends a packet over UART with the form [255], [cmd], [speed]
-        private void SendPacket(byte speedByte)
+        private void SendPacket(int speedTotal)
         {
             if (!serialPort1.IsOpen)
             {
@@ -74,11 +79,12 @@ namespace MECH423Lab6Ex1
 
             byte startByte = 255;
 
-            byte[] packet = new byte[2];
+            byte[] packet = new byte[3];
             packet[0] = startByte;
-            packet[1] = speedByte;
+            packet[1] = (byte)(speedTotal >> 8);
+            packet[2] = (byte)(speedTotal & 0xFF);
 
-            serialPort1.Write(packet, 0, 2);
+            serialPort1.Write(packet, 0, 3);
         }
 
         // ===== SERIAL CONNECTION METHODS =====

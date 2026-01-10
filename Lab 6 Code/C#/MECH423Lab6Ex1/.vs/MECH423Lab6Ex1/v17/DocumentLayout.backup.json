@@ -1,18 +1,18 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\Centr\\Documents\\GitHub\\Mech-421-3-Final-Project\\Lab 6 Code\\C#\\MECH423Lab6Ex1\\",
+  "WorkspaceRootPath": "C:\\Users\\conoron.stu\\Documents\\GitHub\\Mech-421-3-Final-Project\\Lab 6 Code\\C#\\MECH423Lab6Ex1\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{13B270C8-0886-4DE1-BBCC-509CEB06A824}|MECH423Lab6Ex1\\MECH423Lab6Ex1.csproj|C:\\Users\\Centr\\Documents\\GitHub\\Mech-421-3-Final-Project\\Lab 6 Code\\C#\\MECH423Lab6Ex1\\mech423lab6ex1\\form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{13B270C8-0886-4DE1-BBCC-509CEB06A824}|MECH423Lab6Ex1\\MECH423Lab6Ex1.csproj|solutionrelative:mech423lab6ex1\\form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{13B270C8-0886-4DE1-BBCC-509CEB06A824}|MECH423Lab6Ex1\\MECH423Lab6Ex1.csproj|c:\\users\\centr\\documents\\github\\mech-421-3-final-project\\lab 6 code\\c#\\mech423lab6ex1\\mech423lab6ex1\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{13B270C8-0886-4DE1-BBCC-509CEB06A824}|MECH423Lab6Ex1\\MECH423Lab6Ex1.csproj|C:\\Users\\conoron.stu\\Documents\\GitHub\\Mech-421-3-Final-Project\\Lab 6 Code\\C#\\MECH423Lab6Ex1\\mech423lab6ex1\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{13B270C8-0886-4DE1-BBCC-509CEB06A824}|MECH423Lab6Ex1\\MECH423Lab6Ex1.csproj|solutionrelative:mech423lab6ex1\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{13B270C8-0886-4DE1-BBCC-509CEB06A824}|MECH423Lab6Ex1\\MECH423Lab6Ex1.csproj|C:\\Users\\Centr\\Documents\\GitHub\\Mech-421-3-Final-Project\\Lab 6 Code\\C#\\MECH423Lab6Ex1\\mech423lab6ex1\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{13B270C8-0886-4DE1-BBCC-509CEB06A824}|MECH423Lab6Ex1\\MECH423Lab6Ex1.csproj|C:\\Users\\conoron.stu\\Documents\\GitHub\\Mech-421-3-Final-Project\\Lab 6 Code\\C#\\MECH423Lab6Ex1\\mech423lab6ex1\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{13B270C8-0886-4DE1-BBCC-509CEB06A824}|MECH423Lab6Ex1\\MECH423Lab6Ex1.csproj|solutionrelative:mech423lab6ex1\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{13B270C8-0886-4DE1-BBCC-509CEB06A824}|MECH423Lab6Ex1\\MECH423Lab6Ex1.csproj|c:\\users\\conoron.stu\\documents\\github\\mech-421-3-final-project\\lab 6 code\\c#\\mech423lab6ex1\\mech423lab6ex1\\form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{13B270C8-0886-4DE1-BBCC-509CEB06A824}|MECH423Lab6Ex1\\MECH423Lab6Ex1.csproj|solutionrelative:mech423lab6ex1\\form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,41 +22,46 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "Form1.cs",
-              "DocumentMoniker": "C:\\Users\\Centr\\Documents\\GitHub\\Mech-421-3-Final-Project\\Lab 6 Code\\C#\\MECH423Lab6Ex1\\MECH423Lab6Ex1\\Form1.cs",
+              "DocumentMoniker": "C:\\Users\\conoron.stu\\Documents\\GitHub\\Mech-421-3-Final-Project\\Lab 6 Code\\C#\\MECH423Lab6Ex1\\MECH423Lab6Ex1\\Form1.cs",
               "RelativeDocumentMoniker": "MECH423Lab6Ex1\\Form1.cs",
-              "ToolTip": "C:\\Users\\Centr\\Documents\\GitHub\\Mech-421-3-Final-Project\\Lab 6 Code\\C#\\MECH423Lab6Ex1\\MECH423Lab6Ex1\\Form1.cs",
+              "ToolTip": "C:\\Users\\conoron.stu\\Documents\\GitHub\\Mech-421-3-Final-Project\\Lab 6 Code\\C#\\MECH423Lab6Ex1\\MECH423Lab6Ex1\\Form1.cs",
               "RelativeToolTip": "MECH423Lab6Ex1\\Form1.cs",
-              "ViewState": "AgIAAEkAAAAAAAAAAAAcwF4AAAAkAAAAAAAAAA==",
+              "ViewState": "AgIAACQAAAAAAAAAAAArwCsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-01-06T20:36:22.548Z",
+              "IsPinned": true,
               "EditorCaption": ""
             },
             {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "Form1.Designer.cs",
-              "DocumentMoniker": "C:\\Users\\Centr\\Documents\\GitHub\\Mech-421-3-Final-Project\\Lab 6 Code\\C#\\MECH423Lab6Ex1\\MECH423Lab6Ex1\\Form1.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\conoron.stu\\Documents\\GitHub\\Mech-421-3-Final-Project\\Lab 6 Code\\C#\\MECH423Lab6Ex1\\MECH423Lab6Ex1\\Form1.Designer.cs",
               "RelativeDocumentMoniker": "MECH423Lab6Ex1\\Form1.Designer.cs",
-              "ToolTip": "C:\\Users\\Centr\\Documents\\GitHub\\Mech-421-3-Final-Project\\Lab 6 Code\\C#\\MECH423Lab6Ex1\\MECH423Lab6Ex1\\Form1.Designer.cs",
+              "ToolTip": "C:\\Users\\conoron.stu\\Documents\\GitHub\\Mech-421-3-Final-Project\\Lab 6 Code\\C#\\MECH423Lab6Ex1\\MECH423Lab6Ex1\\Form1.Designer.cs",
               "RelativeToolTip": "MECH423Lab6Ex1\\Form1.Designer.cs",
-              "ViewState": "AgIAAD0AAAAAAAAAAAAmwFgAAABaAAAAAAAAAA==",
+              "ViewState": "AgIAAIQAAAAAAAAAAAAowDsAAABEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-01-06T20:36:35.833Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "Form1.cs [Design]",
-              "DocumentMoniker": "C:\\Users\\Centr\\Documents\\GitHub\\Mech-421-3-Final-Project\\Lab 6 Code\\C#\\MECH423Lab6Ex1\\MECH423Lab6Ex1\\Form1.cs",
+              "DocumentMoniker": "C:\\Users\\conoron.stu\\Documents\\GitHub\\Mech-421-3-Final-Project\\Lab 6 Code\\C#\\MECH423Lab6Ex1\\MECH423Lab6Ex1\\Form1.cs",
               "RelativeDocumentMoniker": "MECH423Lab6Ex1\\Form1.cs",
-              "ToolTip": "C:\\Users\\Centr\\Documents\\GitHub\\Mech-421-3-Final-Project\\Lab 6 Code\\C#\\MECH423Lab6Ex1\\MECH423Lab6Ex1\\Form1.cs [Design]",
+              "ToolTip": "C:\\Users\\conoron.stu\\Documents\\GitHub\\Mech-421-3-Final-Project\\Lab 6 Code\\C#\\MECH423Lab6Ex1\\MECH423Lab6Ex1\\Form1.cs [Design]",
               "RelativeToolTip": "MECH423Lab6Ex1\\Form1.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-01-06T20:35:31.743Z",

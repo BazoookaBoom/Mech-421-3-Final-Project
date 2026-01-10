@@ -47,16 +47,16 @@
             // 
             // serialPort1
             // 
-            this.serialPort1.PortName = "COM3";
+            this.serialPort1.PortName = "COM7";
             // 
             // trackBar1
             // 
             this.trackBar1.Location = new System.Drawing.Point(43, 20);
-            this.trackBar1.Maximum = 255;
+            this.trackBar1.Maximum = 65535;
             this.trackBar1.Name = "trackBar1";
             this.trackBar1.Size = new System.Drawing.Size(153, 45);
             this.trackBar1.TabIndex = 2;
-            this.trackBar1.Value = 127;
+            this.trackBar1.Value = 32768;
             this.trackBar1.Scroll += new System.EventHandler(this.TrackBar1_Scroll);
             // 
             // ZeroedButton
@@ -72,11 +72,13 @@
             // comboBoxCOMPorts
             // 
             this.comboBoxCOMPorts.FormattingEnabled = true;
+            this.comboBoxCOMPorts.Items.AddRange(new object[] {
+            "COM3",
+            "COM7"});
             this.comboBoxCOMPorts.Location = new System.Drawing.Point(9, 34);
             this.comboBoxCOMPorts.Name = "comboBoxCOMPorts";
             this.comboBoxCOMPorts.Size = new System.Drawing.Size(121, 21);
             this.comboBoxCOMPorts.TabIndex = 10;
-            this.comboBoxCOMPorts.Items.AddRange(new object[] { "COM3" });
             // 
             // ConnectButton
             // 
