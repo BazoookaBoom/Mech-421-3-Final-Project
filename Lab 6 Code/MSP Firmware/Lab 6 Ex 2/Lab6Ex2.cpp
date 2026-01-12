@@ -1,4 +1,4 @@
-// ===== Lab 6 Ex 1 =====//
+// ===== Lab 6 Ex 2 =====//
 
 #include "driverlib.h"
 #include "msp430.h"
