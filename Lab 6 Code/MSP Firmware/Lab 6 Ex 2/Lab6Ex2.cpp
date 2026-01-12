@@ -109,8 +109,8 @@ void initClock(void)
     CSCTL0_H = 0;
 }
 
-// ------------------ UART ------------------
-// Configure UART for 9600 baud UART
+// ------------------ UART ------------------ 
+// Configure UART for 115200 baud UART
 void initUART(void)
 {
     // Configure P2.0/P2.1 for eUSCI_A0 UART
@@ -119,9 +119,9 @@ void initUART(void)
 
     // Configure UART0
     UCA0CTLW0 |= UCSWRST;
-    UCA0CTLW0 |= UCSSEL0;                    // Run the UART using ACLK
-    UCA0MCTLW = UCOS16 + UCBRF0 + 0x4900;   // Baud rate = 9600 from an 8 MHz clock
-    UCA0BRW = 52;
+    UCA0CTLW0 |= UCSSEL__SMCLK;                    // Run the UART using ACLK
+    UCA0MCTLW = UCOS16 + UCBRF_5 + 0x5500;   // Baud rate = 115200 from an 8 MHz clock
+    UCA0BRW = 4;
     UCA0CTLW0 &= ~UCSWRST;
     UCA0IE |= UCRXIE;                       // Enable UART Rx interrupt
 }
@@ -147,6 +147,12 @@ void initPWM(void)
     TB0CCR1 = 32000;                      // Start at 0% duty
 }
 
+void initTimer() // Set up TA0 and TAB
+{
+    TA1CCR0 = 10000 - 1;                    // 10ms @ 1MHz
+    TA1CCTL0 = CCIE;                        // Enable CCR0 interrupt
+    TA1CTL = TASSEL__SMCLK | MC__UP | ID__8; // SMCLK/8, up mode
+}
 
 // ------------------ UART ISR: parse 2-byte packets [255][speedMSB] ------------------
 #pragma vector=USCI_A0_VECTOR
