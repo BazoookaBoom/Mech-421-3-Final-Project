@@ -20,3 +20,14 @@ C:\Users\Centr\Documents\GitHub\Mech-421-3-Final-Project\Lab 6 Code\C#\MECH423La
 C:\Users\Centr\Documents\GitHub\Mech-421-3-Final-Project\Lab 6 Code\C#\MECH423Lab6Ex2\Lab6Ex2\obj\Debug\Lab6Ex2.csproj.CoreCompileInputs.cache
 C:\Users\Centr\Documents\GitHub\Mech-421-3-Final-Project\Lab 6 Code\C#\MECH423Lab6Ex2\Lab6Ex2\obj\Debug\Lab6Ex2.exe
 C:\Users\Centr\Documents\GitHub\Mech-421-3-Final-Project\Lab 6 Code\C#\MECH423Lab6Ex2\Lab6Ex2\obj\Debug\Lab6Ex2.pdb
+C:\Users\conoron.stu\Documents\GitHub\Mech-421-3-Final-Project\Lab 6 Code\C#\MECH423Lab6Ex2\Lab6Ex2\obj\Debug\Lab6Ex2.csproj.AssemblyReference.cache
+C:\Users\conoron.stu\Documents\GitHub\Mech-421-3-Final-Project\Lab 6 Code\C#\MECH423Lab6Ex2\Lab6Ex2\obj\Debug\Lab6Ex2.exe.config
+C:\Users\conoron.stu\Documents\GitHub\Mech-421-3-Final-Project\Lab 6 Code\C#\MECH423Lab6Ex2\Lab6Ex2\obj\Debug\Lab6Ex2.Form1.resources
+C:\Users\conoron.stu\Documents\GitHub\Mech-421-3-Final-Project\Lab 6 Code\C#\MECH423Lab6Ex2\Lab6Ex2\obj\Debug\Lab6Ex2.Properties.Resources.resources
+C:\Users\conoron.stu\Documents\GitHub\Mech-421-3-Final-Project\Lab 6 Code\C#\MECH423Lab6Ex2\Lab6Ex2\obj\Debug\Lab6Ex2.csproj.GenerateResource.cache
+C:\Users\conoron.stu\Documents\GitHub\Mech-421-3-Final-Project\Lab 6 Code\C#\MECH423Lab6Ex2\Lab6Ex2\obj\Debug\Lab6Ex2.csproj.CoreCompileInputs.cache
+C:\Users\conoron.stu\Documents\GitHub\Mech-421-3-Final-Project\Lab 6 Code\C#\MECH423Lab6Ex2\Lab6Ex2\obj\Debug\Lab6Ex2.exe
+C:\Users\conoron.stu\Documents\GitHub\Mech-421-3-Final-Project\Lab 6 Code\C#\MECH423Lab6Ex2\Lab6Ex2\obj\Debug\Lab6Ex2.pdb
+C:\Users\conoron.stu\Documents\GitHub\Mech-421-3-Final-Project\Lab 6 Code\C#\MECH423Lab6Ex2\Lab6Ex2\bin\Debug\Lab6Ex2.exe.config
+C:\Users\conoron.stu\Documents\GitHub\Mech-421-3-Final-Project\Lab 6 Code\C#\MECH423Lab6Ex2\Lab6Ex2\bin\Debug\Lab6Ex2.exe
+C:\Users\conoron.stu\Documents\GitHub\Mech-421-3-Final-Project\Lab 6 Code\C#\MECH423Lab6Ex2\Lab6Ex2\bin\Debug\Lab6Ex2.pdb

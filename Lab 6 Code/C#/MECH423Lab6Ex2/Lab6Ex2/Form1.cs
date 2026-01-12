@@ -23,6 +23,8 @@ namespace Lab6Ex2
         int SpeedMax = 65536;
         int countsPerRev = 50;
         int timeBtwRefresh = 5; //ms
+        List<byte> rxBuffer = new List<byte>();
+
 
         // --- Motor Control Vars ---
         int speed = 0;
@@ -67,7 +69,10 @@ namespace Lab6Ex2
         private void ProcessEncoderSignal(bool UpSig, bool DownSig)
         {
             //TD
-            if (UpSig){
+            //TA0ClK DWN is forward
+            //TA1CLK UP is backward
+            if (UpSig)
+            {
                 ForwardLabel.BackColor = System.Drawing.Color.Lime;
                 BackwardLabel.BackColor = System.Drawing.SystemColors.ControlDark;
             }
@@ -82,7 +87,7 @@ namespace Lab6Ex2
         // ===== SERIAL COMMUNICATION METHODS =====
 
         // --- SendPacket ---
-        // Sends a packet over UART with the form [255], [cmd], [speed]
+        // Sends a packet over UART with the form [255], [speedMSB], [speedLSB]
         private void SendPacket(int speedTotal)
         {
             if (!serialPort1.IsOpen)
@@ -99,7 +104,7 @@ namespace Lab6Ex2
                 //}
             }
 
-            byte startByte = 255;
+            byte startByte = 0xAA;
 
             byte[] packet = new byte[3];
             packet[0] = startByte;
@@ -142,6 +147,7 @@ namespace Lab6Ex2
             // Attempt to connect to drop-down selected port. If connection failed, attempt auto-reconnects
             try
             {
+                BaudRateSetup();
                 serialPort1.Open();
                 ConnectButton.Text = "Disconnect";
                 userWantsConnection = true;
@@ -171,6 +177,15 @@ namespace Lab6Ex2
                 comboBoxCOMPorts.Text = "No COM ports!";
         }
 
+        // --- SerialPort Baud Rate Setup ---
+        private void BaudRateSetup()
+        {
+            serialPort1.BaudRate = 115200;
+            serialPort1.DataBits = 8;
+            serialPort1.Parity = Parity.None;
+            serialPort1.StopBits = StopBits.One;
+        }
+
         // --- AutoReconnectTimer_Tick ---
         // Attempts to reconnect serial port once
         private void AutoReconnectTimer_Tick(object sender, EventArgs e)
@@ -183,25 +198,72 @@ namespace Lab6Ex2
             try
             {
                 serialPort1.PortName = comboBoxCOMPorts.Text;
+                BaudRateSetup();
                 serialPort1.Open();
                 ConnectButton.Text = "Disconnect";
             }
             catch { }
         }
 
-        private void BackwardLabel_Click(object sender, EventArgs e)
+
+
+        // --- Chart2 Updating stuff ---
+        private void AddDataPointToChart2(double position, double velocity)
         {
-
-        }
-
-        private void ForwardLabel_Click(object sender, EventArgs e)
-        {
-
+            // Add new data point
+            chart2.Series[0].Points.AddY(position);
+            chart2.Series[1].Points.AddY(velocity);
+            // Remove old data points to maintain a fixed number of points
+            int maxPoints = 100; // Set the maximum number of points to display
+            while (chart2.Series[0].Points.Count > maxPoints)
+            {
+                chart2.Series[0].Points.RemoveAt(0);
+                chart2.Series[1].Points.RemoveAt(0);
+            }
+            // Adjust X axis scale
+            chart2.ChartAreas[0].RecalculateAxesScale();
         }
 
         // --- SerialPort1_DataReceived ---
+        // --- Byte Package [255] , [Encoder Dir 0, 1 -> up, down] , [Encoder Counts]---
+        private void SerialPort1_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        {
+            int n = serialPort1.BytesToRead;
+            byte[] temp = new byte[n];
+            serialPort1.Read(temp, 0, n);
 
+            rxBuffer.AddRange(temp);
 
+            while (rxBuffer.Count >= 3)
+            {
+                // Search for start byte
+                if (rxBuffer[0] != 255)
+                {
+                    rxBuffer.RemoveAt(0);
+                    continue;
+                }
+
+                // Wait for full packet
+                if (rxBuffer.Count < 3)
+                    return;
+
+                byte status = rxBuffer[1];
+                byte counts = rxBuffer[2];
+
+                rxBuffer.RemoveRange(0, 3);
+
+                bool upSignal = (status & 0x01) != 0;
+                bool downSignal = (status & 0x02) != 0;
+
+                this.BeginInvoke(new Action(() =>
+                {
+                    ProcessEncoderSignal(upSignal, downSignal);
+                    double position = counts;
+                    double velocity = counts / (timeBtwRefresh / 1000.0);
+                    AddDataPointToChart2(position, velocity);
+                }));
+            }
+        }
 
     }
 }

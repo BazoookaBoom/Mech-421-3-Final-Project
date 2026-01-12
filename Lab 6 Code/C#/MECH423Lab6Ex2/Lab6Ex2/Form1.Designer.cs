@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
             this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.ZeroedButton = new System.Windows.Forms.Button();
@@ -55,6 +55,7 @@
             // 
             // serialPort1
             // 
+            this.serialPort1.BaudRate = 115200;
             this.serialPort1.PortName = "COM7";
             // 
             // trackBar1
@@ -169,37 +170,35 @@
             // 
             this.ForwardLabel.AutoSize = true;
             this.ForwardLabel.BackColor = System.Drawing.Color.Lime;
-            this.ForwardLabel.Location = new System.Drawing.Point(73, 90);
+            this.ForwardLabel.Location = new System.Drawing.Point(119, 90);
             this.ForwardLabel.Name = "ForwardLabel";
-            this.ForwardLabel.Size = new System.Drawing.Size(45, 13);
+            this.ForwardLabel.Size = new System.Drawing.Size(55, 13);
             this.ForwardLabel.TabIndex = 20;
-            this.ForwardLabel.Text = "Forward";
-            this.ForwardLabel.Click += new System.EventHandler(this.ForwardLabel_Click);
+            this.ForwardLabel.Text = "Clockwise";
             // 
             // BackwardLabel
             // 
             this.BackwardLabel.AutoSize = true;
             this.BackwardLabel.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.BackwardLabel.Location = new System.Drawing.Point(12, 90);
+            this.BackwardLabel.Location = new System.Drawing.Point(50, 90);
             this.BackwardLabel.Name = "BackwardLabel";
-            this.BackwardLabel.Size = new System.Drawing.Size(55, 13);
+            this.BackwardLabel.Size = new System.Drawing.Size(62, 13);
             this.BackwardLabel.TabIndex = 21;
-            this.BackwardLabel.Text = "Backward";
-            this.BackwardLabel.Click += new System.EventHandler(this.BackwardLabel_Click);
+            this.BackwardLabel.Text = "CounterCW";
             // 
             // chart2
             // 
-            chartArea1.Name = "ChartArea1";
-            this.chart2.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chart2.Legends.Add(legend1);
+            chartArea4.Name = "ChartArea1";
+            this.chart2.ChartAreas.Add(chartArea4);
+            legend4.Name = "Legend1";
+            this.chart2.Legends.Add(legend4);
             this.chart2.Location = new System.Drawing.Point(6, 108);
             this.chart2.Name = "chart2";
             this.chart2.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.None;
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.chart2.Series.Add(series1);
+            series4.ChartArea = "ChartArea1";
+            series4.Legend = "Legend1";
+            series4.Name = "Series1";
+            this.chart2.Series.Add(series4);
             this.chart2.Size = new System.Drawing.Size(510, 284);
             this.chart2.TabIndex = 22;
             this.chart2.Text = "chart2";
