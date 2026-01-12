@@ -146,7 +146,7 @@
             this.groupBox4.Controls.Add(this.trackBar1);
             this.groupBox4.Controls.Add(this.CWSpinLabel);
             this.groupBox4.Controls.Add(this.CCWSpinLabel);
-            this.groupBox4.Location = new System.Drawing.Point(6, 90);
+            this.groupBox4.Location = new System.Drawing.Point(268, 6);
             this.groupBox4.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Padding = new System.Windows.Forms.Padding(2);
@@ -169,21 +169,23 @@
             // 
             this.ForwardLabel.AutoSize = true;
             this.ForwardLabel.BackColor = System.Drawing.Color.Lime;
-            this.ForwardLabel.Location = new System.Drawing.Point(415, 9);
+            this.ForwardLabel.Location = new System.Drawing.Point(73, 90);
             this.ForwardLabel.Name = "ForwardLabel";
             this.ForwardLabel.Size = new System.Drawing.Size(45, 13);
             this.ForwardLabel.TabIndex = 20;
             this.ForwardLabel.Text = "Forward";
+            this.ForwardLabel.Click += new System.EventHandler(this.ForwardLabel_Click);
             // 
             // BackwardLabel
             // 
             this.BackwardLabel.AutoSize = true;
             this.BackwardLabel.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.BackwardLabel.Location = new System.Drawing.Point(354, 9);
+            this.BackwardLabel.Location = new System.Drawing.Point(12, 90);
             this.BackwardLabel.Name = "BackwardLabel";
             this.BackwardLabel.Size = new System.Drawing.Size(55, 13);
             this.BackwardLabel.TabIndex = 21;
             this.BackwardLabel.Text = "Backward";
+            this.BackwardLabel.Click += new System.EventHandler(this.BackwardLabel_Click);
             // 
             // chart2
             // 
@@ -191,14 +193,14 @@
             this.chart2.ChartAreas.Add(chartArea1);
             legend1.Name = "Legend1";
             this.chart2.Legends.Add(legend1);
-            this.chart2.Location = new System.Drawing.Point(269, 40);
+            this.chart2.Location = new System.Drawing.Point(6, 108);
             this.chart2.Name = "chart2";
             this.chart2.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.None;
             series1.ChartArea = "ChartArea1";
             series1.Legend = "Legend1";
             series1.Name = "Series1";
             this.chart2.Series.Add(series1);
-            this.chart2.Size = new System.Drawing.Size(260, 284);
+            this.chart2.Size = new System.Drawing.Size(510, 284);
             this.chart2.TabIndex = 22;
             this.chart2.Text = "chart2";
             // 
@@ -206,7 +208,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(541, 336);
+            this.ClientSize = new System.Drawing.Size(599, 402);
             this.Controls.Add(this.chart2);
             this.Controls.Add(this.BackwardLabel);
             this.Controls.Add(this.ForwardLabel);

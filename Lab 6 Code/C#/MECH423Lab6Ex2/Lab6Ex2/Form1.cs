@@ -189,6 +189,16 @@ namespace Lab6Ex2
             catch { }
         }
 
+        private void BackwardLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ForwardLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
         // --- SerialPort1_DataReceived ---
 
 
