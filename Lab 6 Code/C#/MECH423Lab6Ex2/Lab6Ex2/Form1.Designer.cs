@@ -46,6 +46,7 @@
             this.ForwardLabel = new System.Windows.Forms.Label();
             this.BackwardLabel = new System.Windows.Forms.Label();
             this.chart2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -241,6 +242,7 @@
         private System.Windows.Forms.Label BackwardLabel; 
         internal System.Windows.Forms.DataVisualization.Charting.Chart chart1;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart2;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 

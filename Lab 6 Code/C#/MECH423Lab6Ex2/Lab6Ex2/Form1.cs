@@ -76,6 +76,7 @@ namespace Lab6Ex2
                 ForwardLabel.BackColor = System.Drawing.SystemColors.ControlDark;
                 BackwardLabel.BackColor = System.Drawing.Color.Lime;
             }
+
         }
 
         // ===== SERIAL COMMUNICATION METHODS =====
@@ -115,7 +116,41 @@ namespace Lab6Ex2
         // Closes COM port if currently open
         private void ConnectButton_Click(object sender, EventArgs e)
         {
+            // Close serial port and reset button text to reflect new state
+            if (serialPort1.IsOpen)
+            {
+                userWantsConnection = false;
+                serialPort1.Close();
+                ConnectButton.Text = "Connect";
+                return;
+            }
 
+            // If connection attempted, but no COM ports are available to connect to, show error message
+            if (comboBoxCOMPorts.Text == "No COM ports!")
+            {
+                MessageBox.Show("No COM ports detected!");
+                return;
+            }
+
+            // If program has made it to this point, then:
+            // - serial port is currently closed
+            // - AND there must be a valid COM port to connect to
+
+            // Take dropdown-selected COM port as the connection target
+            serialPort1.PortName = comboBoxCOMPorts.Text;
+
+            // Attempt to connect to drop-down selected port. If connection failed, attempt auto-reconnects
+            try
+            {
+                serialPort1.Open();
+                ConnectButton.Text = "Disconnect";
+                userWantsConnection = true;
+            }
+            catch
+            {
+                MessageBox.Show("Failed to open port. Will auto-retry.");
+                userWantsConnection = true;
+            }
         }
 
         // --- RefreshCOMPorts --- //
@@ -154,6 +189,9 @@ namespace Lab6Ex2
             catch { }
         }
 
-       
+        // --- SerialPort1_DataReceived ---
+
+
+
     }
 }
