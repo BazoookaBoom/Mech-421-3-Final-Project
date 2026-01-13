@@ -1,4 +1,6 @@
-﻿namespace Lab6Ex2
+﻿using System.IO.Ports;
+
+namespace Lab6Ex2
 {
     partial class Form1
     {
@@ -29,9 +31,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
             this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.ZeroedButton = new System.Windows.Forms.Button();
@@ -47,6 +49,10 @@
             this.BackwardLabel = new System.Windows.Forms.Label();
             this.chart2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.PositionLabel = new System.Windows.Forms.Label();
+            this.VelocityLabel = new System.Windows.Forms.Label();
+            this.PositionTextBox = new System.Windows.Forms.TextBox();
+            this.VelocityTextBox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -55,8 +61,8 @@
             // 
             // serialPort1
             // 
-            this.serialPort1.BaudRate = 115200;
             this.serialPort1.PortName = "COM7";
+            this.serialPort1.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.SerialPort1_DataReceived);
             // 
             // trackBar1
             // 
@@ -188,26 +194,64 @@
             // 
             // chart2
             // 
-            chartArea4.Name = "ChartArea1";
-            this.chart2.ChartAreas.Add(chartArea4);
-            legend4.Name = "Legend1";
-            this.chart2.Legends.Add(legend4);
-            this.chart2.Location = new System.Drawing.Point(6, 108);
+            chartArea1.Name = "ChartArea1";
+            this.chart2.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chart2.Legends.Add(legend1);
+            this.chart2.Location = new System.Drawing.Point(26, 108);
             this.chart2.Name = "chart2";
             this.chart2.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.None;
-            series4.ChartArea = "ChartArea1";
-            series4.Legend = "Legend1";
-            series4.Name = "Series1";
-            this.chart2.Series.Add(series4);
-            this.chart2.Size = new System.Drawing.Size(510, 284);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chart2.Series.Add(series1);
+            this.chart2.Size = new System.Drawing.Size(591, 284);
             this.chart2.TabIndex = 22;
             this.chart2.Text = "chart2";
+            // 
+            // PositionLabel
+            // 
+            this.PositionLabel.AutoSize = true;
+            this.PositionLabel.Location = new System.Drawing.Point(535, 26);
+            this.PositionLabel.Name = "PositionLabel";
+            this.PositionLabel.Size = new System.Drawing.Size(44, 13);
+            this.PositionLabel.TabIndex = 23;
+            this.PositionLabel.Text = "Position";
+            // 
+            // VelocityLabel
+            // 
+            this.VelocityLabel.AutoSize = true;
+            this.VelocityLabel.Location = new System.Drawing.Point(535, 58);
+            this.VelocityLabel.Name = "VelocityLabel";
+            this.VelocityLabel.Size = new System.Drawing.Size(44, 13);
+            this.VelocityLabel.TabIndex = 24;
+            this.VelocityLabel.Text = "Velocity";
+            // 
+            // PositionTextBox
+            // 
+            this.PositionTextBox.Location = new System.Drawing.Point(585, 26);
+            this.PositionTextBox.Name = "PositionTextBox";
+            this.PositionTextBox.Size = new System.Drawing.Size(43, 20);
+            this.PositionTextBox.TabIndex = 25;
+            this.PositionTextBox.Text = "0";
+            // 
+            // VelocityTextBox
+            // 
+            this.VelocityTextBox.Location = new System.Drawing.Point(585, 52);
+            this.VelocityTextBox.Name = "VelocityTextBox";
+            this.VelocityTextBox.Size = new System.Drawing.Size(43, 20);
+            this.VelocityTextBox.TabIndex = 26;
+            this.VelocityTextBox.Text = "0";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(599, 402);
+            this.ClientSize = new System.Drawing.Size(656, 402);
+            this.Controls.Add(this.VelocityTextBox);
+            this.Controls.Add(this.PositionTextBox);
+            this.Controls.Add(this.VelocityLabel);
+            this.Controls.Add(this.PositionLabel);
             this.Controls.Add(this.chart2);
             this.Controls.Add(this.BackwardLabel);
             this.Controls.Add(this.ForwardLabel);
@@ -241,9 +285,12 @@
         private System.Windows.Forms.Button ConnectButton;
         private System.Windows.Forms.Label ForwardLabel;
         private System.Windows.Forms.Label BackwardLabel; 
-        internal System.Windows.Forms.DataVisualization.Charting.Chart chart1;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart2;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Label PositionLabel;
+        private System.Windows.Forms.Label VelocityLabel;
+        private System.Windows.Forms.TextBox PositionTextBox;
+        private System.Windows.Forms.TextBox VelocityTextBox;
     }
 }
 

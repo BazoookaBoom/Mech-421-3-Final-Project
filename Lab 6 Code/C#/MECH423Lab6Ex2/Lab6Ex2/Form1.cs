@@ -21,10 +21,23 @@ namespace Lab6Ex2
         bool userWantsConnection = false;
         int SpeedCenter = 32768;
         int SpeedMax = 65536;
-        int countsPerRev = 50;
-        int timeBtwRefresh = 5; //ms
+        double countsPerRev = 979.62;
+        int timeBtwRefresh = 100; //ms
+        double count2VelocityFactor = 1/ 979.62 / (100.0/1000.0) * 60.0; // 1 / 979.62 counts per revolution = revolutions completed / 50ms = velocity in Rev per ms * 1000 * 60 to get RPM 
+        double position = 0;
+        double velocity = 0;
+        double previousPosition = 0;
+        // 5 teeth per cm on pulley, 20 teeth per revolution
+        double count2PositionFactor = 1.0 / 979.62 * 20.0 / 5.0; // counts to revolutions 
+
         List<byte> rxBuffer = new List<byte>();
 
+        // --- Speed update Timer Vars ---
+        Timer sendSpeedTimer = new Timer();
+        int lastSpeedToSend = -1;
+
+        // --- Charting Vars ---
+        int chartIndex = 1;
 
         // --- Motor Control Vars ---
         int speed = 0;
@@ -32,15 +45,20 @@ namespace Lab6Ex2
         public Form1()
         {
             InitializeComponent();
-
+            InitializeChart2();
             // Auto-reconnect setup
             autoReconnectTimer.Interval = 1000;
             autoReconnectTimer.Tick += AutoReconnectTimer_Tick;
             autoReconnectTimer.Start();
+
+            // Setup speed sending timer (every 100ms, same as encoder)
+            sendSpeedTimer.Interval = 100;
+            sendSpeedTimer.Tick += SendSpeedTimer_Tick;
+            sendSpeedTimer.Start();
         }
         private void Form1_Load(object sender, EventArgs e)
         {
-            //RefreshCOMPorts();
+            InitializeChart2();
         }
         private void ZeroedButton_Click(object sender, EventArgs e)
         {
@@ -56,30 +74,37 @@ namespace Lab6Ex2
         private void TrackBar1_Scroll(object sender, EventArgs e)
         {
             speed = trackBar1.Value;
-            if (speed <= 0)
-            {
+            if (speed <= 0){
                 speed = 1;
             }
-            SendPacket(speed);
+
+            lastSpeedToSend = speed; // update desired speed
             SpeedLabel.Text = (((double)(speed - SpeedCenter) / SpeedCenter) * 100).ToString("F1");
-            Console.WriteLine("Speed set to: " + SpeedLabel.Text + " %");
         }
 
-        // ===== Encoder signal output processing =====
-        private void ProcessEncoderSignal(bool UpSig, bool DownSig)
+        private void SendSpeedTimer_Tick(object sender, EventArgs e)
         {
-            //TD
+            if (serialPort1.IsOpen && lastSpeedToSend != -1)
+            {
+                SendPacket(lastSpeedToSend);
+                lastSpeedToSend = -1; // reset, wait for next slider change
+            }
+        }
+        // ===== Encoder signal output processing =====
+        private void ProcessEncoderSignal(int direction)
+        {
             //TA0ClK DWN is forward
             //TA1CLK UP is backward
-            if (UpSig)
+            switch (direction)
             {
-                ForwardLabel.BackColor = System.Drawing.Color.Lime;
-                BackwardLabel.BackColor = System.Drawing.SystemColors.ControlDark;
-            }
-            else if (DownSig)
-            {
-                ForwardLabel.BackColor = System.Drawing.SystemColors.ControlDark;
-                BackwardLabel.BackColor = System.Drawing.Color.Lime;
+                case 1:
+                    ForwardLabel.BackColor = System.Drawing.Color.Lime;
+                    BackwardLabel.BackColor = System.Drawing.SystemColors.ControlDark;
+                    break;
+                case 2:
+                    ForwardLabel.BackColor = System.Drawing.SystemColors.ControlDark;
+                    BackwardLabel.BackColor = System.Drawing.Color.Lime;
+                    break;
             }
 
         }
@@ -180,7 +205,7 @@ namespace Lab6Ex2
         // --- SerialPort Baud Rate Setup ---
         private void BaudRateSetup()
         {
-            serialPort1.BaudRate = 115200;
+            serialPort1.BaudRate = 9600;
             serialPort1.DataBits = 8;
             serialPort1.Parity = Parity.None;
             serialPort1.StopBits = StopBits.One;
@@ -205,63 +230,123 @@ namespace Lab6Ex2
             catch { }
         }
 
+        // === Position and Velocity Charting ===
+
+        // --- Velocity Calculation ---
+        private double CalculateVelocity(int counts)
+        {
+            return (double)counts * count2VelocityFactor;
+        }
+
+        //// --- Position Calculation --- 
+        //private double CalculatePosition(int counts)
+        //{
+
+
+        //}
+
+        // ===== CHARTING HELPER =====
+        private void InitializeChart2()
+        {
+            chart2.Series.Clear();
+
+            Series posSeries = new Series
+            {
+                Name = "Position",
+                Color = Color.Blue,
+                ChartType = SeriesChartType.Line
+            };
+            Series velSeries = new Series
+            {
+                Name = "Velocity",
+                Color = Color.Red,
+                ChartType = SeriesChartType.Line
+            };
+
+            chart2.Series.Add(posSeries);
+            chart2.Series.Add(velSeries);
+
+            var area = chart2.ChartAreas[0];
+            area.AxisX.Title = "Time";
+            area.AxisY.Title = "Value";
+            area.AxisX.Minimum = 0;
+            area.AxisX.Maximum = 100; // initial range
+        }
 
 
         // --- Chart2 Updating stuff ---
-        private void AddDataPointToChart2(double position, double velocity)
+        private void AddDataPointToChart2(double pos, double vel)
         {
-            // Add new data point
-            chart2.Series[0].Points.AddY(position);
-            chart2.Series[1].Points.AddY(velocity);
-            // Remove old data points to maintain a fixed number of points
-            int maxPoints = 100; // Set the maximum number of points to display
+            // Add points
+            chart2.Series[0].Points.AddXY(chartIndex, pos);
+            chart2.Series[1].Points.AddXY(chartIndex, vel);
+            chartIndex++;
+
+            // Keep last N points
+            int maxPoints = 100;
             while (chart2.Series[0].Points.Count > maxPoints)
             {
                 chart2.Series[0].Points.RemoveAt(0);
                 chart2.Series[1].Points.RemoveAt(0);
             }
-            // Adjust X axis scale
-            chart2.ChartAreas[0].RecalculateAxesScale();
-        }
 
-        // --- SerialPort1_DataReceived ---
-        // --- Byte Package [255] , [Encoder Dir 0, 1 -> up, down] , [Encoder Counts]---
+            // Scroll X-axis
+            var area = chart2.ChartAreas[0];
+            area.AxisX.Minimum = chartIndex - maxPoints > 0 ? chartIndex - maxPoints : 0;
+            area.AxisX.Maximum = chartIndex;
+
+            chart2.Invalidate(); // redraw chart
+        }
+        // ===== SERIAL DATA RECEIVED =====
+        // Packet format: [0xAA], [Dir 0/1], [Count MSB], [Count LSB]
         private void SerialPort1_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-            int n = serialPort1.BytesToRead;
-            byte[] temp = new byte[n];
-            serialPort1.Read(temp, 0, n);
+            int bytesToRead = serialPort1.BytesToRead;
+            if (bytesToRead == 0) return;
 
-            rxBuffer.AddRange(temp);
+            byte[] tempBuffer = new byte[bytesToRead];
+            serialPort1.Read(tempBuffer, 0, bytesToRead);
 
-            while (rxBuffer.Count >= 3)
+            lock (rxBuffer)
             {
-                // Search for start byte
-                if (rxBuffer[0] != 255)
+                rxBuffer.AddRange(tempBuffer);
+
+                // Process all complete 4-byte packets
+                while (rxBuffer.Count >= 4)
                 {
-                    rxBuffer.RemoveAt(0);
-                    continue;
+                    int startIndex = rxBuffer.IndexOf(0xAA);
+                    if (startIndex == -1)
+                    {
+                        // no start byte, clear garbage
+                        rxBuffer.Clear();
+                        break;
+                    }
+                    if (startIndex > 0)
+                    {
+                        rxBuffer.RemoveRange(0, startIndex);
+                    }
+                    if (rxBuffer.Count < 4) break;
+
+                    byte direction = rxBuffer[1];
+                    ushort counts = (ushort)((rxBuffer[2] << 8) | rxBuffer[3]);
+
+                    rxBuffer.RemoveRange(0, 4);
+
+                    int signedCounts = (direction == 0x01) ? counts : -(int)counts;
+
+                    position += signedCounts * count2PositionFactor;
+                    velocity = signedCounts * count2VelocityFactor;
+
+                    // Update UI safely
+                    this.BeginInvoke(new Action(() =>
+                    {
+                        ProcessEncoderSignal(direction);  // highlight CW/CCW
+                        AddDataPointToChart2(position, velocity);
+
+                        PositionTextBox.Text = position.ToString("F2") + " cm";
+                        VelocityTextBox.Text = velocity.ToString("F2") + " RPM";
+                    }));
                 }
-
-                // Wait for full packet
-                if (rxBuffer.Count < 3)
-                    return;
-
-                byte status = rxBuffer[1];
-                byte counts = rxBuffer[2];
-
-                rxBuffer.RemoveRange(0, 3);
-
-                bool upSignal = (status & 0x01) != 0;
-                bool downSignal = (status & 0x02) != 0;
-
-                this.BeginInvoke(new Action(() =>
-                {
-                    ProcessEncoderSignal(upSignal, downSignal);
-                    double position = counts;
-                    double velocity = counts / (timeBtwRefresh / 1000.0);
-                    AddDataPointToChart2(position, velocity);
-                }));
             }
         }
 
