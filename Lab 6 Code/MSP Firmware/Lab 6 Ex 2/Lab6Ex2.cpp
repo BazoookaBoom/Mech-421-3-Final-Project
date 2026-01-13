@@ -18,13 +18,16 @@ volatile uint8_t rxBuffer[3];
 volatile uint8_t rxCount = 0;
 volatile bool newSpeed = 0;
 
-
+volatile bool dirCWEnc = true; // TRUE = CW, FALSE = CCW
+volatile uint8_t oldACounts = 0; // TA0 counts at start of measurement window
+volatile uint8_t counts = 0; // Counts during measurement window (200 Hz = 5ms)
 
 // ------------------ Forward declarations ------------------
 void initClock(void);
 void initUART(void);
 void processPacket(uint8_t speed1, uint8_t speed2);
 void initPWM(void);
+void initTimer(void);
 
 
 int main(void) {
@@ -33,6 +36,7 @@ int main(void) {
     initClock();
     initUART();
     initPWM();
+    initTimer();
 
 
     _EINT();
@@ -147,11 +151,20 @@ void initPWM(void)
     TB0CCR1 = 32000;                      // Start at 0% duty
 }
 
-void initTimer() // Set up TA0 and TAB
+void initTimer(void) // Set up TA0 and TAB
 {
-    TA1CCR0 = 10000 - 1;                    // 10ms @ 1MHz
-    TA1CCTL0 = CCIE;                        // Enable CCR0 interrupt
-    TA1CTL = TASSEL__SMCLK | MC__UP | ID__8; // SMCLK/8, up mode
+    P1DIR &= ~(BIT1 | BIT2);
+    P1SEL1 = BIT1 | BIT2;
+    P1SEL0 &= ~(BIT1 | BIT2);
+
+    TA0CCTL0 &= ~CCIE;                        // Disable interrupt to start, enable only for sampling
+    TA0CTL = TASSEL_0 | MC__CONTINUOUS | ID__1;
+
+    TA1CTL = TASSEL_0 | MC__CONTINUOUS | ID__1;
+
+    TB1CTL = TBSSEL__SMCLK | MC__UP | TBCLR;
+    TB1CCR0 = 40000 - 1; // Counts to get 200 Hz
+    TB1CCTL0 |= CCIE;
 }
 
 // ------------------ UART ISR: parse 2-byte packets [255][speedMSB] ------------------
@@ -181,4 +194,27 @@ __interrupt void USCI_A0_ISR(void)
         newSpeed = 1;
         rxCount = 0;
     }
+}
+
+// --------------------- TB1 ISR (Poll rotation direction) ---------------------
+#pragma vector=TIMER1_B0_VECTOR
+__interrupt void TIMER1_B0_ISR(void)
+{
+    TA0CCTL0 |= CCIE; // Enable interrupt to sample next tick
+}
+
+//
+#pragma vector=TIMER0_A0_VECTOR
+__interrupt void TIMER0_A0_ISR(void)
+{
+    if (P1IN & BIT2)
+    {
+        dirCWEnc = false;
+    }
+    else {
+        dirCWEnc = true;
+    }
+
+    counts = TA0R - oldACounts;
+    oldACounts = TA0R;
 }
