@@ -53,6 +53,8 @@ namespace Lab6Ex2
             this.VelocityLabel = new System.Windows.Forms.Label();
             this.PositionTextBox = new System.Windows.Forms.TextBox();
             this.VelocityTextBox = new System.Windows.Forms.TextBox();
+            this.HzTextBox = new System.Windows.Forms.TextBox();
+            this.HzLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -212,7 +214,7 @@ namespace Lab6Ex2
             // PositionLabel
             // 
             this.PositionLabel.AutoSize = true;
-            this.PositionLabel.Location = new System.Drawing.Point(535, 26);
+            this.PositionLabel.Location = new System.Drawing.Point(533, 50);
             this.PositionLabel.Name = "PositionLabel";
             this.PositionLabel.Size = new System.Drawing.Size(44, 13);
             this.PositionLabel.TabIndex = 23;
@@ -221,7 +223,7 @@ namespace Lab6Ex2
             // VelocityLabel
             // 
             this.VelocityLabel.AutoSize = true;
-            this.VelocityLabel.Location = new System.Drawing.Point(535, 58);
+            this.VelocityLabel.Location = new System.Drawing.Point(533, 82);
             this.VelocityLabel.Name = "VelocityLabel";
             this.VelocityLabel.Size = new System.Drawing.Size(44, 13);
             this.VelocityLabel.TabIndex = 24;
@@ -229,7 +231,7 @@ namespace Lab6Ex2
             // 
             // PositionTextBox
             // 
-            this.PositionTextBox.Location = new System.Drawing.Point(585, 26);
+            this.PositionTextBox.Location = new System.Drawing.Point(583, 50);
             this.PositionTextBox.Name = "PositionTextBox";
             this.PositionTextBox.Size = new System.Drawing.Size(43, 20);
             this.PositionTextBox.TabIndex = 25;
@@ -237,17 +239,36 @@ namespace Lab6Ex2
             // 
             // VelocityTextBox
             // 
-            this.VelocityTextBox.Location = new System.Drawing.Point(585, 52);
+            this.VelocityTextBox.Location = new System.Drawing.Point(583, 76);
             this.VelocityTextBox.Name = "VelocityTextBox";
             this.VelocityTextBox.Size = new System.Drawing.Size(43, 20);
             this.VelocityTextBox.TabIndex = 26;
             this.VelocityTextBox.Text = "0";
+            // 
+            // HzTextBox
+            // 
+            this.HzTextBox.Location = new System.Drawing.Point(583, 24);
+            this.HzTextBox.Name = "HzTextBox";
+            this.HzTextBox.Size = new System.Drawing.Size(43, 20);
+            this.HzTextBox.TabIndex = 28;
+            this.HzTextBox.Text = "0";
+            // 
+            // HzLabel
+            // 
+            this.HzLabel.AutoSize = true;
+            this.HzLabel.Location = new System.Drawing.Point(533, 24);
+            this.HzLabel.Name = "HzLabel";
+            this.HzLabel.Size = new System.Drawing.Size(44, 13);
+            this.HzLabel.TabIndex = 27;
+            this.HzLabel.Text = "Hz";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(656, 402);
+            this.Controls.Add(this.HzTextBox);
+            this.Controls.Add(this.HzLabel);
             this.Controls.Add(this.VelocityTextBox);
             this.Controls.Add(this.PositionTextBox);
             this.Controls.Add(this.VelocityLabel);
@@ -291,6 +312,8 @@ namespace Lab6Ex2
         private System.Windows.Forms.Label VelocityLabel;
         private System.Windows.Forms.TextBox PositionTextBox;
         private System.Windows.Forms.TextBox VelocityTextBox;
+        private System.Windows.Forms.TextBox HzTextBox;
+        private System.Windows.Forms.Label HzLabel;
     }
 }
 

@@ -24,10 +24,11 @@ namespace Lab6Ex2
         double countsPerRev = 979.62;
         int timeBtwRefresh = 100; //ms
         double count2VelocityFactor = 1/ 979.62 / (100.0/1000.0) * 60.0; // 1 / 979.62 counts per revolution = revolutions completed / 50ms = velocity in Rev per ms * 1000 * 60 to get RPM 
+        double Hz = 0;
         double position = 0;
         double velocity = 0;
         double previousPosition = 0;
-        // 5 teeth per cm on pulley, 20 teeth per revolution
+        // 5 teeth per cm on belt, 20 teeth per revolution
         double count2PositionFactor = 1.0 / 979.62 * 20.0 / 5.0; // counts to revolutions 
 
         List<byte> rxBuffer = new List<byte>();
@@ -334,6 +335,7 @@ namespace Lab6Ex2
 
                     int signedCounts = (direction == 0x01) ? counts : -(int)counts;
 
+                    Hz = (double)counts / countsPerRev / (timeBtwRefresh / 1000.0); // counts to revolutions per second
                     position += signedCounts * count2PositionFactor;
                     velocity = signedCounts * count2VelocityFactor;
 
@@ -343,6 +345,7 @@ namespace Lab6Ex2
                         ProcessEncoderSignal(direction);  // highlight CW/CCW
                         AddDataPointToChart2(position, velocity);
 
+                        HzTextBox.Text = Hz.ToString("F2") + " Hz";
                         PositionTextBox.Text = position.ToString("F2") + " cm";
                         VelocityTextBox.Text = velocity.ToString("F2") + " RPM";
                     }));
