@@ -22,14 +22,14 @@ namespace Lab6Ex2
         int SpeedCenter = 32768;
         int SpeedMax = 65536;
         double countsPerRev = 979.62;
-        int timeBtwRefresh = 100; //ms
-        double count2VelocityFactor = 1/ 979.62 / (100.0/1000.0) * 60.0; // 1 / 979.62 counts per revolution = revolutions completed / 50ms = velocity in Rev per ms * 1000 * 60 to get RPM 
+        int timeBtwRefresh = 50; //ms
+        double count2VelocityFactor = 1/ 979.62 / (50.0/1000.0) * 60.0; // 1 / 979.62 counts per revolution = revolutions completed / 50ms = velocity in Rev per ms * 1000 * 60 to get RPM 
         double Hz = 0;
         double position = 0;
         double velocity = 0;
         double previousPosition = 0;
         // 5 teeth per cm on belt, 20 teeth per revolution
-        double count2PositionFactor = 1.0 / 979.62 * 20.0 / 5.0; // counts to revolutions 
+        double count2PositionFactor = 1.0 / 979.62 * 20.0 / 5.0 * 4; // counts to revolutions 
 
         List<byte> rxBuffer = new List<byte>();
 
@@ -105,6 +105,10 @@ namespace Lab6Ex2
                 case 2:
                     ForwardLabel.BackColor = System.Drawing.SystemColors.ControlDark;
                     BackwardLabel.BackColor = System.Drawing.Color.Lime;
+                    break;
+                case 3:
+                    ForwardLabel.BackColor = System.Drawing.SystemColors.ControlDark;
+                    BackwardLabel.BackColor = System.Drawing.SystemColors.ControlDark;
                     break;
             }
 
@@ -233,18 +237,6 @@ namespace Lab6Ex2
 
         // === Position and Velocity Charting ===
 
-        // --- Velocity Calculation ---
-        private double CalculateVelocity(int counts)
-        {
-            return (double)counts * count2VelocityFactor;
-        }
-
-        //// --- Position Calculation --- 
-        //private double CalculatePosition(int counts)
-        //{
-
-
-        //}
 
         // ===== CHARTING HELPER =====
         private void InitializeChart2()
@@ -261,17 +253,26 @@ namespace Lab6Ex2
             {
                 Name = "Velocity",
                 Color = Color.Red,
-                ChartType = SeriesChartType.Line
+                ChartType = SeriesChartType.Line,
+                YAxisType = AxisType.Secondary
             };
 
             chart2.Series.Add(posSeries);
-            chart2.Series.Add(velSeries);
+
+
+            //chart2.Series.Add(posSeries);
+            //chart2.Series.Add(velSeries);
 
             var area = chart2.ChartAreas[0];
-            area.AxisX.Title = "Time";
-            area.AxisY.Title = "Value";
+            area.AxisX.Title = "Time (ms)";
+            area.AxisY.Title = "Position";
             area.AxisX.Minimum = 0;
-            area.AxisX.Maximum = 100; // initial range
+            area.AxisX.Maximum = 5000; // 5000ms window
+
+            area.AxisY2.Title = "Velocity (RPM)";
+            area.AxisY2.Enabled = AxisEnabled.True;
+
+            chart2.Series.Add(velSeries);
         }
 
 
@@ -281,10 +282,10 @@ namespace Lab6Ex2
             // Add points
             chart2.Series[0].Points.AddXY(chartIndex, pos);
             chart2.Series[1].Points.AddXY(chartIndex, vel);
-            chartIndex++;
+            chartIndex += timeBtwRefresh;
 
             // Keep last N points
-            int maxPoints = 100;
+            int maxPoints = 5000;
             while (chart2.Series[0].Points.Count > maxPoints)
             {
                 chart2.Series[0].Points.RemoveAt(0);
@@ -334,10 +335,15 @@ namespace Lab6Ex2
                     rxBuffer.RemoveRange(0, 4);
 
                     int signedCounts = (direction == 0x01) ? counts : -(int)counts;
+                    if(signedCounts == 0)
+                    {
+                        direction = 3;
+                    }
 
                     Hz = (double)counts / countsPerRev / (timeBtwRefresh / 1000.0); // counts to revolutions per second
                     position += signedCounts * count2PositionFactor;
                     velocity = signedCounts * count2VelocityFactor;
+                    
 
                     // Update UI safely
                     this.BeginInvoke(new Action(() =>
@@ -345,9 +351,9 @@ namespace Lab6Ex2
                         ProcessEncoderSignal(direction);  // highlight CW/CCW
                         AddDataPointToChart2(position, velocity);
 
-                        HzTextBox.Text = Hz.ToString("F2") + " Hz";
-                        PositionTextBox.Text = position.ToString("F2") + " cm";
-                        VelocityTextBox.Text = velocity.ToString("F2") + " RPM";
+                        HzTextBox.Text = Hz.ToString("F2");
+                        PositionTextBox.Text = position.ToString("F2");
+                        VelocityTextBox.Text = velocity.ToString("F2");
                     }));
                 }
             }

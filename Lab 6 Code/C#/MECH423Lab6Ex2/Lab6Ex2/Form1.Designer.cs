@@ -214,53 +214,53 @@ namespace Lab6Ex2
             // PositionLabel
             // 
             this.PositionLabel.AutoSize = true;
-            this.PositionLabel.Location = new System.Drawing.Point(533, 50);
+            this.PositionLabel.Location = new System.Drawing.Point(521, 53);
             this.PositionLabel.Name = "PositionLabel";
-            this.PositionLabel.Size = new System.Drawing.Size(44, 13);
+            this.PositionLabel.Size = new System.Drawing.Size(67, 13);
             this.PositionLabel.TabIndex = 23;
-            this.PositionLabel.Text = "Position";
+            this.PositionLabel.Text = "Position [cm]";
             // 
             // VelocityLabel
             // 
             this.VelocityLabel.AutoSize = true;
-            this.VelocityLabel.Location = new System.Drawing.Point(533, 82);
+            this.VelocityLabel.Location = new System.Drawing.Point(521, 81);
             this.VelocityLabel.Name = "VelocityLabel";
-            this.VelocityLabel.Size = new System.Drawing.Size(44, 13);
+            this.VelocityLabel.Size = new System.Drawing.Size(77, 13);
             this.VelocityLabel.TabIndex = 24;
-            this.VelocityLabel.Text = "Velocity";
+            this.VelocityLabel.Text = "Velocity [RPM]";
             // 
             // PositionTextBox
             // 
-            this.PositionTextBox.Location = new System.Drawing.Point(583, 50);
+            this.PositionTextBox.Location = new System.Drawing.Point(599, 50);
             this.PositionTextBox.Name = "PositionTextBox";
-            this.PositionTextBox.Size = new System.Drawing.Size(43, 20);
+            this.PositionTextBox.Size = new System.Drawing.Size(50, 20);
             this.PositionTextBox.TabIndex = 25;
             this.PositionTextBox.Text = "0";
             // 
             // VelocityTextBox
             // 
-            this.VelocityTextBox.Location = new System.Drawing.Point(583, 76);
+            this.VelocityTextBox.Location = new System.Drawing.Point(599, 76);
             this.VelocityTextBox.Name = "VelocityTextBox";
-            this.VelocityTextBox.Size = new System.Drawing.Size(43, 20);
+            this.VelocityTextBox.Size = new System.Drawing.Size(50, 20);
             this.VelocityTextBox.TabIndex = 26;
             this.VelocityTextBox.Text = "0";
             // 
             // HzTextBox
             // 
-            this.HzTextBox.Location = new System.Drawing.Point(583, 24);
+            this.HzTextBox.Location = new System.Drawing.Point(599, 24);
             this.HzTextBox.Name = "HzTextBox";
-            this.HzTextBox.Size = new System.Drawing.Size(43, 20);
+            this.HzTextBox.Size = new System.Drawing.Size(50, 20);
             this.HzTextBox.TabIndex = 28;
             this.HzTextBox.Text = "0";
             // 
             // HzLabel
             // 
             this.HzLabel.AutoSize = true;
-            this.HzLabel.Location = new System.Drawing.Point(533, 24);
+            this.HzLabel.Location = new System.Drawing.Point(521, 27);
             this.HzLabel.Name = "HzLabel";
-            this.HzLabel.Size = new System.Drawing.Size(44, 13);
+            this.HzLabel.Size = new System.Drawing.Size(79, 13);
             this.HzLabel.TabIndex = 27;
-            this.HzLabel.Text = "Hz";
+            this.HzLabel.Text = "Frequency [Hz]";
             // 
             // Form1
             // 
