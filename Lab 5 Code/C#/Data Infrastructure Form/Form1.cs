@@ -24,11 +24,52 @@ namespace Data_Infrastructure_Form
         private Mat _image;
         private Thread _cameraThread;
         private bool _fps = false;
-        
+
+        System.Windows.Forms.Timer autoReconnectTimer = new System.Windows.Forms.Timer();
+        bool userWantsConnection = false;
 
         public Form1()
         {
             InitializeComponent();
+            RefreshCOMPorts();
+
+            autoReconnectTimer.Interval = 1000;
+            autoReconnectTimer.Tick += AutoReconnectTimer_Tick;
+            autoReconnectTimer.Start();
+        }
+
+        private void RefreshCOMPorts()
+        {
+            var ports = System.IO.Ports.SerialPort.GetPortNames();
+            var selected = dpdnConnect.Text;
+
+            dpdnConnect.Items.Clear();
+            dpdnConnect.Items.AddRange(ports);
+
+            if (ports.Contains(selected))
+                dpdnConnect.Text = selected;
+            else if (ports.Length > 0)
+                dpdnConnect.SelectedIndex = 0;
+            else
+                dpdnConnect.Text = "No COM ports!";
+        }
+
+        // --- AutoReconnectTimer_Tick ---
+        // Attempts to reconnect serial port once
+        private void AutoReconnectTimer_Tick(object sender, EventArgs e)
+        {
+            if (!userWantsConnection) return;
+            if (serialPort1.IsOpen) return;
+
+            RefreshCOMPorts();
+
+            try
+            {
+                serialPort1.PortName = dpdnConnect.Text;
+                serialPort1.Open();
+                btnConnect.Text = "Disconnect";
+            }
+            catch { }
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -73,6 +114,19 @@ namespace Data_Infrastructure_Form
                         Cv2.Circle(newImage, (int)circle.Center.X, (int)circle.Center.Y, 5, Scalar.Red, -1);
                     }
 
+
+                    if (circles.Length > 0)
+                    {
+                        txtXOut.Text = Convert.ToString(circles[0].Center.X);
+                        txtYOut.Text = Convert.ToString(circles[0].Center.Y);
+                        txtROut.Text = Convert.ToString(circles[0].Radius);
+                    }
+                    else
+                    {
+                        txtXOut.Text = "NaN";
+                        txtYOut.Text = "NaN";
+                        txtROut.Text = "NaN";
+                    }
                 }
 
                 if (_fps)
@@ -122,6 +176,45 @@ namespace Data_Infrastructure_Form
             _canny = false;
             _hough = !_hough;
             
+        }
+
+        private void btnConnect_Click(object sender, EventArgs e)
+        {
+            // Close serial port and reset button text to reflect new state
+            if (serialPort1.IsOpen)
+            {
+                userWantsConnection = false;
+                serialPort1.Close();
+                btnConnect.Text = "Connect";
+                return;
+            }
+
+            // If connection attempted, but no COM ports are available to connect to, show error message
+            if (dpdnConnect.Text == "No COM ports!")
+            {
+                MessageBox.Show("No COM ports detected!");
+                return;
+            }
+
+            // If program has made it to this point, then:
+            // - serial port is currently closed
+            // - AND there must be a valid COM port to connect to
+
+            // Take dropdown-selected COM port as the connection target
+            serialPort1.PortName = dpdnConnect.Text;
+
+            // Attempt to connect to drop-down selected port. If connection failed, attempt auto-reconnects
+            try
+            {
+                serialPort1.Open();
+                btnConnect.Text = "Disconnect";
+                userWantsConnection = true;
+            }
+            catch
+            {
+                MessageBox.Show("Failed to open port. Will auto-retry.");
+                userWantsConnection = true;
+            }
         }
     }
 }
