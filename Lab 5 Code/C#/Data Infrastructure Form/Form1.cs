@@ -24,6 +24,9 @@ namespace Data_Infrastructure_Form
         private Mat _image;
         private Thread _cameraThread;
         private bool _fps = false;
+        private int cameraNum = 0; // Choose which camera to use
+        private volatile bool _closing = false;
+        private byte txbyte;
 
         System.Windows.Forms.Timer autoReconnectTimer = new System.Windows.Forms.Timer();
         bool userWantsConnection = false;
@@ -74,7 +77,7 @@ namespace Data_Infrastructure_Form
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            _capture = new VideoCapture(1);
+            _capture = new VideoCapture(cameraNum);
             _image = new Mat();
             _cameraThread = new Thread(new ThreadStart(CaptureCameraCallback));
             _cameraThread.Start();
@@ -82,26 +85,56 @@ namespace Data_Infrastructure_Form
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
-            _cameraThread.Interrupt();
-            _capture.Release();
-            
+            _closing = true;
+            _run = false;
+
+            try { _cameraThread?.Join(500); } catch { }
+            try { _capture?.Release(); } catch { }
+
+        }
+
+        private void UI(Action action)
+        {
+            if (IsDisposed) return;
+
+            if (InvokeRequired)
+                BeginInvoke(action);
+            else
+                action();
         }
 
         private void CaptureCameraCallback()
         {
-            while (true)
+            while (!_closing)
             {
-                if (!_run) continue;
+                // Don’t spin at 100% CPU when paused
+                if (!_run)
+                {
+                    Thread.Sleep(10);
+                    continue;
+                }
+
                 var startTime = DateTime.Now;
 
                 _capture.Read(_image);
-                if (_image.Empty()) return;
+                if (_image.Empty())
+                {
+                    Thread.Sleep(10);
+                    continue;
+                }
+
                 var imageRes = new Mat();
                 var newImageGrey = new Mat();
+
                 Cv2.Resize(_image, imageRes, new OpenCvSharp.Size(320, 240));
                 var newImage = imageRes.Clone();
+
                 if (_canny)
                     Cv2.Canny(imageRes, newImage, 50, 200);
+
+                string xText = "NaN", yText = "NaN", rText = "NaN";
+                txbyte = 0; // 0 encodes as no data read
+
                 if (_hough)
                 {
                     Cv2.MedianBlur(newImage, newImage, 5);
@@ -110,42 +143,55 @@ namespace Data_Infrastructure_Form
 
                     foreach (var circle in circles)
                     {
-                        Cv2.Circle(newImage, (int) circle.Center.X, (int) circle.Center.Y, (int) circle.Radius, Scalar.Green, 5);
+                        Cv2.Circle(newImage, (int)circle.Center.X, (int)circle.Center.Y, (int)circle.Radius, Scalar.Green, 5);
                         Cv2.Circle(newImage, (int)circle.Center.X, (int)circle.Center.Y, 5, Scalar.Red, -1);
                     }
 
-
                     if (circles.Length > 0)
                     {
-                        txtXOut.Text = Convert.ToString(circles[0].Center.X);
-                        txtYOut.Text = Convert.ToString(circles[0].Center.Y);
-                        txtROut.Text = Convert.ToString(circles[0].Radius);
-                    }
-                    else
-                    {
-                        txtXOut.Text = "NaN";
-                        txtYOut.Text = "NaN";
-                        txtROut.Text = "NaN";
+                        xText = circles[0].Center.X.ToString("0.##");
+                        yText = circles[0].Center.Y.ToString("0.##");
+                        rText = circles[0].Radius.ToString("0.##");
+
+                        txbyte = Convert.ToByte(circles[0].Center.X/320*254 + 1); // Convert to a byte (1 to 255)
                     }
                 }
 
                 if (_fps)
                 {
                     var diff = DateTime.Now - startTime;
-                    var fpsInfo = $"FPS: Nan";
-                    if (diff.Milliseconds > 0)
+                    var fpsInfo = "FPS: NaN";
+                    if (diff.TotalMilliseconds > 0)
                     {
-                        var fpsVal = 1.0 / diff.Milliseconds * 1000;
+                        var fpsVal = 1000.0 / diff.TotalMilliseconds;
                         fpsInfo = $"FPS: {fpsVal:00}";
                     }
-                    Cv2.PutText(imageRes, fpsInfo, new OpenCvSharp.Point(10, 20), HersheyFonts.HersheyComplexSmall, 1, Scalar.Black);
+                    Cv2.PutText(imageRes, fpsInfo, new OpenCvSharp.Point(10, 20),
+                        HersheyFonts.HersheyComplexSmall, 1, Scalar.Black);
                 }
 
+                // Create bitmaps on worker thread
                 var bmpWebCam = BitmapConverter.ToBitmap(imageRes);
                 var bmpEffect = BitmapConverter.ToBitmap(newImage);
 
-                pictureBoxWebCam.Image = bmpWebCam;
-                pictureBoxEffect.Image = bmpEffect;
+                // Assign on UI thread (and dispose old images to avoid leaking memory)
+                UI(() =>
+                {
+                    // If form is closing/disposed, don’t touch controls
+                    if (IsDisposed) { bmpWebCam.Dispose(); bmpEffect.Dispose(); return; }
+
+                    txtXOut.Text = xText;
+                    txtYOut.Text = yText;
+                    txtROut.Text = rText;
+
+                    var old1 = pictureBoxWebCam.Image;
+                    pictureBoxWebCam.Image = bmpWebCam;
+                    old1?.Dispose();
+
+                    var old2 = pictureBoxEffect.Image;
+                    pictureBoxEffect.Image = bmpEffect;
+                    old2?.Dispose();
+                });
             }
         }
 
@@ -215,6 +261,11 @@ namespace Data_Infrastructure_Form
                 MessageBox.Show("Failed to open port. Will auto-retry.");
                 userWantsConnection = true;
             }
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            serialPort1.Write(txbyte.ToString());
         }
     }
 }

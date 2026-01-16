@@ -38,17 +38,17 @@
             this.btnHough = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.dpdnConnect = new System.Windows.Forms.ComboBox();
             this.btnConnect = new System.Windows.Forms.Button();
+            this.dpdnConnect = new System.Windows.Forms.ComboBox();
             this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.txtXOut = new System.Windows.Forms.TextBox();
-            this.txtROut = new System.Windows.Forms.TextBox();
-            this.txtYOut = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtYOut = new System.Windows.Forms.TextBox();
+            this.txtROut = new System.Windows.Forms.TextBox();
+            this.txtXOut = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxWebCam)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxEffect)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -147,14 +147,6 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Setup";
             // 
-            // dpdnConnect
-            // 
-            this.dpdnConnect.FormattingEnabled = true;
-            this.dpdnConnect.Location = new System.Drawing.Point(32, 48);
-            this.dpdnConnect.Name = "dpdnConnect";
-            this.dpdnConnect.Size = new System.Drawing.Size(208, 33);
-            this.dpdnConnect.TabIndex = 9;
-            // 
             // btnConnect
             // 
             this.btnConnect.Location = new System.Drawing.Point(246, 41);
@@ -164,6 +156,18 @@
             this.btnConnect.Text = "Connect";
             this.btnConnect.UseVisualStyleBackColor = true;
             this.btnConnect.Click += new System.EventHandler(this.btnConnect_Click);
+            // 
+            // dpdnConnect
+            // 
+            this.dpdnConnect.FormattingEnabled = true;
+            this.dpdnConnect.Location = new System.Drawing.Point(32, 48);
+            this.dpdnConnect.Name = "dpdnConnect";
+            this.dpdnConnect.Size = new System.Drawing.Size(208, 33);
+            this.dpdnConnect.TabIndex = 9;
+            // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // groupBox3
             // 
@@ -180,35 +184,14 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Outputs";
             // 
-            // txtXOut
+            // label3
             // 
-            this.txtXOut.Location = new System.Drawing.Point(140, 39);
-            this.txtXOut.Name = "txtXOut";
-            this.txtXOut.Size = new System.Drawing.Size(100, 31);
-            this.txtXOut.TabIndex = 11;
-            // 
-            // txtROut
-            // 
-            this.txtROut.Location = new System.Drawing.Point(140, 113);
-            this.txtROut.Name = "txtROut";
-            this.txtROut.Size = new System.Drawing.Size(100, 31);
-            this.txtROut.TabIndex = 12;
-            // 
-            // txtYOut
-            // 
-            this.txtYOut.Location = new System.Drawing.Point(140, 76);
-            this.txtYOut.Name = "txtYOut";
-            this.txtYOut.Size = new System.Drawing.Size(100, 31);
-            this.txtYOut.TabIndex = 13;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(27, 42);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(84, 25);
-            this.label1.TabIndex = 14;
-            this.label1.Text = "XCoord";
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(27, 119);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(79, 25);
+            this.label3.TabIndex = 16;
+            this.label3.Text = "Radius";
             // 
             // label2
             // 
@@ -219,20 +202,41 @@
             this.label2.TabIndex = 15;
             this.label2.Text = "YCoord";
             // 
-            // label3
+            // label1
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(27, 119);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(79, 25);
-            this.label3.TabIndex = 16;
-            this.label3.Text = "Radius";
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(27, 42);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(84, 25);
+            this.label1.TabIndex = 14;
+            this.label1.Text = "XCoord";
+            // 
+            // txtYOut
+            // 
+            this.txtYOut.Location = new System.Drawing.Point(140, 76);
+            this.txtYOut.Name = "txtYOut";
+            this.txtYOut.Size = new System.Drawing.Size(100, 31);
+            this.txtYOut.TabIndex = 13;
+            // 
+            // txtROut
+            // 
+            this.txtROut.Location = new System.Drawing.Point(140, 113);
+            this.txtROut.Name = "txtROut";
+            this.txtROut.Size = new System.Drawing.Size(100, 31);
+            this.txtROut.TabIndex = 12;
+            // 
+            // txtXOut
+            // 
+            this.txtXOut.Location = new System.Drawing.Point(140, 39);
+            this.txtXOut.Name = "txtXOut";
+            this.txtXOut.Size = new System.Drawing.Size(100, 31);
+            this.txtXOut.TabIndex = 11;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1625, 1203);
+            this.ClientSize = new System.Drawing.Size(1625, 1103);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
