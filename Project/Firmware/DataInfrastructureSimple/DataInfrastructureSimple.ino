@@ -1,45 +1,46 @@
-/*
-Name: Data_Infrastructure_Simple.ino
-Created By: CO
-Created On: November 25, 2025
-Updated On: November 30, 2025
-Description: This will take the coordinate of the disc left and right and spin a servomotor
-Board to be used: https://devboards.info/boards/arduino-mega2560-rev3
-*/
+#include <Servo.h>
 
-int servoPin = 11; //PWM capable
-int PWMFrequency = 10000;
-double maxCoordValue = 2;
+Servo myservo;
 
-//Function structure calls
-void pinSetup(void);
-void servoMove(double Coord);
+const int servoPin = 11;
+const int maxCoordValue = 255;
+int xCoord = 0;
+int tempNumber = 0;
+
+void servoMove(int coord);
 
 void setup() {
   Serial.begin(9600);
-  pinSetup();
-
+  myservo.attach(servoPin);
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-  xCoord =Serial.read();
-  if(xCoord != -1){
-    ServoMove(xCoord);
+  bool newNumber = false;
+  while (Serial.available() > 0) {
+    tempNumber = tempNumber * 10 + (Serial.read() - 48);
+    newNumber = true;
+    Serial.print("Temp Number - ");
+    Serial.println(tempNumber);
+  }
+  delay(50);
+  if(tempNumber != 0){
+    xCoord = tempNumber;
+  }
+  else{
+    newNumber = 0;
+  }
+  if ((newNumber) && (Serial.available() == 0)) {
+    
+    Serial.print("xCoord - ");
+    Serial.println(xCoord);
+    servoMove(xCoord);
+    tempNumber = 0;
+    
   }
 }
 
-
-void pinSetup(){
-  
-  pinMode(servoPin, OUTPUT);
-	digitalWrite(pumpPins[i], 0); //Both pins start in closed state
-  analogWriteFrequency(pumpPins[i], PWMFrequency);
-
-}
-
-void servoMove(double Coord){
-  int servoPosition = map(0, maxCoordValue, 0, 1023, Coord);
-  analogWriteFrequency(servoPin, servoPosition);
-
+void servoMove(int coord) {
+  coord = constrain(coord, 0, maxCoordValue);
+  int servoPosition = map(coord, 0, maxCoordValue, 0, 180);
+  myservo.write(servoPosition);
 }
