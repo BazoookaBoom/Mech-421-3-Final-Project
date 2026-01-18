@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.IO.Ports;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.Windows.Forms.DataVisualization.Charting;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Lab6Ex2
 {
@@ -32,6 +33,13 @@ namespace Lab6Ex2
         double count2PositionFactor = 1.0 / 979.62 * 20.0 / 5.0 * 4; // counts to revolutions 
 
         List<byte> rxBuffer = new List<byte>();
+
+        // ===== DATA LOGGING VARS =====
+        StreamWriter logWriter = null;
+        bool isLogging = false;
+        int logStartTime = 0;
+        string filename = "C:\\Users\\Centr\\Documents\\GitHub\\Mech-421-3-Final-Project\\Labs\\Duplicate_Check_Later\\Lab 6 Code\\C#\\MECH423Lab6Ex3\\step25.csv";
+
 
         // --- Speed update Timer Vars ---
         Timer sendSpeedTimer = new Timer();
@@ -81,6 +89,20 @@ namespace Lab6Ex2
 
             lastSpeedToSend = speed; // update desired speed
             SpeedLabel.Text = (((double)(speed - SpeedCenter) / SpeedCenter) * 100).ToString("F1");
+        }
+
+        private void SetPWMButton_Click(object sender, EventArgs e)
+        {
+            lastSpeedToSend = SpeedCenter * (100 + Convert.ToInt32(PWMSetTextBox.Text)) / 100;
+            if (lastSpeedToSend == SpeedMax)
+            {
+                trackBar1.Value = SpeedMax - 1;
+            }
+            else
+            {
+                trackBar1.Value = lastSpeedToSend;
+            }
+            SpeedLabel.Text = PWMSetTextBox.Text;
         }
 
         private void SendSpeedTimer_Tick(object sender, EventArgs e)
@@ -157,6 +179,7 @@ namespace Lab6Ex2
                 userWantsConnection = false;
                 serialPort1.Close();
                 ConnectButton.Text = "Connect";
+                StopLogging();
                 return;
             }
 
@@ -187,6 +210,7 @@ namespace Lab6Ex2
                 MessageBox.Show("Failed to open port. Will auto-retry.");
                 userWantsConnection = true;
             }
+            StartLogging(filename);
         }
 
         // --- RefreshCOMPorts --- //
@@ -299,6 +323,27 @@ namespace Lab6Ex2
 
             chart2.Invalidate(); // redraw chart
         }
+        private void StartLogging(string filename)
+        {
+            logWriter = new StreamWriter(filename);
+            logWriter.WriteLine("Time_ms,DutyCycle_percent,Position");
+            logStartTime = Environment.TickCount;
+            isLogging = true;
+        }
+
+        private void StopLogging()
+        {
+            if (logWriter != null)
+            {
+                isLogging = false;
+                logWriter.Flush();
+                logWriter.Close();
+                logWriter = null;
+            }
+        }
+
+
+
         // ===== SERIAL DATA RECEIVED =====
         // Packet format: [0xAA], [Dir 0/1], [Count MSB], [Count LSB]
         private void SerialPort1_DataReceived(object sender, SerialDataReceivedEventArgs e)
@@ -354,10 +399,21 @@ namespace Lab6Ex2
                         HzTextBox.Text = Hz.ToString("F2");
                         PositionTextBox.Text = position.ToString("F2");
                         VelocityTextBox.Text = velocity.ToString("F2");
+                        if (isLogging && logWriter != null)
+                        {
+                            int timeMs = Environment.TickCount - logStartTime;
+
+                            double dutyCyclePercent =
+                                ((double)(lastSpeedToSend - SpeedCenter)) * 100.0/ (double) SpeedCenter;
+
+                            logWriter.WriteLine($"{timeMs},{dutyCyclePercent:F2},{position:F4}");
+                        }
+
                     }));
                 }
             }
         }
 
+        
     }
 }

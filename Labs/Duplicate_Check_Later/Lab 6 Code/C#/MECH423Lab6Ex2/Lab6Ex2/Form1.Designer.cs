@@ -44,6 +44,8 @@ namespace Lab6Ex2
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.SetPWMButton = new System.Windows.Forms.Button();
+            this.PWMSetTextBox = new System.Windows.Forms.TextBox();
             this.SpeedLabel = new System.Windows.Forms.Label();
             this.ForwardLabel = new System.Windows.Forms.Label();
             this.BackwardLabel = new System.Windows.Forms.Label();
@@ -150,6 +152,8 @@ namespace Lab6Ex2
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.SetPWMButton);
+            this.groupBox4.Controls.Add(this.PWMSetTextBox);
             this.groupBox4.Controls.Add(this.SpeedLabel);
             this.groupBox4.Controls.Add(this.ZeroedButton);
             this.groupBox4.Controls.Add(this.trackBar1);
@@ -163,6 +167,24 @@ namespace Lab6Ex2
             this.groupBox4.TabIndex = 19;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Continuous Control";
+            // 
+            // SetPWMButton
+            // 
+            this.SetPWMButton.Location = new System.Drawing.Point(193, 37);
+            this.SetPWMButton.Name = "SetPWMButton";
+            this.SetPWMButton.Size = new System.Drawing.Size(50, 35);
+            this.SetPWMButton.TabIndex = 16;
+            this.SetPWMButton.Text = "Set \n PWM";
+            this.SetPWMButton.UseVisualStyleBackColor = true;
+            this.SetPWMButton.Click += new System.EventHandler(this.SetPWMButton_Click);
+            // 
+            // PWMSetTextBox
+            // 
+            this.PWMSetTextBox.Location = new System.Drawing.Point(193, 75);
+            this.PWMSetTextBox.Name = "PWMSetTextBox";
+            this.PWMSetTextBox.Size = new System.Drawing.Size(50, 20);
+            this.PWMSetTextBox.TabIndex = 30;
+            this.PWMSetTextBox.Text = "0";
             // 
             // SpeedLabel
             // 
@@ -314,6 +336,8 @@ namespace Lab6Ex2
         private System.Windows.Forms.TextBox VelocityTextBox;
         private System.Windows.Forms.TextBox HzTextBox;
         private System.Windows.Forms.Label HzLabel;
+        private System.Windows.Forms.Button SetPWMButton;
+        private System.Windows.Forms.TextBox PWMSetTextBox;
     }
 }
 
