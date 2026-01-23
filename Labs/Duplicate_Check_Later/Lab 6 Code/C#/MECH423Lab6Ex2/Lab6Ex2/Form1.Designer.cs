@@ -57,6 +57,7 @@ namespace Lab6Ex2
             this.VelocityTextBox = new System.Windows.Forms.TextBox();
             this.HzTextBox = new System.Windows.Forms.TextBox();
             this.HzLabel = new System.Windows.Forms.Label();
+            this.SaveButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -284,11 +285,22 @@ namespace Lab6Ex2
             this.HzLabel.TabIndex = 27;
             this.HzLabel.Text = "Frequency [Hz]";
             // 
+            // SaveButton
+            // 
+            this.SaveButton.Location = new System.Drawing.Point(179, 79);
+            this.SaveButton.Name = "SaveButton";
+            this.SaveButton.Size = new System.Drawing.Size(75, 23);
+            this.SaveButton.TabIndex = 16;
+            this.SaveButton.Text = "Save?";
+            this.SaveButton.UseVisualStyleBackColor = true;
+            this.SaveButton.Click += new System.EventHandler(this.SaveButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(656, 402);
+            this.Controls.Add(this.SaveButton);
             this.Controls.Add(this.HzTextBox);
             this.Controls.Add(this.HzLabel);
             this.Controls.Add(this.VelocityTextBox);
@@ -338,6 +350,7 @@ namespace Lab6Ex2
         private System.Windows.Forms.Label HzLabel;
         private System.Windows.Forms.Button SetPWMButton;
         private System.Windows.Forms.TextBox PWMSetTextBox;
+        private System.Windows.Forms.Button SaveButton;
     }
 }
 
