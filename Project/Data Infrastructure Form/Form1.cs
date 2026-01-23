@@ -27,6 +27,7 @@ namespace Data_Infrastructure_Form
         private int cameraNum = 0; // Choose which camera to use
         private volatile bool _closing = false;
         private byte txbyte;
+        private List<int> circleColour = new List<int>(); // -1 = unassigned, 0 = white, 1 = black
 
         System.Windows.Forms.Timer autoReconnectTimer = new System.Windows.Forms.Timer();
         bool userWantsConnection = false;
@@ -139,10 +140,14 @@ namespace Data_Infrastructure_Form
                 {
                     Cv2.MedianBlur(newImage, newImage, 5);
                     Cv2.CvtColor(newImage, newImageGrey, ColorConversionCodes.BGR2GRAY);
-                    var circles = Cv2.HoughCircles(newImageGrey, HoughModes.Gradient, 1, 20);
+                    var circles = Cv2.HoughCircles(newImageGrey, HoughModes.GradientAlt, 1, 5, 300, 0.9, 5, 50);
 
                     foreach (var circle in circles)
                     {
+
+                        //newImage[(int)circle.Center.Y, (int)circle.Center.Y, (int)circle.Center.X, (int)circle.Center.X] need to extract colour info somehow (---)
+
+
                         Cv2.Circle(newImage, (int)circle.Center.X, (int)circle.Center.Y, (int)circle.Radius, Scalar.Green, 5);
                         Cv2.Circle(newImage, (int)circle.Center.X, (int)circle.Center.Y, 5, Scalar.Red, -1);
                     }

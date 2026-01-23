@@ -60,3 +60,34 @@ C:\Users\Centr\Documents\GitHub\Mech-421-3-Final-Project\Lab 5 Code\C#\Data Infr
 C:\Users\Centr\Documents\GitHub\Mech-421-3-Final-Project\Lab 5 Code\C#\Data Infrastructure Form\obj\Debug\Data Inf.26D227EF.Up2Date
 C:\Users\Centr\Documents\GitHub\Mech-421-3-Final-Project\Lab 5 Code\C#\Data Infrastructure Form\obj\Debug\Data Infrastructure Form.exe
 C:\Users\Centr\Documents\GitHub\Mech-421-3-Final-Project\Lab 5 Code\C#\Data Infrastructure Form\obj\Debug\Data Infrastructure Form.pdb
+C:\Users\mikeh\Mech-421-3-Final-Project\Project\Data Infrastructure Form\bin\Debug\dll\x86\OpenCvSharpExtern.dll
+C:\Users\mikeh\Mech-421-3-Final-Project\Project\Data Infrastructure Form\bin\Debug\dll\x86\opencv_videoio_ffmpeg4110.dll
+C:\Users\mikeh\Mech-421-3-Final-Project\Project\Data Infrastructure Form\bin\Debug\dll\x64\OpenCvSharpExtern.dll
+C:\Users\mikeh\Mech-421-3-Final-Project\Project\Data Infrastructure Form\bin\Debug\dll\x64\opencv_videoio_ffmpeg4110_64.dll
+C:\Users\mikeh\Mech-421-3-Final-Project\Project\Data Infrastructure Form\bin\Debug\Data Infrastructure Form.exe.config
+C:\Users\mikeh\Mech-421-3-Final-Project\Project\Data Infrastructure Form\bin\Debug\Data Infrastructure Form.exe
+C:\Users\mikeh\Mech-421-3-Final-Project\Project\Data Infrastructure Form\bin\Debug\Data Infrastructure Form.pdb
+C:\Users\mikeh\Mech-421-3-Final-Project\Project\Data Infrastructure Form\bin\Debug\OpenCvSharp.dll
+C:\Users\mikeh\Mech-421-3-Final-Project\Project\Data Infrastructure Form\bin\Debug\OpenCvSharp.Extensions.dll
+C:\Users\mikeh\Mech-421-3-Final-Project\Project\Data Infrastructure Form\bin\Debug\System.Buffers.dll
+C:\Users\mikeh\Mech-421-3-Final-Project\Project\Data Infrastructure Form\bin\Debug\System.Drawing.Common.dll
+C:\Users\mikeh\Mech-421-3-Final-Project\Project\Data Infrastructure Form\bin\Debug\System.Memory.dll
+C:\Users\mikeh\Mech-421-3-Final-Project\Project\Data Infrastructure Form\bin\Debug\System.Numerics.Vectors.dll
+C:\Users\mikeh\Mech-421-3-Final-Project\Project\Data Infrastructure Form\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\mikeh\Mech-421-3-Final-Project\Project\Data Infrastructure Form\bin\Debug\OpenCvSharp.xml
+C:\Users\mikeh\Mech-421-3-Final-Project\Project\Data Infrastructure Form\bin\Debug\OpenCvSharp.Extensions.xml
+C:\Users\mikeh\Mech-421-3-Final-Project\Project\Data Infrastructure Form\bin\Debug\System.Buffers.xml
+C:\Users\mikeh\Mech-421-3-Final-Project\Project\Data Infrastructure Form\bin\Debug\System.Drawing.Common.pdb
+C:\Users\mikeh\Mech-421-3-Final-Project\Project\Data Infrastructure Form\bin\Debug\System.Drawing.Common.xml
+C:\Users\mikeh\Mech-421-3-Final-Project\Project\Data Infrastructure Form\bin\Debug\System.Memory.xml
+C:\Users\mikeh\Mech-421-3-Final-Project\Project\Data Infrastructure Form\bin\Debug\System.Numerics.Vectors.xml
+C:\Users\mikeh\Mech-421-3-Final-Project\Project\Data Infrastructure Form\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\mikeh\Mech-421-3-Final-Project\Project\Data Infrastructure Form\obj\Debug\Data Infrastructure Form.csproj.AssemblyReference.cache
+C:\Users\mikeh\Mech-421-3-Final-Project\Project\Data Infrastructure Form\obj\Debug\Data Infrastructure Form.exe.config
+C:\Users\mikeh\Mech-421-3-Final-Project\Project\Data Infrastructure Form\obj\Debug\Data_Infrastructure_Form.Form1.resources
+C:\Users\mikeh\Mech-421-3-Final-Project\Project\Data Infrastructure Form\obj\Debug\Data_Infrastructure_Form.Properties.Resources.resources
+C:\Users\mikeh\Mech-421-3-Final-Project\Project\Data Infrastructure Form\obj\Debug\Data Infrastructure Form.csproj.GenerateResource.cache
+C:\Users\mikeh\Mech-421-3-Final-Project\Project\Data Infrastructure Form\obj\Debug\Data Infrastructure Form.csproj.CoreCompileInputs.cache
+C:\Users\mikeh\Mech-421-3-Final-Project\Project\Data Infrastructure Form\obj\Debug\Data Inf.26D227EF.Up2Date
+C:\Users\mikeh\Mech-421-3-Final-Project\Project\Data Infrastructure Form\obj\Debug\Data Infrastructure Form.exe
+C:\Users\mikeh\Mech-421-3-Final-Project\Project\Data Infrastructure Form\obj\Debug\Data Infrastructure Form.pdb
