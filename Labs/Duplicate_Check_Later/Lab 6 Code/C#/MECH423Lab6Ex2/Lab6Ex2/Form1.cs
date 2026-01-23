@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Diagnostics;
 
 namespace Lab6Ex2
 {
@@ -36,9 +37,12 @@ namespace Lab6Ex2
 
         // ===== DATA LOGGING VARS =====
         StreamWriter logWriter = null;
+        int currentSpeedCommand = 32768;
         bool isLogging = false;
-        int logStartTime = 0;
-        string filename = "C:\\Users\\Centr\\Documents\\GitHub\\Mech-421-3-Final-Project\\Labs\\Duplicate_Check_Later\\Lab 6 Code\\C#\\MECH423Lab6Ex3\\step25.csv";
+        string filename = "C:\\Users\\Centr\\Documents\\GitHub\\Mech-421-3-Final-Project\\Labs\\Duplicate_Check_Later\\Lab 6 Code\\C#\\MECH423Lab6Ex3" +
+            "\\step50.csv";
+
+        Stopwatch logTimer = new Stopwatch();
 
 
         // --- Speed update Timer Vars ---
@@ -71,48 +75,47 @@ namespace Lab6Ex2
         }
         private void ZeroedButton_Click(object sender, EventArgs e)
         {
-            speed = SpeedCenter;
-            trackBar1.Value = speed;
+            currentSpeedCommand = SpeedCenter;
+            lastSpeedToSend = SpeedCenter;
 
-            SendPacket((byte)speed);
-
+            trackBar1.Value = SpeedCenter;
             SpeedLabel.Text = "0";
-            Console.WriteLine("Speed set to: " + SpeedLabel.Text + " %");
         }
+
 
         private void TrackBar1_Scroll(object sender, EventArgs e)
         {
             speed = trackBar1.Value;
-            if (speed <= 0){
-                speed = 1;
-            }
+            if (speed <= 0) speed = 1;
 
-            lastSpeedToSend = speed; // update desired speed
-            SpeedLabel.Text = (((double)(speed - SpeedCenter) / SpeedCenter) * 100).ToString("F1");
+            currentSpeedCommand = speed;   // ✅ persistent state
+            lastSpeedToSend = speed;       // UART transmit buffer
+
+            SpeedLabel.Text =
+                (((double)(speed - SpeedCenter) / SpeedCenter) * 100).ToString("F1");
         }
+
 
         private void SetPWMButton_Click(object sender, EventArgs e)
         {
-            lastSpeedToSend = SpeedCenter * (100 + Convert.ToInt32(PWMSetTextBox.Text)) / 100;
-            if (lastSpeedToSend == SpeedMax)
-            {
-                trackBar1.Value = SpeedMax - 1;
-            }
-            else
-            {
-                trackBar1.Value = lastSpeedToSend;
-            }
+            currentSpeedCommand = SpeedCenter * (100 + Convert.ToInt32(PWMSetTextBox.Text)) / 100;
+
+            lastSpeedToSend = currentSpeedCommand;
+
+            trackBar1.Value = Math.Min(currentSpeedCommand, SpeedMax - 1);
             SpeedLabel.Text = PWMSetTextBox.Text;
         }
+
 
         private void SendSpeedTimer_Tick(object sender, EventArgs e)
         {
             if (serialPort1.IsOpen && lastSpeedToSend != -1)
             {
                 SendPacket(lastSpeedToSend);
-                lastSpeedToSend = -1; // reset, wait for next slider change
+                lastSpeedToSend = -1;
             }
         }
+
         // ===== Encoder signal output processing =====
         private void ProcessEncoderSignal(int direction)
         {
@@ -211,6 +214,19 @@ namespace Lab6Ex2
                 userWantsConnection = true;
             }
             StartLogging(filename);
+        }
+        private void SaveButton_Click(object sender, EventArgs e)
+        {
+            if (!isLogging)
+            {
+                StartLogging(filename);
+                SaveButton.Text = "Writing";
+            }
+            else
+            {
+                StopLogging();
+                SaveButton.Text = "Save?";
+            }
         }
 
         // --- RefreshCOMPorts --- //
@@ -326,15 +342,21 @@ namespace Lab6Ex2
         private void StartLogging(string filename)
         {
             logWriter = new StreamWriter(filename);
-            logWriter.WriteLine("Time_ms,DutyCycle_percent,Position");
-            logStartTime = Environment.TickCount;
+            logWriter.WriteLine("Time_ms,DutyCycle_percent,Position,Speed");
+
+            logTimer.Reset();
+            logTimer.Start();
+
             isLogging = true;
         }
+
 
         private void StopLogging()
         {
             if (logWriter != null)
             {
+                logTimer.Stop();
+
                 isLogging = false;
                 logWriter.Flush();
                 logWriter.Close();
@@ -344,9 +366,12 @@ namespace Lab6Ex2
 
 
 
+
         // ===== SERIAL DATA RECEIVED =====
         // Packet format: [0xAA], [Dir 0/1], [Count MSB], [Count LSB]
-        private void SerialPort1_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        
+        
+        /*private void SerialPort1_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             int bytesToRead = serialPort1.BytesToRead;
             if (bytesToRead == 0) return;
@@ -388,32 +413,37 @@ namespace Lab6Ex2
                     Hz = (double)counts / countsPerRev / (timeBtwRefresh / 1000.0); // counts to revolutions per second
                     position += signedCounts * count2PositionFactor;
                     velocity = signedCounts * count2VelocityFactor;
-                    
+
 
                     // Update UI safely
-                    this.BeginInvoke(new Action(() =>
+                    //this.BeginInvoke(new Action(() =>
+                    //{
+                    //    ProcessEncoderSignal(direction);  // highlight CW/CCW
+                    //    AddDataPointToChart2(position, velocity);
+
+                    //    HzTextBox.Text = Hz.ToString("F2");
+                    //    PositionTextBox.Text = position.ToString("F2");
+                    //    VelocityTextBox.Text = velocity.ToString("F2");
+
+
+                    //}));
+
+                    // Data logging
+
+                    if (isLogging && logWriter != null)
                     {
-                        ProcessEncoderSignal(direction);  // highlight CW/CCW
-                        AddDataPointToChart2(position, velocity);
+                        int timeMs = (int)logTimer.ElapsedMilliseconds;
 
-                        HzTextBox.Text = Hz.ToString("F2");
-                        PositionTextBox.Text = position.ToString("F2");
-                        VelocityTextBox.Text = velocity.ToString("F2");
-                        if (isLogging && logWriter != null)
-                        {
-                            int timeMs = Environment.TickCount - logStartTime;
+                        double dutyCyclePercent = ((double)(currentSpeedCommand - SpeedCenter)) * 100.0 / SpeedCenter;
 
-                            double dutyCyclePercent =
-                                ((double)(lastSpeedToSend - SpeedCenter)) * 100.0/ (double) SpeedCenter;
 
-                            logWriter.WriteLine($"{timeMs},{dutyCyclePercent:F2},{position:F4}");
-                        }
-
-                    }));
+                        logWriter.WriteLine($"{timeMs},{dutyCyclePercent:F2},{position:F4},{velocity:F4}");
+                    }
                 }
             }
-        }
+        }*/
 
         
+
     }
 }
