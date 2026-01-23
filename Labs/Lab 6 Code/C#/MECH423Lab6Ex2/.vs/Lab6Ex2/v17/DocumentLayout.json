@@ -30,9 +30,9 @@
               "Title": "Form1.cs",
               "DocumentMoniker": "C:\\Users\\Centr\\Documents\\GitHub\\Mech-421-3-Final-Project\\Labs\\Duplicate_Check_Later\\Lab 6 Code\\C#\\MECH423Lab6Ex2\\Lab6Ex2\\Form1.cs",
               "RelativeDocumentMoniker": "Lab6Ex2\\Form1.cs",
-              "ToolTip": "C:\\Users\\Centr\\Documents\\GitHub\\Mech-421-3-Final-Project\\Labs\\Duplicate_Check_Later\\Lab 6 Code\\C#\\MECH423Lab6Ex2\\Lab6Ex2\\Form1.cs*",
-              "RelativeToolTip": "Lab6Ex2\\Form1.cs*",
-              "ViewState": "AgIAAJEBAAAAAAAAAAAcwKoBAAAaAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\Centr\\Documents\\GitHub\\Mech-421-3-Final-Project\\Labs\\Duplicate_Check_Later\\Lab 6 Code\\C#\\MECH423Lab6Ex2\\Lab6Ex2\\Form1.cs",
+              "RelativeToolTip": "Lab6Ex2\\Form1.cs",
+              "ViewState": "AgIAAFgBAAAAAAAAAAAuwHQBAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-01-11T08:43:21.726Z",
               "EditorCaption": ""
@@ -47,8 +47,7 @@
               "RelativeToolTip": "Lab6Ex2\\Form1.Designer.cs",
               "ViewState": "AgIAABYAAAAAAAAAAAAgwBgAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-11T08:47:08.93Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-11T08:47:08.93Z"
             },
             {
               "$type": "Document",
@@ -56,11 +55,10 @@
               "Title": "Form1.cs [Design]",
               "DocumentMoniker": "C:\\Users\\Centr\\Documents\\GitHub\\Mech-421-3-Final-Project\\Labs\\Duplicate_Check_Later\\Lab 6 Code\\C#\\MECH423Lab6Ex2\\Lab6Ex2\\Form1.cs",
               "RelativeDocumentMoniker": "Lab6Ex2\\Form1.cs",
-              "ToolTip": "C:\\Users\\Centr\\Documents\\GitHub\\Mech-421-3-Final-Project\\Labs\\Duplicate_Check_Later\\Lab 6 Code\\C#\\MECH423Lab6Ex2\\Lab6Ex2\\Form1.cs [Design]*",
-              "RelativeToolTip": "Lab6Ex2\\Form1.cs [Design]*",
+              "ToolTip": "C:\\Users\\Centr\\Documents\\GitHub\\Mech-421-3-Final-Project\\Labs\\Duplicate_Check_Later\\Lab 6 Code\\C#\\MECH423Lab6Ex2\\Lab6Ex2\\Form1.cs [Design]",
+              "RelativeToolTip": "Lab6Ex2\\Form1.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-11T08:43:04.096Z",
-              "EditorCaption": " [Design]"
+              "WhenOpened": "2026-01-11T08:43:04.096Z"
             }
           ]
         }
