@@ -27,7 +27,8 @@ namespace Data_Infrastructure_Form
         private int cameraNum = 0; // Choose which camera to use
         private volatile bool _closing = false;
         private byte txbyte;
-        private List<int> circleColour = new List<int>(); // -1 = unassigned, 0 = white, 1 = black
+        private List<Vec4f> discs = new List<Vec4f>(); // [X, Y, Radius, Colour]
+
 
         System.Windows.Forms.Timer autoReconnectTimer = new System.Windows.Forms.Timer();
         bool userWantsConnection = false;
@@ -133,7 +134,7 @@ namespace Data_Infrastructure_Form
                 if (_canny)
                     Cv2.Canny(imageRes, newImage, 50, 200);
 
-                string xText = "NaN", yText = "NaN", rText = "NaN";
+                string xText = "NaN", yText = "NaN", rText = "NaN", cText = "NaN";
                 txbyte = 0; // 0 encodes as no data read
 
                 if (_hough)
@@ -141,15 +142,36 @@ namespace Data_Infrastructure_Form
                     Cv2.MedianBlur(newImage, newImage, 5);
                     Cv2.CvtColor(newImage, newImageGrey, ColorConversionCodes.BGR2GRAY);
                     var circles = Cv2.HoughCircles(newImageGrey, HoughModes.GradientAlt, 1, 5, 300, 0.9, 5, 50);
+                    // output is an array of vec3fs? -> array of vec4fs
+
+
+                    discs.Clear();
 
                     foreach (var circle in circles)
                     {
 
                         //newImage[(int)circle.Center.Y, (int)circle.Center.Y, (int)circle.Center.X, (int)circle.Center.X] need to extract colour info somehow (---)
+                        Vec3b colour = newImage.At<Vec3b>((int) circle.Center.Y, (int) circle.Center.X);
+
+                        double luminance = calculateLuminance(colour);
+
+                        float team;
+
+                        if (luminance > 127.5)
+                        { team = 0; cText = "White";  }
+                        else { team = 1; cText = "Black";  }
+
+                        var disc_i = new Vec4f(circle.Center.X, circle.Center.Y, circle.Radius, team);
+
+
+
+                        discs.Add(disc_i);
 
 
                         Cv2.Circle(newImage, (int)circle.Center.X, (int)circle.Center.Y, (int)circle.Radius, Scalar.Green, 5);
                         Cv2.Circle(newImage, (int)circle.Center.X, (int)circle.Center.Y, 5, Scalar.Red, -1);
+                        Cv2.PutText(newImage, cText, (OpenCvSharp.Point) circle.Center, HersheyFonts.HersheyComplexSmall, 0.5, Scalar.Black);
+                        
                     }
 
                     if (circles.Length > 0)
@@ -188,6 +210,7 @@ namespace Data_Infrastructure_Form
                     txtXOut.Text = xText;
                     txtYOut.Text = yText;
                     txtROut.Text = rText;
+                    txtCOut.Text = cText;
 
                     var old1 = pictureBoxWebCam.Image;
                     pictureBoxWebCam.Image = bmpWebCam;
@@ -271,6 +294,17 @@ namespace Data_Infrastructure_Form
         private void timer1_Tick(object sender, EventArgs e)
         {
             serialPort1.Write(txbyte.ToString());
+        }
+
+        private double calculateLuminance(Vec3b colour)
+        {
+            byte blue = colour[0];
+            byte green = colour[1];
+            byte red = colour[2];
+
+            double luminance = blue * 0.0722 + green * 0.7152 + red * 0.2172;
+
+            return luminance;
         }
     }
 }

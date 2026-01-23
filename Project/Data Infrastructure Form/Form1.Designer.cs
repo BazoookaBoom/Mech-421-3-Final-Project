@@ -49,6 +49,8 @@
             this.txtYOut = new System.Windows.Forms.TextBox();
             this.txtROut = new System.Windows.Forms.TextBox();
             this.txtXOut = new System.Windows.Forms.TextBox();
+            this.txtCOut = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxWebCam)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxEffect)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -171,6 +173,8 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.label4);
+            this.groupBox3.Controls.Add(this.txtCOut);
             this.groupBox3.Controls.Add(this.label3);
             this.groupBox3.Controls.Add(this.label2);
             this.groupBox3.Controls.Add(this.label1);
@@ -232,6 +236,22 @@
             this.txtXOut.Size = new System.Drawing.Size(100, 31);
             this.txtXOut.TabIndex = 11;
             // 
+            // txtCOut
+            // 
+            this.txtCOut.Location = new System.Drawing.Point(140, 150);
+            this.txtCOut.Name = "txtCOut";
+            this.txtCOut.Size = new System.Drawing.Size(100, 31);
+            this.txtCOut.TabIndex = 17;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(27, 156);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(75, 25);
+            this.label4.TabIndex = 18;
+            this.label4.Text = "Colour";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
@@ -278,6 +298,8 @@
         private System.Windows.Forms.TextBox txtYOut;
         private System.Windows.Forms.TextBox txtROut;
         private System.Windows.Forms.TextBox txtXOut;
+        private System.Windows.Forms.TextBox txtCOut;
+        private System.Windows.Forms.Label label4;
     }
 }
 
