@@ -1,0 +1,11 @@
+C:\Users\Centr\Documents\GitHub\Mech-421-3-Final-Project\Labs\Lab 6 Code\C#\MECH423Lab6Ex3\Lab6Ex3\Lab6Ex3\obj\Debug\Lab6Ex3.csproj.AssemblyReference.cache
+C:\Users\Centr\Documents\GitHub\Mech-421-3-Final-Project\Labs\Lab 6 Code\C#\MECH423Lab6Ex3\Lab6Ex3\Lab6Ex3\obj\Debug\Lab6Ex3.Properties.Resources.resources
+C:\Users\Centr\Documents\GitHub\Mech-421-3-Final-Project\Labs\Lab 6 Code\C#\MECH423Lab6Ex3\Lab6Ex3\Lab6Ex3\obj\Debug\Lab6Ex3.csproj.GenerateResource.cache
+C:\Users\Centr\Documents\GitHub\Mech-421-3-Final-Project\Labs\Lab 6 Code\C#\MECH423Lab6Ex3\Lab6Ex3\Lab6Ex3\obj\Debug\Lab6Ex3.csproj.CoreCompileInputs.cache
+C:\Users\Centr\Documents\GitHub\Mech-421-3-Final-Project\Labs\Lab 6 Code\C#\MECH423Lab6Ex3\Lab6Ex3\Lab6Ex3\bin\Debug\Lab6Ex3.exe.config
+C:\Users\Centr\Documents\GitHub\Mech-421-3-Final-Project\Labs\Lab 6 Code\C#\MECH423Lab6Ex3\Lab6Ex3\Lab6Ex3\bin\Debug\Lab6Ex3.exe
+C:\Users\Centr\Documents\GitHub\Mech-421-3-Final-Project\Labs\Lab 6 Code\C#\MECH423Lab6Ex3\Lab6Ex3\Lab6Ex3\bin\Debug\Lab6Ex3.pdb
+C:\Users\Centr\Documents\GitHub\Mech-421-3-Final-Project\Labs\Lab 6 Code\C#\MECH423Lab6Ex3\Lab6Ex3\Lab6Ex3\obj\Debug\Lab6Ex3.exe
+C:\Users\Centr\Documents\GitHub\Mech-421-3-Final-Project\Labs\Lab 6 Code\C#\MECH423Lab6Ex3\Lab6Ex3\Lab6Ex3\obj\Debug\Lab6Ex3.pdb
+C:\Users\Centr\Documents\GitHub\Mech-421-3-Final-Project\Labs\Lab 6 Code\C#\MECH423Lab6Ex3\Lab6Ex3\Lab6Ex3\obj\Debug\Lab6Ex3.exe.config
+C:\Users\Centr\Documents\GitHub\Mech-421-3-Final-Project\Labs\Lab 6 Code\C#\MECH423Lab6Ex3\Lab6Ex3\Lab6Ex3\obj\Debug\Lab6Ex3.Form1.resources

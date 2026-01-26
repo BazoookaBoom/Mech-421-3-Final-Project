@@ -39,8 +39,8 @@ namespace Lab6Ex2
         StreamWriter logWriter = null;
         int currentSpeedCommand = 32768;
         bool isLogging = false;
-        string filename = "C:\\Users\\Centr\\Documents\\GitHub\\Mech-421-3-Final-Project\\Labs\\Duplicate_Check_Later\\Lab 6 Code\\C#\\MECH423Lab6Ex3" +
-            "\\step50.csv";
+        string filename = "C:\\Users\\Centr\\Documents\\GitHub\\Mech-421-3-Final-Project\\Labs\\Lab 6 Code\\C#\\MECH423Lab6Ex3" +
+            "\\test.csv";
 
         Stopwatch logTimer = new Stopwatch();
 
@@ -371,7 +371,7 @@ namespace Lab6Ex2
         // Packet format: [0xAA], [Dir 0/1], [Count MSB], [Count LSB]
         
         
-        /*private void SerialPort1_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        private void SerialPort1_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             int bytesToRead = serialPort1.BytesToRead;
             if (bytesToRead == 0) return;
@@ -416,17 +416,17 @@ namespace Lab6Ex2
 
 
                     // Update UI safely
-                    //this.BeginInvoke(new Action(() =>
-                    //{
-                    //    ProcessEncoderSignal(direction);  // highlight CW/CCW
-                    //    AddDataPointToChart2(position, velocity);
+                    this.BeginInvoke(new Action(() =>
+                    {
+                        ProcessEncoderSignal(direction);  // highlight CW/CCW
+                        AddDataPointToChart2(position, velocity);
 
-                    //    HzTextBox.Text = Hz.ToString("F2");
-                    //    PositionTextBox.Text = position.ToString("F2");
-                    //    VelocityTextBox.Text = velocity.ToString("F2");
+                        HzTextBox.Text = Hz.ToString("F2");
+                        PositionTextBox.Text = position.ToString("F2");
+                        VelocityTextBox.Text = velocity.ToString("F2");
 
 
-                    //}));
+                    }));
 
                     // Data logging
 
@@ -441,7 +441,7 @@ namespace Lab6Ex2
                     }
                 }
             }
-        }*/
+        }
 
         
 
