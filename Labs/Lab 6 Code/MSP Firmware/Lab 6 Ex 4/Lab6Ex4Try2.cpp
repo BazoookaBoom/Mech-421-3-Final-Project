@@ -13,6 +13,7 @@
 #define ENC_FWD BIT6   // P1.6
 #define ENC_BWD BIT7   // P1.7
 #define PWM_PERIOD_TB0 65535u
+#define COUNTS_PER_CM  9.605f
 
 #define TX_BUFFER_SIZE 16
 
@@ -31,10 +32,10 @@ volatile uint8_t txTail = 0;
 // ====== Position Control ======
 volatile int32_t positionSetpoint = 0;  // Desired position (encoder counts)
 volatile int32_t positionActual = 0;    // Current position (encoder counts)
-volatile int32_t Kp = 1000;             // Proportional gain (tune experimentally)
+volatile int32_t Kp = 250;             // Proportional gain (tune experimentally)
 
-#define CONTROL_OUTPUT_MAX 32767
-#define CONTROL_OUTPUT_MIN -32767
+#define CONTROL_OUTPUT_MAX 30000
+#define CONTROL_OUTPUT_MIN -30000
 
 // ======= FORWARD DECLARATIONS =======
 void initClock(void);
@@ -71,11 +72,10 @@ int main(void)
     {
         if (newSpeed)
         {
-            uint8_t speedByte1 = rxBuffer[1];
-            uint8_t speedByte2 = rxBuffer[2];
+            uint8_t positionByte = rxBuffer[1];
 
-            // Update setpoint from C# program
-            positionSetpoint = ((int32_t)speedByte1 << 8) | speedByte2;
+            // // Update setpoint from C# program
+            positionSetpoint = (int32_t)((float)positionByte * COUNTS_PER_CM);
             newSpeed = 0;
         }
     }
@@ -198,43 +198,51 @@ void initEncoderPins(void)
 
 void initControlTimer(void)
 {
-    TA1CCR0 = 8000 - 1;  // 1 kHz @ 8MHz
+    TA1CCR0 = 40000 - 1;  // 1 kHz @ 8MHz
     TA1CCTL0 = CCIE;
     TA1CTL = TASSEL__SMCLK | MC__UP | ID__1;
 }
 
 // ======= POSITION CONTROL =======
-void updatePosition(void)
-{
-    positionActual = (int32_t)fwdCount - (int32_t)bwdCount;
-}
+
 
 void positionControlStep(void)
 {
     int32_t error = positionSetpoint - positionActual;
     int32_t pwmCommand;
+    uint32_t speedWord;
 
-    // ----- 32-bit multiply using hardware multiplier -----
-    MPY32L = (uint16_t)(error & 0xFFFF);
-    MPY32H = (uint16_t)((error >> 16) & 0xFFFF);
-    OP2L   = (uint16_t)(Kp & 0xFFFF);
-    OP2H   = (uint16_t)((Kp >> 16) & 0xFFFF);
-    MACS32;  // multiply signed 32x32 -> 64 bits
+    // ---------- Signed 32-bit multiply ----------
+    MPYS32L = (int16_t)(error & 0xFFFF);
+    MPYS32H = (int16_t)(error >> 16);
 
-    pwmCommand = (int32_t)RES0;
+    OP2L = (int16_t)(Kp & 0xFFFF);
+    OP2H = (int16_t)(Kp >> 16);
 
-    // ----- Saturate -----
-    if (pwmCommand > CONTROL_OUTPUT_MAX) pwmCommand = CONTROL_OUTPUT_MAX;
-    if (pwmCommand < CONTROL_OUTPUT_MIN) pwmCommand = CONTROL_OUTPUT_MIN;
+    // ---------- Correct result extraction ----------
+    pwmCommand = ((int32_t)RES1 << 16) | RES0;
 
-    // ----- Send to motor -----
-    if (pwmCommand >= 0)
-        processPacket((uint8_t)((SPEED_CENTER + pwmCommand) >> 8),
-                      (uint8_t)((SPEED_CENTER + pwmCommand) & 0xFF));
-    else
-        processPacket((uint8_t)((SPEED_CENTER - (-pwmCommand)) >> 8),
-                      (uint8_t)((SPEED_CENTER - (-pwmCommand)) & 0xFF));
+    // pwmCommand = error * Kp;
+
+    // ---------- Saturation ----------
+    if (pwmCommand > CONTROL_OUTPUT_MAX)
+        pwmCommand = CONTROL_OUTPUT_MAX;
+    if (pwmCommand < CONTROL_OUTPUT_MIN)
+        pwmCommand = CONTROL_OUTPUT_MIN;
+
+    // ---------- Center-offset command ----------
+    speedWord = SPEED_CENTER + pwmCommand;
+
+    // Safety clamp (just in case)
+    if (speedWord > 65535) speedWord = 65535;
+    if (speedWord < 0)     speedWord = 0;
+
+    processPacket(
+        (uint8_t)(speedWord >> 8),
+        (uint8_t)(speedWord & 0xFF)
+    );
 }
+
 
 // ======= INTERRUPTS =======
 
@@ -244,12 +252,14 @@ __interrupt void PORT1_ISR(void)
     if (P1IFG & ENC_FWD)
     {
         fwdCount++;
+        positionActual++;
         P1IFG &= ~ENC_FWD;
     }
 
     if (P1IFG & ENC_BWD)
     {
         bwdCount++;
+        positionActual--;
         P1IFG &= ~ENC_BWD;
     }
 }
@@ -274,16 +284,16 @@ __interrupt void TIMER0_A0_ISR(void)
     fwdCount = 0;
     bwdCount = 0;
 
-    UART_SendPacket(direction, countToSend);
+    // UART_SendPacket(direction, countToSend);
 }
 
 #pragma vector = TIMER1_A0_VECTOR
 __interrupt void TIMER1_A0_ISR(void)
 {
-    updatePosition();
     positionControlStep();
 }
 
+//[0xAA][positionByte] = [startByte][25.5cm max]
 #pragma vector = USCI_A0_VECTOR
 __interrupt void USCI_A0_ISR(void)
 {
@@ -305,14 +315,10 @@ __interrupt void USCI_A0_ISR(void)
         else if (rxCount == 1)
         {
             rxBuffer[1] = b;
-            rxCount = 2;
-        }
-        else
-        {
-            rxBuffer[2] = b;
-            newSpeed = 1;
             rxCount = 0;
+            newSpeed = 1;
         }
+
     }
 
     if (status & UCTXIFG)
