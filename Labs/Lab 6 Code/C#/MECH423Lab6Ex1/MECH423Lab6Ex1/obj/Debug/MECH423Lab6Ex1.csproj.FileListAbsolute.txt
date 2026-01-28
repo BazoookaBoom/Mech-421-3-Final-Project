@@ -20,3 +20,14 @@ C:\Users\conoron.stu\Documents\GitHub\Mech-421-3-Final-Project\Lab 6 Code\C#\MEC
 C:\Users\conoron.stu\Documents\GitHub\Mech-421-3-Final-Project\Lab 6 Code\C#\MECH423Lab6Ex1\MECH423Lab6Ex1\obj\Debug\MECH423Lab6Ex1.csproj.CoreCompileInputs.cache
 C:\Users\conoron.stu\Documents\GitHub\Mech-421-3-Final-Project\Lab 6 Code\C#\MECH423Lab6Ex1\MECH423Lab6Ex1\obj\Debug\MECH423Lab6Ex1.exe
 C:\Users\conoron.stu\Documents\GitHub\Mech-421-3-Final-Project\Lab 6 Code\C#\MECH423Lab6Ex1\MECH423Lab6Ex1\obj\Debug\MECH423Lab6Ex1.pdb
+C:\Users\Centr\Documents\GitHub\Mech-421-3-Final-Project\Labs\Lab 6 Code\C#\MECH423Lab6Ex1\MECH423Lab6Ex1\bin\Debug\MECH423Lab6Ex1.exe.config
+C:\Users\Centr\Documents\GitHub\Mech-421-3-Final-Project\Labs\Lab 6 Code\C#\MECH423Lab6Ex1\MECH423Lab6Ex1\bin\Debug\MECH423Lab6Ex1.exe
+C:\Users\Centr\Documents\GitHub\Mech-421-3-Final-Project\Labs\Lab 6 Code\C#\MECH423Lab6Ex1\MECH423Lab6Ex1\bin\Debug\MECH423Lab6Ex1.pdb
+C:\Users\Centr\Documents\GitHub\Mech-421-3-Final-Project\Labs\Lab 6 Code\C#\MECH423Lab6Ex1\MECH423Lab6Ex1\obj\Debug\MECH423Lab6Ex1.csproj.AssemblyReference.cache
+C:\Users\Centr\Documents\GitHub\Mech-421-3-Final-Project\Labs\Lab 6 Code\C#\MECH423Lab6Ex1\MECH423Lab6Ex1\obj\Debug\MECH423Lab6Ex1.exe.config
+C:\Users\Centr\Documents\GitHub\Mech-421-3-Final-Project\Labs\Lab 6 Code\C#\MECH423Lab6Ex1\MECH423Lab6Ex1\obj\Debug\MECH423Lab6Ex1.Form1.resources
+C:\Users\Centr\Documents\GitHub\Mech-421-3-Final-Project\Labs\Lab 6 Code\C#\MECH423Lab6Ex1\MECH423Lab6Ex1\obj\Debug\MECH423Lab6Ex1.Properties.Resources.resources
+C:\Users\Centr\Documents\GitHub\Mech-421-3-Final-Project\Labs\Lab 6 Code\C#\MECH423Lab6Ex1\MECH423Lab6Ex1\obj\Debug\MECH423Lab6Ex1.csproj.GenerateResource.cache
+C:\Users\Centr\Documents\GitHub\Mech-421-3-Final-Project\Labs\Lab 6 Code\C#\MECH423Lab6Ex1\MECH423Lab6Ex1\obj\Debug\MECH423Lab6Ex1.csproj.CoreCompileInputs.cache
+C:\Users\Centr\Documents\GitHub\Mech-421-3-Final-Project\Labs\Lab 6 Code\C#\MECH423Lab6Ex1\MECH423Lab6Ex1\obj\Debug\MECH423Lab6Ex1.exe
+C:\Users\Centr\Documents\GitHub\Mech-421-3-Final-Project\Labs\Lab 6 Code\C#\MECH423Lab6Ex1\MECH423Lab6Ex1\obj\Debug\MECH423Lab6Ex1.pdb
