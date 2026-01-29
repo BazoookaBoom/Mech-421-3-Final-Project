@@ -41,7 +41,6 @@ namespace Lab6Ex3
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.SetPWMButton = new System.Windows.Forms.Button();
             this.PWMSetTextBox = new System.Windows.Forms.TextBox();
-            this.SpeedLabel = new System.Windows.Forms.Label();
             this.ForwardLabel = new System.Windows.Forms.Label();
             this.BackwardLabel = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
@@ -53,6 +52,8 @@ namespace Lab6Ex3
             this.HzLabel = new System.Windows.Forms.Label();
             this.SaveButton = new System.Windows.Forms.Button();
             this.timerSave = new System.Windows.Forms.Timer(this.components);
+            this.FilenameTextBox = new System.Windows.Forms.TextBox();
+            this.FilenameLabel = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.SuspendLayout();
@@ -126,9 +127,10 @@ namespace Lab6Ex3
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.FilenameLabel);
+            this.groupBox4.Controls.Add(this.FilenameTextBox);
             this.groupBox4.Controls.Add(this.SetPWMButton);
             this.groupBox4.Controls.Add(this.PWMSetTextBox);
-            this.groupBox4.Controls.Add(this.SpeedLabel);
             this.groupBox4.Controls.Add(this.CWSpinLabel);
             this.groupBox4.Controls.Add(this.CCWSpinLabel);
             this.groupBox4.Location = new System.Drawing.Point(268, 6);
@@ -157,16 +159,6 @@ namespace Lab6Ex3
             this.PWMSetTextBox.Size = new System.Drawing.Size(50, 20);
             this.PWMSetTextBox.TabIndex = 30;
             this.PWMSetTextBox.Text = "0";
-            // 
-            // SpeedLabel
-            // 
-            this.SpeedLabel.AutoSize = true;
-            this.SpeedLabel.Location = new System.Drawing.Point(103, 75);
-            this.SpeedLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.SpeedLabel.Name = "SpeedLabel";
-            this.SpeedLabel.Size = new System.Drawing.Size(13, 13);
-            this.SpeedLabel.TabIndex = 20;
-            this.SpeedLabel.Text = "0";
             // 
             // ForwardLabel
             // 
@@ -249,6 +241,23 @@ namespace Lab6Ex3
             this.SaveButton.UseVisualStyleBackColor = true;
             this.SaveButton.Click += new System.EventHandler(this.SaveButton_Click);
             // 
+            // FilenameTextBox
+            // 
+            this.FilenameTextBox.Location = new System.Drawing.Point(42, 66);
+            this.FilenameTextBox.Name = "FilenameTextBox";
+            this.FilenameTextBox.Size = new System.Drawing.Size(66, 20);
+            this.FilenameTextBox.TabIndex = 31;
+            this.FilenameTextBox.Text = "test";
+            // 
+            // FilenameLabel
+            // 
+            this.FilenameLabel.AutoSize = true;
+            this.FilenameLabel.Location = new System.Drawing.Point(45, 49);
+            this.FilenameLabel.Name = "FilenameLabel";
+            this.FilenameLabel.Size = new System.Drawing.Size(35, 13);
+            this.FilenameLabel.TabIndex = 32;
+            this.FilenameLabel.Text = "Filename";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -280,7 +289,6 @@ namespace Lab6Ex3
 
         private System.IO.Ports.SerialPort serialPort1;
         private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.Label SpeedLabel;
         private System.Windows.Forms.Label CWSpinLabel;
         private System.Windows.Forms.Label CCWSpinLabel;
         private System.Windows.Forms.GroupBox groupBox1;
@@ -301,6 +309,8 @@ namespace Lab6Ex3
         private System.Windows.Forms.TextBox PWMSetTextBox;
         private System.Windows.Forms.Button SaveButton;
         private System.Windows.Forms.Timer timerSave;
+        private System.Windows.Forms.Label FilenameLabel;
+        private System.Windows.Forms.TextBox FilenameTextBox;
     }
 }
 

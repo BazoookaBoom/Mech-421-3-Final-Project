@@ -49,9 +49,9 @@ namespace Lab6Ex3
             sendSpeedTimer.Tick += SendSpeedTimer_Tick;
             sendSpeedTimer.Start();
 
-            timerSave.Interval = 25;
-            timerSave.Tick += TimerSave_Tick;
-            timerSave.Start();
+            //timerSave.Interval = 25;
+            //timerSave.Tick += TimerSave_Tick;
+            //timerSave.Start();
 
             serialPort1.DataReceived += SerialPort1_DataReceived;
         }
@@ -59,6 +59,7 @@ namespace Lab6Ex3
         // ================= UI BUTTONS =================
         private void SaveButton_Click(object sender, EventArgs e)
         {
+            filename = "C:\\Users\\Centr\\Documents\\GitHub\\Mech-421-3-Final-Project\\Labs\\Lab 6 Code\\C#\\MECH423Lab6Ex3\\" + FilenameTextBox.Text + ".csv";
             if (!isLogging)
             {
                 StartLogging(filename);
@@ -103,7 +104,11 @@ namespace Lab6Ex3
                 SpeedCenter * (100 + Convert.ToInt32(PWMSetTextBox.Text)) / 100;
 
             lastSpeedToSend = currentSpeedCommand;
-            SpeedLabel.Text = PWMSetTextBox.Text;
+
+            if(lastSpeedToSend >= 65535)
+            {
+                lastSpeedToSend = SpeedCenter * 2 -1;
+            }
         }
 
         // ================= SPEED TX =================
@@ -140,27 +145,44 @@ namespace Lab6Ex3
                     if (startIndex == -1)
                     {
                         rxBuffer.Clear();
-                        break;
+                        return;
                     }
 
                     if (startIndex > 0)
                         rxBuffer.RemoveRange(0, startIndex);
 
-                    if (rxBuffer.Count < 4) break;
+                    if (rxBuffer.Count < 4) return;
 
                     byte dir = rxBuffer[1];
-                    ushort counts =
-                        (ushort)((rxBuffer[2] << 8) | rxBuffer[3]);
+                    ushort counts = (ushort)((rxBuffer[2] << 8) | rxBuffer[3]);
 
                     rxBuffer.RemoveRange(0, 4);
 
                     int signedCounts = (dir == 0x01) ? counts : -counts;
 
+                    // Update state
                     position += signedCounts * count2PositionFactor;
                     velocity = signedCounts * count2VelocityFactor;
+
+                    // ===== LOG EXACTLY ON RX =====
+                    if (isLogging && logWriter != null)
+                    {
+                        int timeMs = (int)logTimer.ElapsedMilliseconds;
+
+                        logBuffer.Add($"{timeMs},{position:F4},{velocity:F4}");
+
+                        if (logBuffer.Count >= LOG_FLUSH_SIZE)
+                        {
+                            foreach (var line in logBuffer)
+                                logWriter.WriteLine(line);
+
+                            logBuffer.Clear();
+                        }
+                    }
                 }
             }
         }
+
 
         // ================= LOGGING =================
         private void StartLogging(string filename)
@@ -207,5 +229,7 @@ namespace Lab6Ex3
                 logBuffer.Clear();
             }
         }
+
+       
     }
 }
