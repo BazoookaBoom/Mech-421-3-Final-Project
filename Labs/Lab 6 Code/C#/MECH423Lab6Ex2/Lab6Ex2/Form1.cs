@@ -25,7 +25,7 @@ namespace Lab6Ex2
         int SpeedMax = 65536;
         double countsPerRev = 979.62;
         int timeBtwRefresh = 50; //ms
-        double count2VelocityFactor = 1/ 979.62 / (50.0/1000.0) * 60.0; // 1 / 979.62 counts per revolution = revolutions completed / 50ms = velocity in Rev per ms * 1000 * 60 to get RPM 
+        double count2VelocityFactor = 1/ 979.62 / (50.0/1000.0) * 60.0; // 1 / 979.62 counts per revolution = revolutions completed / 50ms = velocity in Rev per ms * 1000 * 60 to get velo 
         double Hz = 0;
         double position = 0;
         double velocity = 0;
@@ -309,7 +309,7 @@ namespace Lab6Ex2
             area.AxisX.Minimum = 0;
             area.AxisX.Maximum = 5000; // 5000ms window
 
-            area.AxisY2.Title = "Velocity (RPM)";
+            area.AxisY2.Title = "Velocity (velo)";
             area.AxisY2.Enabled = AxisEnabled.True;
 
             chart2.Series.Add(velSeries);

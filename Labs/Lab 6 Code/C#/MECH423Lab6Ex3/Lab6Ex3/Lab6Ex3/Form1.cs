@@ -4,38 +4,71 @@ using System.Diagnostics;
 using System.IO;
 using System.IO.Ports;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Lab6Ex3
 {
     public partial class Form1 : Form
     {
-        // Using the serialPort1 from designer
+        // ================= TIMERS =================
         Timer sendSpeedTimer = new Timer();
-        int lastSpeedToSend = -1;
-        int currentSpeedCommand = 32768; // center default
 
-        // Encoder variables
+        int lastSpeedToSend = -1;
+
+        // ================= ENCODER =================
         double countsPerRev = 979.62;
-        double count2VelocityFactor = 1 / 979.62 / 0.05 * 60.0; // RPM
-        double count2PositionFactor = 1.0 / 979.62 * 20.0 / 5.0 * 4; // counts -> cm
+        double count2VelocityFactor = 1 / 979.62 / 0.05 * 60.0;   // RPM
+        double count2PositionFactor = 1.0 / 979.62 * 20.0 / 5.0 * 4; // cm
+
         double position = 0;
         double velocity = 0;
+
         int SpeedCenter = 32768;
 
+        // ================= SERIAL =================
         List<byte> rxBuffer = new List<byte>();
-        StreamWriter logWriter = null;
-        Stopwatch logTimer = new Stopwatch();
 
+        // ================= LOGGING =================
+        Stopwatch logTimer = new Stopwatch();
+        StreamWriter logWriter = null;
+        bool isLogging = false;
+
+        List<string> logBuffer = new List<string>();
+        const int LOG_FLUSH_SIZE = 20;   // flush every 20 samples (~500 ms)
+
+        string filename =
+            "C:\\Users\\Centr\\Documents\\GitHub\\Mech-421-3-Final-Project\\Labs\\Lab 6 Code\\C#\\MECH423Lab6Ex3\\test.csv";
+
+        int currentSpeedCommand = 32768;
+
+        // ================= CONSTRUCTOR =================
         public Form1()
         {
             InitializeComponent();
 
-            sendSpeedTimer.Interval = 10; // 10 ms for fast sending
+            sendSpeedTimer.Interval = 100;
             sendSpeedTimer.Tick += SendSpeedTimer_Tick;
             sendSpeedTimer.Start();
 
+            timerSave.Interval = 25;
+            timerSave.Tick += TimerSave_Tick;
+            timerSave.Start();
+
             serialPort1.DataReceived += SerialPort1_DataReceived;
+        }
+
+        // ================= UI BUTTONS =================
+        private void SaveButton_Click(object sender, EventArgs e)
+        {
+            if (!isLogging)
+            {
+                StartLogging(filename);
+                SaveButton.Text = "Writing";
+            }
+            else
+            {
+                StopLogging();
+                SaveButton.Text = "Save?";
+            }
         }
 
         private void ConnectButton_Click(object sender, EventArgs e)
@@ -52,14 +85,11 @@ namespace Lab6Ex3
             serialPort1.DataBits = 8;
             serialPort1.Parity = Parity.None;
             serialPort1.StopBits = StopBits.One;
-
             serialPort1.PortName = comboBoxCOMPorts.Text;
-
             try
             {
                 serialPort1.Open();
                 ConnectButton.Text = "Disconnect";
-                StartLogging("log.csv");
             }
             catch
             {
@@ -67,16 +97,16 @@ namespace Lab6Ex3
             }
         }
 
-        // Called when user presses the "Set PWM" button
         private void SetPWMButton_Click(object sender, EventArgs e)
         {
-            currentSpeedCommand = SpeedCenter * (100 + Convert.ToInt32(PWMSetTextBox.Text)) / 100;
+            currentSpeedCommand =
+                SpeedCenter * (100 + Convert.ToInt32(PWMSetTextBox.Text)) / 100;
 
             lastSpeedToSend = currentSpeedCommand;
-
             SpeedLabel.Text = PWMSetTextBox.Text;
         }
 
+        // ================= SPEED TX =================
         private void SendSpeedTimer_Tick(object sender, EventArgs e)
         {
             if (serialPort1.IsOpen && lastSpeedToSend != -1)
@@ -91,6 +121,7 @@ namespace Lab6Ex3
             }
         }
 
+        // ================= SERIAL RX =================
         private void SerialPort1_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             int bytesToRead = serialPort1.BytesToRead;
@@ -111,51 +142,69 @@ namespace Lab6Ex3
                         rxBuffer.Clear();
                         break;
                     }
+
                     if (startIndex > 0)
                         rxBuffer.RemoveRange(0, startIndex);
 
                     if (rxBuffer.Count < 4) break;
 
                     byte dir = rxBuffer[1];
-                    ushort counts = (ushort)((rxBuffer[2] << 8) | rxBuffer[3]);
+                    ushort counts =
+                        (ushort)((rxBuffer[2] << 8) | rxBuffer[3]);
+
                     rxBuffer.RemoveRange(0, 4);
 
                     int signedCounts = (dir == 0x01) ? counts : -counts;
 
                     position += signedCounts * count2PositionFactor;
                     velocity = signedCounts * count2VelocityFactor;
-
-                    this.BeginInvoke(new Action(() =>
-                    {
-                        PositionTextBox.Text = position.ToString("F4");
-                        VelocityTextBox.Text = velocity.ToString("F4");
-                        HzTextBox.Text = (velocity / 60.0).ToString("F4");
-                    }));
-
-                    if (logWriter != null)
-                    {
-                        int timeMs = (int)logTimer.ElapsedMilliseconds;
-                        logWriter.WriteLine($"{timeMs},{position:F4},{velocity:F4}");
-                    }
                 }
             }
         }
 
+        // ================= LOGGING =================
         private void StartLogging(string filename)
         {
             logWriter = new StreamWriter(filename);
-            logWriter.WriteLine("Time_ms,Position,Velocity");
+            logWriter.WriteLine("Time_ms,Position_cm,Velocity_RPM");
+            logBuffer.Clear();
             logTimer.Restart();
+            isLogging = true;
         }
 
         private void StopLogging()
         {
+            isLogging = false;
             logTimer.Stop();
+
             if (logWriter != null)
             {
+                // Final flush
+                foreach (var line in logBuffer)
+                    logWriter.WriteLine(line);
+
+                logBuffer.Clear();
+
                 logWriter.Flush();
                 logWriter.Close();
                 logWriter = null;
+            }
+        }
+
+        private void TimerSave_Tick(object sender, EventArgs e)
+        {
+            if (!isLogging || logWriter == null) return;
+
+            int timeMs = (int)logTimer.ElapsedMilliseconds;
+
+            logBuffer.Add($"{timeMs},{position:F4},{velocity:F4}");
+
+            if (logBuffer.Count >= LOG_FLUSH_SIZE)
+            {
+                foreach (var line in logBuffer)
+                    logWriter.WriteLine(line);
+
+                logBuffer.Clear();
             }
         }
     }

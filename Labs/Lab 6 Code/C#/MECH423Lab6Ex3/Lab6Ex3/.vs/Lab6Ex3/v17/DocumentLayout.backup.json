@@ -3,16 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\Centr\\Documents\\GitHub\\Mech-421-3-Final-Project\\Labs\\Lab 6 Code\\C#\\MECH423Lab6Ex3\\Lab6Ex3\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{EF967FAA-385C-4190-872D-8FBF4B654FD3}|Lab6Ex3\\Lab6Ex3.csproj|c:\\users\\centr\\documents\\github\\mech-421-3-final-project\\labs\\lab 6 code\\c#\\mech423lab6ex3\\lab6ex3\\lab6ex3\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{EF967FAA-385C-4190-872D-8FBF4B654FD3}|Lab6Ex3\\Lab6Ex3.csproj|C:\\Users\\Centr\\Documents\\GitHub\\Mech-421-3-Final-Project\\Labs\\Lab 6 Code\\C#\\MECH423Lab6Ex3\\Lab6Ex3\\lab6ex3\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EF967FAA-385C-4190-872D-8FBF4B654FD3}|Lab6Ex3\\Lab6Ex3.csproj|solutionrelative:lab6ex3\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EF967FAA-385C-4190-872D-8FBF4B654FD3}|Lab6Ex3\\Lab6Ex3.csproj|C:\\Users\\Centr\\Documents\\GitHub\\Mech-421-3-Final-Project\\Labs\\Lab 6 Code\\C#\\MECH423Lab6Ex3\\Lab6Ex3\\lab6ex3\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{EF967FAA-385C-4190-872D-8FBF4B654FD3}|Lab6Ex3\\Lab6Ex3.csproj|solutionrelative:lab6ex3\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
       "AbsoluteMoniker": "D:0:0:{EF967FAA-385C-4190-872D-8FBF4B654FD3}|Lab6Ex3\\Lab6Ex3.csproj|c:\\users\\centr\\documents\\github\\mech-421-3-final-project\\labs\\lab 6 code\\c#\\mech423lab6ex3\\lab6ex3\\lab6ex3\\form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EF967FAA-385C-4190-872D-8FBF4B654FD3}|Lab6Ex3\\Lab6Ex3.csproj|solutionrelative:lab6ex3\\form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EF967FAA-385C-4190-872D-8FBF4B654FD3}|Lab6Ex3\\Lab6Ex3.csproj|c:\\users\\centr\\documents\\github\\mech-421-3-final-project\\labs\\lab 6 code\\c#\\mech423lab6ex3\\lab6ex3\\lab6ex3\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{EF967FAA-385C-4190-872D-8FBF4B654FD3}|Lab6Ex3\\Lab6Ex3.csproj|solutionrelative:lab6ex3\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,7 +26,7 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "Form1.cs [Design]",
               "DocumentMoniker": "C:\\Users\\Centr\\Documents\\GitHub\\Mech-421-3-Final-Project\\Labs\\Lab 6 Code\\C#\\MECH423Lab6Ex3\\Lab6Ex3\\Lab6Ex3\\Form1.cs",
               "RelativeDocumentMoniker": "Lab6Ex3\\Form1.cs",
@@ -39,13 +39,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "Form1.Designer.cs",
               "DocumentMoniker": "C:\\Users\\Centr\\Documents\\GitHub\\Mech-421-3-Final-Project\\Labs\\Lab 6 Code\\C#\\MECH423Lab6Ex3\\Lab6Ex3\\Lab6Ex3\\Form1.Designer.cs",
               "RelativeDocumentMoniker": "Lab6Ex3\\Form1.Designer.cs",
               "ToolTip": "C:\\Users\\Centr\\Documents\\GitHub\\Mech-421-3-Final-Project\\Labs\\Lab 6 Code\\C#\\MECH423Lab6Ex3\\Lab6Ex3\\Lab6Ex3\\Form1.Designer.cs",
               "RelativeToolTip": "Lab6Ex3\\Form1.Designer.cs",
-              "ViewState": "AgIAAH4AAAAAAAAAAAAIwI0AAAAbAAAAAAAAAA==",
+              "ViewState": "AgIAACIAAAAAAAAAAADwvzYAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-01-23T23:22:55.307Z",
               "EditorCaption": ""
@@ -58,7 +58,7 @@
               "RelativeDocumentMoniker": "Lab6Ex3\\Form1.cs",
               "ToolTip": "C:\\Users\\Centr\\Documents\\GitHub\\Mech-421-3-Final-Project\\Labs\\Lab 6 Code\\C#\\MECH423Lab6Ex3\\Lab6Ex3\\Lab6Ex3\\Form1.cs*",
               "RelativeToolTip": "Lab6Ex3\\Form1.cs*",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAgAAAAAAAAAA==",
+              "ViewState": "AgIAAEMAAAAAAAAAAAAgwGAAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-01-23T23:22:24.847Z",
               "EditorCaption": ""

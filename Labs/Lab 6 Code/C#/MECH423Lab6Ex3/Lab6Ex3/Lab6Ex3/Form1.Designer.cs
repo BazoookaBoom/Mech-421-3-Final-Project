@@ -52,6 +52,7 @@ namespace Lab6Ex3
             this.HzTextBox = new System.Windows.Forms.TextBox();
             this.HzLabel = new System.Windows.Forms.Label();
             this.SaveButton = new System.Windows.Forms.Button();
+            this.timerSave = new System.Windows.Forms.Timer(this.components);
             this.groupBox1.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.SuspendLayout();
@@ -246,12 +247,13 @@ namespace Lab6Ex3
             this.SaveButton.TabIndex = 16;
             this.SaveButton.Text = "Save?";
             this.SaveButton.UseVisualStyleBackColor = true;
+            this.SaveButton.Click += new System.EventHandler(this.SaveButton_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(656, 402);
+            this.ClientSize = new System.Drawing.Size(658, 128);
             this.Controls.Add(this.SaveButton);
             this.Controls.Add(this.HzTextBox);
             this.Controls.Add(this.HzLabel);
@@ -298,6 +300,7 @@ namespace Lab6Ex3
         private System.Windows.Forms.Button SetPWMButton;
         private System.Windows.Forms.TextBox PWMSetTextBox;
         private System.Windows.Forms.Button SaveButton;
+        private System.Windows.Forms.Timer timerSave;
     }
 }
 
