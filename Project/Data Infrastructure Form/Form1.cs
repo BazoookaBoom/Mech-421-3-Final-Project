@@ -142,7 +142,7 @@ namespace Data_Infrastructure_Form
                     Cv2.MedianBlur(newImage, newImage, 5);
                     Cv2.CvtColor(newImage, newImageGrey, ColorConversionCodes.BGR2GRAY);
                     var circles = Cv2.HoughCircles(newImageGrey, HoughModes.GradientAlt, 1, 5, 300, 0.9, 5, 50);
-                    // output is an array of vec3fs? -> array of vec4fs
+                    
 
 
                     discs.Clear();
