@@ -28,7 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
+            this.Heartbeat = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
+            // 
+            // Heartbeat
+            // 
+            this.Heartbeat.Interval = 200;
+            this.Heartbeat.Tick += new System.EventHandler(this.Heartbeat_Tick);
             // 
             // Form1
             // 
@@ -37,12 +45,16 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
+        private System.IO.Ports.SerialPort serialPort1;
+        private System.Windows.Forms.Timer Heartbeat;
     }
 }
 
