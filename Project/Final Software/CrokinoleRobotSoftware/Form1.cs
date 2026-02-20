@@ -41,20 +41,39 @@ namespace CrokinoleRobotSoftware
         
         private void Form1_Load(object sender, EventArgs e)
         {
-            // Connect to MCU
-            _TxHelper.ConnectMCU(serialPort1, COMPORT);
-            // Connect to Camera
-            _visionHelper.ConnectCamera(CAMERANUM);
+
+            Heartbeat.Start();
+            Task.Run(() => InitializeHardware());
+
+        }
+        private void InitializeHardware()
+        {
+            try
+            {
+                _TxHelper.ConnectMCU(serialPort1, COMPORT);
+                _visionHelper.ConnectCamera(CAMERANUM);
+                _visionHelper.StartCapture();
+            }
+            catch (Exception ex)
+            {
+                this.Invoke((Action)(() =>
+                    MessageBox.Show($"Hardware init failed: {ex.Message}")));
+            }
         }
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
             _visionHelper.Dispose();
+            _TxHelper.DisconnectMCU();
         }
 
         private void Heartbeat_Tick(object sender, EventArgs e)
         {
-            
+            _TxHelper.ReconnectMCU();
+
+            _visionHelper.AnalyseFrame(camFrame);
+
+
         }
     }
 }
