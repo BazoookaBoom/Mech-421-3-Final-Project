@@ -43,14 +43,14 @@
             this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtCOut = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.txtYOut = new System.Windows.Forms.TextBox();
             this.txtROut = new System.Windows.Forms.TextBox();
             this.txtXOut = new System.Windows.Forms.TextBox();
-            this.txtCOut = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxWebCam)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxEffect)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -63,6 +63,7 @@
             this.pictureBoxWebCam.Location = new System.Drawing.Point(96, 325);
             this.pictureBoxWebCam.Name = "pictureBoxWebCam";
             this.pictureBoxWebCam.Size = new System.Drawing.Size(661, 478);
+            this.pictureBoxWebCam.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxWebCam.TabIndex = 0;
             this.pictureBoxWebCam.TabStop = false;
             // 
@@ -110,7 +111,8 @@
             // 
             this.pictureBoxEffect.Location = new System.Drawing.Point(865, 325);
             this.pictureBoxEffect.Name = "pictureBoxEffect";
-            this.pictureBoxEffect.Size = new System.Drawing.Size(661, 478);
+            this.pictureBoxEffect.Size = new System.Drawing.Size(680, 440);
+            this.pictureBoxEffect.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxEffect.TabIndex = 5;
             this.pictureBoxEffect.TabStop = false;
             // 
@@ -188,6 +190,22 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Outputs";
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(27, 156);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(75, 25);
+            this.label4.TabIndex = 18;
+            this.label4.Text = "Colour";
+            // 
+            // txtCOut
+            // 
+            this.txtCOut.Location = new System.Drawing.Point(140, 150);
+            this.txtCOut.Name = "txtCOut";
+            this.txtCOut.Size = new System.Drawing.Size(100, 31);
+            this.txtCOut.TabIndex = 17;
+            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -235,22 +253,6 @@
             this.txtXOut.Name = "txtXOut";
             this.txtXOut.Size = new System.Drawing.Size(100, 31);
             this.txtXOut.TabIndex = 11;
-            // 
-            // txtCOut
-            // 
-            this.txtCOut.Location = new System.Drawing.Point(140, 150);
-            this.txtCOut.Name = "txtCOut";
-            this.txtCOut.Size = new System.Drawing.Size(100, 31);
-            this.txtCOut.TabIndex = 17;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(27, 156);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(75, 25);
-            this.label4.TabIndex = 18;
-            this.label4.Text = "Colour";
             // 
             // Form1
             // 

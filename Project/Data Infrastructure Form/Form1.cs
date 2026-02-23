@@ -128,7 +128,8 @@ namespace Data_Infrastructure_Form
                 var imageRes = new Mat();
                 var newImageGrey = new Mat();
 
-                Cv2.Resize(_image, imageRes, new OpenCvSharp.Size(320, 240));
+                //Cv2.Resize(_image, imageRes, new OpenCvSharp.Size(640, 480));
+                imageRes = _image.Clone();
                 var newImage = imageRes.Clone();
 
                 if (_canny)
@@ -180,7 +181,7 @@ namespace Data_Infrastructure_Form
                         yText = circles[0].Center.Y.ToString("0.##");
                         rText = circles[0].Radius.ToString("0.##");
 
-                        txbyte = Convert.ToByte(circles[0].Center.X/320*254 + 1); // Convert to a byte (1 to 255)
+                        //txbyte = Convert.ToByte(circles[0].Center.X/320*254 + 1); // Convert to a byte (1 to 255)
                     }
                 }
 
