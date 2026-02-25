@@ -305,39 +305,54 @@ namespace CrokinoleRobotSoftware
         }
 
         // Decide a strategy based on difficulty
-        public int DetermineStrategy(List<Vec4f> discs)
+        public Point2f DetermineStrategy(List<Vec4f> discs)
         {
-            // Check current board state
-            CheckForOppDiscs(discs);
-
-
             Random random = new Random();
+            double randVal;
 
-            double value = random.NextDouble();
+            // Check current board state
+            if (CheckForOppDiscs(discs))
+            {
+                // Opponent's discs are on board
+                while (_difficulty == 0) {
+                    randVal = random.NextDouble();
 
-            if (_difficulty == 0)
-            {
-                if (value < 0.01) { return 0; }
-                else if (value < 0.4) { return 1; }
-                else if (value < 0.7) { return 2; }
-                else return 3;
-            }
-            else if (_difficulty == 1)
-            {
-                if (value < 0.1) { return 0; }
-                else if (value < 0.3) { return 1; }
-                else if (value < 0.7) { return 2; }
-                else return 3;
-            }
-            else if (_difficulty == 2)
-            {
-                if (value < 0.2) { return 0; }
-                else if (value < 0.5) { return 2; }
-                else return 3;
+                    if (randVal < 0.01) { return 0; }
+                    else if (randVal < 0.4) { return 1; }
+                    else if (randVal < 0.7) { return 2; }
+                    else return 3;
+                }
+                while (_difficulty == 1) { }
+                while (_difficulty == 2) { }
+                while (_difficulty == 3) { }
             }
             else
             {
-                return 0; // Shouldn't ever be reached unless debugging
+                // No opponent discs
+                while (_difficulty == 0) {
+                    randVal = random.NextDouble();
+
+                    if (randVal < 0.05) { return SinkerStratNO(discs); } // 5% chance to target 20-pt
+                    else { return DefenceStratNO(discs); }
+                }
+                while (_difficulty == 1) {
+                    randVal = random.NextDouble();
+
+                    if (randVal < 0.10) { return SinkerStratNO(discs); } // 10% chance to target 20-pt
+                    else { return DefenceStratNO(discs); }
+                }
+                while (_difficulty == 2) {
+                    randVal = random.NextDouble();
+
+                    if (randVal < 0.20) { return SinkerStratNO(discs); } // 20% chance to target 20-pt
+                    else { return DefenceStratNO(discs); }
+                }
+                while (_difficulty == 3) {
+                    randVal = random.NextDouble();
+
+                    if (randVal < 0.80) { return SinkerStratNO(discs); } // 80% chance to target 20-pt
+                    else { return DefenceStratNO(discs); }
+                }
             }
 
         }
@@ -374,12 +389,16 @@ namespace CrokinoleRobotSoftware
         }
 
         // Spread strategy tries to place a shot in the 10 or 5-point zone to spread the opponent's attention
-        private Point2f SpreadStratNO(List<Vec4f> discs)
+        private Point2f SpreadStrat(List<Vec4f> discs)
         {
             Random random = new Random();
 
             while (true)
             {
+                // Pick a disc in the 10 or 5-pt zone and target it's coordinates
+                random.Next(discs.Count());
+
+
                 // Generate coordinate
                 float x = (float)random.NextDouble() * ((Cx - R5) - (Cx + R5));
                 float y = (float)random.NextDouble() * ((Cy - R5) - (Cy));
@@ -396,10 +415,20 @@ namespace CrokinoleRobotSoftware
             }
         }
 
-        // Offensive strategy attempts to knock opponent's pieces outwards
-        private void AttackStrat(List<Vec4f> discs)
+        // HitAny strategy attempts to hit an opponents pieces
+        private void HitAny(List<Vec4f> discs)
         {
+            Random random = new Random();
 
+            while (true)
+            {
+                int index = random.Next(discs.Count);
+
+                float x = discs[index].Item0;
+                float y = discs[index].Item1;
+
+
+            }
         }
 
         // Calculate shot parameters
@@ -407,13 +436,15 @@ namespace CrokinoleRobotSoftware
         public Vec3f CalculateShot(List<Vec4f> discs, Point2f target)
         {
             List<Vector2> validShots = new List<Vector2>(); 
-            const float arcCenterAngle = 270f;
+            List<int> validAngles = new List<int>();
+            const float arcCenterAngle = 270f * ((float)Math.PI / 180f); // 270 degrees on the unit circle is the center of the arc
             float arcHalfSpan = 45f * ((float) Math.PI / 180f); // 45 degrees each side
             Random random = new Random();
 
-            // Generate potential locations along the shooting arc
 
-            int samples = 90; // one per degree, adjust as needed
+
+            // Generate potential locations along the shooting arc
+            int samples = 90; // one per degree, adjust as needed. 0 corresponds with 225 on the units circle, 90 corresponds with 315
 
             for (int i = 0; i <= samples; i++)
             {
@@ -427,13 +458,13 @@ namespace CrokinoleRobotSoftware
 
                 Vector2 vec2Target = new Vector2(target.X, target.Y);
 
-                // direction from shooter toward target
-                Vector2 direction = Vector2.Normalize(vec2Target - shooterPos);
-                
-
                 // check if path is clear of pegs
                 if (PathClearOfPegs(shooterPos, vec2Target))
+                {
                     validShots.Add(shooterPos);
+                    validAngles.Add(i);
+                }
+                    
             }
 
             // Choose shooter position
@@ -443,22 +474,26 @@ namespace CrokinoleRobotSoftware
                 validShots[selectedIndex].X,
                 validShots[selectedIndex].Y);
 
-
             // Calculate slew angle
             Vector2 radialVec = new Vector2(Cx, Cy);
             Vector2 perpendicular = Vector2.Normalize(radialVec - selectedPos);
             Vector2 selVec2Target = new Vector2(target.X, target.Y);
             Vector2 selDirection = Vector2.Normalize(selVec2Target - selectedPos);
-            float slewAngle = AngleBetween(perpendicular, selDirection) + 90;
+            byte slewAngle = (byte) (AngleBetween(perpendicular, selDirection) + 90);
+
+            // Convert selected position to shooter circular position
+            int gantryPos = 0xFFFF - validAngles[selectedIndex] / 90 * 0xFFFF;
+
 
             Vec3f output = new Vec3f(
-                validShots[selectedIndex].X,
-                validShots[selectedIndex].Y,
-                slewAngle);
+                gantryPos, // actual format should be gantry pos, slew angle, power
+                slewAngle,
+                (byte) 0xFF);
 
             return output;
 
         }
+
         // Calculate angle between 2 vectors
         float AngleBetween(Vector2 a, Vector2 b)
         {
@@ -470,6 +505,9 @@ namespace CrokinoleRobotSoftware
         // Check whether the path is clear of pegs [Add disc collision detection]
         bool PathClearOfPegs(Vector2 start, Vector2 end) =>
         !pegs.Any(peg => LineIntersectsCircle(start, end, new Vector2(peg[0], peg[1]), RP + RD));
+
+        bool DiscCollision(Vector2 start, Vector2 end, List<Vec4f> discs) =>
+        !discs.Any(disc => LineIntersectsCircle(start, end, new Vector2(disc[0], disc[1]), disc[2] + RD));
 
         // Checks whether a line intersects a circle specified by its center and radius
         bool LineIntersectsCircle(Vector2 start, Vector2 end, Vector2 center, float radius)
@@ -517,6 +555,11 @@ namespace CrokinoleRobotSoftware
 
     internal class StateMachine
     {
+        private bool whiteStartedRound = true;
+        private int shotsLeft = 8;
+        private bool pendingRoundEnd = false;
+
+
 
         int state = 0; // "dumb" state variable that only tracks state. No state-related code is called from the Logic class
 
@@ -529,34 +572,53 @@ namespace CrokinoleRobotSoftware
         // Moves to next state in the state machine. For branching paths, path 0 is the default
         public int NextState(int stateChange = 0)
         {
+
             switch (state)
             {
                 // Pre-game states
-                case 0: state++; break;
-                case 1: state++; break;
-                case 2: state++; break;
+                case 0: state++; break; // Load game
+                case 1: state++; break; // Difficulty selection received
 
-                // In-round states
-                case 3: state++; break;
-                case 4: state++; break;
-                case 5: state++; break;
-                case 6: state++; break;
-                case 7:
-                    if (stateChange == 0) { state = 3; }
-                    else { state = 8; } // Branch 1 goes to 
+                case 2: 
+
+                    if(pendingRoundEnd) { pendingRoundEnd = false; state = 5; } //Jump to round end now that player has finished their turn, ending the round
+                    else { state++;  }
+                    break; 
+
+                case 3: state++; break; // Calculating and sending instructions to MCU
+                case 4:
+
+                    if (shotsLeft-- > 0) { 
+                        if(whiteStartedRound == true)
+                        {
+                            state = 5;
+                        }
+                        else
+                        {
+                            state = 2;
+                            pendingRoundEnd = true;
+                        }
+
+                            state = 2; 
+                    } // If shots remaining, go to next player turn
+                    else { state = 5; } // Else go to round end
+                    
                     break;
+                case 5: 
+                    if(whiteStartedRound == true) { 
+                        state = 3; // If white started this round, black starts the next round
+                        whiteStartedRound = false;
+                        shotsLeft = 8; // Reset shot count
+                    }
+                    else { state = 2; whiteStartedRound = true; }
 
-                // Post-round states
-                case 8: state++; break;
-                case 9: state++; break;
-                case 10:
-                    if (stateChange == 0) { state = 3; } // New round
-                    else { state = 11; }
+
+                        ; break;
+                case 6:
+                    if (stateChange == 0) { state = 2; }
+                    else { state = 7; } // Branch 1 goes to 
                     break;
-
-                // End game states
-                case 11: state = 1; break;
-                case 12: state = 1; break;
+                case 7: state++; break;
             }
 
             return state;

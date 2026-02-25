@@ -7,11 +7,11 @@
       "RelativeMoniker": "D:0:0:{E8B35155-2918-44FD-B2F2-60AEA148BA1B}|CrokinoleRobotSoftware.csproj|solutionrelative:helper functions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E8B35155-2918-44FD-B2F2-60AEA148BA1B}|CrokinoleRobotSoftware.csproj|C:\\Users\\mikeh\\Mech-421-3-Final-Project\\Project\\Final Software\\CrokinoleRobotSoftware\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{E8B35155-2918-44FD-B2F2-60AEA148BA1B}|CrokinoleRobotSoftware.csproj|c:\\users\\mikeh\\mech-421-3-final-project\\project\\final software\\crokinolerobotsoftware\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E8B35155-2918-44FD-B2F2-60AEA148BA1B}|CrokinoleRobotSoftware.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E8B35155-2918-44FD-B2F2-60AEA148BA1B}|CrokinoleRobotSoftware.csproj|c:\\users\\mikeh\\mech-421-3-final-project\\project\\final software\\crokinolerobotsoftware\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{E8B35155-2918-44FD-B2F2-60AEA148BA1B}|CrokinoleRobotSoftware.csproj|C:\\Users\\mikeh\\Mech-421-3-Final-Project\\Project\\Final Software\\CrokinoleRobotSoftware\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{E8B35155-2918-44FD-B2F2-60AEA148BA1B}|CrokinoleRobotSoftware.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
@@ -30,9 +30,9 @@
               "Title": "Helper Functions.cs",
               "DocumentMoniker": "C:\\Users\\mikeh\\Mech-421-3-Final-Project\\Project\\Final Software\\CrokinoleRobotSoftware\\Helper Functions.cs",
               "RelativeDocumentMoniker": "Helper Functions.cs",
-              "ToolTip": "C:\\Users\\mikeh\\Mech-421-3-Final-Project\\Project\\Final Software\\CrokinoleRobotSoftware\\Helper Functions.cs*",
-              "RelativeToolTip": "Helper Functions.cs*",
-              "ViewState": "AgIAAI0BAAAAAAAAAAAmwJcBAAAAAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\mikeh\\Mech-421-3-Final-Project\\Project\\Final Software\\CrokinoleRobotSoftware\\Helper Functions.cs",
+              "RelativeToolTip": "Helper Functions.cs",
+              "ViewState": "AgIAACsBAAAAAAAAAAAAwNsBAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-02-14T11:06:58.387Z",
               "IsPinned": true,
@@ -44,9 +44,9 @@
               "Title": "Form1.cs",
               "DocumentMoniker": "C:\\Users\\mikeh\\Mech-421-3-Final-Project\\Project\\Final Software\\CrokinoleRobotSoftware\\Form1.cs",
               "RelativeDocumentMoniker": "Form1.cs",
-              "ToolTip": "C:\\Users\\mikeh\\Mech-421-3-Final-Project\\Project\\Final Software\\CrokinoleRobotSoftware\\Form1.cs*",
-              "RelativeToolTip": "Form1.cs*",
-              "ViewState": "AgIAAEEAAAAAAAAAAAAqwE0AAAAYAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\mikeh\\Mech-421-3-Final-Project\\Project\\Final Software\\CrokinoleRobotSoftware\\Form1.cs",
+              "RelativeToolTip": "Form1.cs",
+              "ViewState": "AgIAAL8AAAAAAAAAAAAAALsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-02-14T10:54:05.659Z",
               "IsPinned": true,
@@ -58,8 +58,8 @@
               "Title": "Form1.cs [Design]",
               "DocumentMoniker": "C:\\Users\\mikeh\\Mech-421-3-Final-Project\\Project\\Final Software\\CrokinoleRobotSoftware\\Form1.cs",
               "RelativeDocumentMoniker": "Form1.cs",
-              "ToolTip": "C:\\Users\\mikeh\\Mech-421-3-Final-Project\\Project\\Final Software\\CrokinoleRobotSoftware\\Form1.cs [Design]*",
-              "RelativeToolTip": "Form1.cs [Design]*",
+              "ToolTip": "C:\\Users\\mikeh\\Mech-421-3-Final-Project\\Project\\Final Software\\CrokinoleRobotSoftware\\Form1.cs [Design]",
+              "RelativeToolTip": "Form1.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-02-14T10:50:30.853Z",
               "EditorCaption": " [Design]"

@@ -35,19 +35,33 @@
             this.EndTurnButt = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.Start = new System.Windows.Forms.TabPage();
-            this.Run = new System.Windows.Forms.TabPage();
-            this.GameOver = new System.Windows.Forms.TabPage();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.RoundEnd = new System.Windows.Forms.TabPage();
-            this.ComboBxDiff = new System.Windows.Forms.ComboBox();
             this.ButtDiffSel = new System.Windows.Forms.Button();
+            this.ComboBxDiff = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.Run = new System.Windows.Forms.TabPage();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.RoundEnd = new System.Windows.Forms.TabPage();
+            this.GameOver = new System.Windows.Forms.TabPage();
+            this.RoundEndProceedButt = new System.Windows.Forms.Button();
+            this.WhtRoundScore = new System.Windows.Forms.TextBox();
+            this.BlkRoundScore = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.BlkGameScore = new System.Windows.Forms.TextBox();
+            this.WhtGameScore = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.camFrame)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.Start.SuspendLayout();
             this.Run.SuspendLayout();
+            this.RoundEnd.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // serialPort1
+            // 
+            this.serialPort1.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.serialPort1_DataReceived);
             // 
             // Heartbeat
             // 
@@ -97,68 +111,17 @@
             this.Start.Text = "Start";
             this.Start.UseVisualStyleBackColor = true;
             // 
-            // Run
+            // ButtDiffSel
             // 
-            this.Run.Controls.Add(this.label2);
-            this.Run.Controls.Add(this.label1);
-            this.Run.Controls.Add(this.EndTurnButt);
-            this.Run.Controls.Add(this.camFrame);
-            this.Run.Location = new System.Drawing.Point(8, 39);
-            this.Run.Name = "Run";
-            this.Run.Padding = new System.Windows.Forms.Padding(3);
-            this.Run.Size = new System.Drawing.Size(1774, 1178);
-            this.Run.TabIndex = 1;
-            this.Run.Text = "Run";
-            this.Run.UseVisualStyleBackColor = true;
-            // 
-            // GameOver
-            // 
-            this.GameOver.Location = new System.Drawing.Point(8, 39);
-            this.GameOver.Name = "GameOver";
-            this.GameOver.Size = new System.Drawing.Size(1774, 1178);
-            this.GameOver.TabIndex = 2;
-            this.GameOver.Text = "GameOver";
-            this.GameOver.UseVisualStyleBackColor = true;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(534, 56);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(122, 55);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "0 : 0";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(734, 56);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(122, 55);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "0 : 0";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Segoe Print", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(682, 34);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(507, 112);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "Crokinolinator";
-            // 
-            // RoundEnd
-            // 
-            this.RoundEnd.Location = new System.Drawing.Point(8, 39);
-            this.RoundEnd.Name = "RoundEnd";
-            this.RoundEnd.Padding = new System.Windows.Forms.Padding(3);
-            this.RoundEnd.Size = new System.Drawing.Size(1774, 1178);
-            this.RoundEnd.TabIndex = 3;
-            this.RoundEnd.Text = "RoundEnd";
-            this.RoundEnd.UseVisualStyleBackColor = true;
+            this.ButtDiffSel.Enabled = false;
+            this.ButtDiffSel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ButtDiffSel.Location = new System.Drawing.Point(921, 565);
+            this.ButtDiffSel.Name = "ButtDiffSel";
+            this.ButtDiffSel.Size = new System.Drawing.Size(183, 86);
+            this.ButtDiffSel.TabIndex = 2;
+            this.ButtDiffSel.Text = "Select Difficulty";
+            this.ButtDiffSel.UseVisualStyleBackColor = true;
+            this.ButtDiffSel.Click += new System.EventHandler(this.ButtDiffSel_Click);
             // 
             // ComboBxDiff
             // 
@@ -174,17 +137,159 @@
             this.ComboBxDiff.Size = new System.Drawing.Size(228, 45);
             this.ComboBxDiff.TabIndex = 1;
             // 
-            // ButtDiffSel
+            // label3
             // 
-            this.ButtDiffSel.Enabled = false;
-            this.ButtDiffSel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ButtDiffSel.Location = new System.Drawing.Point(921, 565);
-            this.ButtDiffSel.Name = "ButtDiffSel";
-            this.ButtDiffSel.Size = new System.Drawing.Size(183, 86);
-            this.ButtDiffSel.TabIndex = 2;
-            this.ButtDiffSel.Text = "Select Difficulty";
-            this.ButtDiffSel.UseVisualStyleBackColor = true;
-            this.ButtDiffSel.Click += new System.EventHandler(this.ButtDiffSel_Click);
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Segoe Print", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(682, 34);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(507, 112);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "Crokinolinator";
+            // 
+            // Run
+            // 
+            this.Run.Controls.Add(this.label2);
+            this.Run.Controls.Add(this.label1);
+            this.Run.Controls.Add(this.EndTurnButt);
+            this.Run.Controls.Add(this.camFrame);
+            this.Run.Location = new System.Drawing.Point(8, 39);
+            this.Run.Name = "Run";
+            this.Run.Padding = new System.Windows.Forms.Padding(3);
+            this.Run.Size = new System.Drawing.Size(1774, 1178);
+            this.Run.TabIndex = 1;
+            this.Run.Text = "Run";
+            this.Run.UseVisualStyleBackColor = true;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(734, 56);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(122, 55);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "0 : 0";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(534, 56);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(122, 55);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "0 : 0";
+            // 
+            // RoundEnd
+            // 
+            this.RoundEnd.Controls.Add(this.BlkGameScore);
+            this.RoundEnd.Controls.Add(this.WhtGameScore);
+            this.RoundEnd.Controls.Add(this.label7);
+            this.RoundEnd.Controls.Add(this.label6);
+            this.RoundEnd.Controls.Add(this.label5);
+            this.RoundEnd.Controls.Add(this.label4);
+            this.RoundEnd.Controls.Add(this.BlkRoundScore);
+            this.RoundEnd.Controls.Add(this.WhtRoundScore);
+            this.RoundEnd.Controls.Add(this.RoundEndProceedButt);
+            this.RoundEnd.Location = new System.Drawing.Point(8, 39);
+            this.RoundEnd.Name = "RoundEnd";
+            this.RoundEnd.Padding = new System.Windows.Forms.Padding(3);
+            this.RoundEnd.Size = new System.Drawing.Size(1774, 1178);
+            this.RoundEnd.TabIndex = 3;
+            this.RoundEnd.Text = "RoundEnd";
+            this.RoundEnd.UseVisualStyleBackColor = true;
+            // 
+            // GameOver
+            // 
+            this.GameOver.Location = new System.Drawing.Point(8, 39);
+            this.GameOver.Name = "GameOver";
+            this.GameOver.Size = new System.Drawing.Size(1774, 1178);
+            this.GameOver.TabIndex = 2;
+            this.GameOver.Text = "GameOver";
+            this.GameOver.UseVisualStyleBackColor = true;
+            // 
+            // RoundEndProceedButt
+            // 
+            this.RoundEndProceedButt.Location = new System.Drawing.Point(637, 275);
+            this.RoundEndProceedButt.Name = "RoundEndProceedButt";
+            this.RoundEndProceedButt.Size = new System.Drawing.Size(188, 125);
+            this.RoundEndProceedButt.TabIndex = 3;
+            this.RoundEndProceedButt.Text = "Next Round";
+            this.RoundEndProceedButt.UseVisualStyleBackColor = true;
+            this.RoundEndProceedButt.Click += new System.EventHandler(this.RoundEndProceedButt_Click);
+            // 
+            // WhtRoundScore
+            // 
+            this.WhtRoundScore.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.WhtRoundScore.Location = new System.Drawing.Point(502, 168);
+            this.WhtRoundScore.Name = "WhtRoundScore";
+            this.WhtRoundScore.Size = new System.Drawing.Size(130, 44);
+            this.WhtRoundScore.TabIndex = 4;
+            // 
+            // BlkRoundScore
+            // 
+            this.BlkRoundScore.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BlkRoundScore.Location = new System.Drawing.Point(1093, 172);
+            this.BlkRoundScore.Name = "BlkRoundScore";
+            this.BlkRoundScore.Size = new System.Drawing.Size(117, 44);
+            this.BlkRoundScore.TabIndex = 5;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(202, 175);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(294, 37);
+            this.label4.TabIndex = 6;
+            this.label4.Text = "White Round Score";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(774, 175);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(290, 37);
+            this.label5.TabIndex = 7;
+            this.label5.Text = "Black Round Score";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(202, 101);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(287, 37);
+            this.label6.TabIndex = 8;
+            this.label6.Text = "White Game Score";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(774, 101);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(283, 37);
+            this.label7.TabIndex = 9;
+            this.label7.Text = "Black Game Score";
+            // 
+            // BlkGameScore
+            // 
+            this.BlkGameScore.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BlkGameScore.Location = new System.Drawing.Point(1093, 102);
+            this.BlkGameScore.Name = "BlkGameScore";
+            this.BlkGameScore.Size = new System.Drawing.Size(117, 44);
+            this.BlkGameScore.TabIndex = 11;
+            // 
+            // WhtGameScore
+            // 
+            this.WhtGameScore.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.WhtGameScore.Location = new System.Drawing.Point(502, 98);
+            this.WhtGameScore.Name = "WhtGameScore";
+            this.WhtGameScore.Size = new System.Drawing.Size(130, 44);
+            this.WhtGameScore.TabIndex = 10;
             // 
             // Form1
             // 
@@ -202,6 +307,8 @@
             this.Start.PerformLayout();
             this.Run.ResumeLayout(false);
             this.Run.PerformLayout();
+            this.RoundEnd.ResumeLayout(false);
+            this.RoundEnd.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -222,6 +329,15 @@
         private System.Windows.Forms.TabPage RoundEnd;
         private System.Windows.Forms.Button ButtDiffSel;
         private System.Windows.Forms.ComboBox ComboBxDiff;
+        private System.Windows.Forms.Button RoundEndProceedButt;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox BlkRoundScore;
+        private System.Windows.Forms.TextBox WhtRoundScore;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox BlkGameScore;
+        private System.Windows.Forms.TextBox WhtGameScore;
+        private System.Windows.Forms.Label label7;
     }
 }
 

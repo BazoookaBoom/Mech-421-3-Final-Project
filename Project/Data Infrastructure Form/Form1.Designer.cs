@@ -62,7 +62,7 @@
             // 
             this.pictureBoxWebCam.Location = new System.Drawing.Point(96, 325);
             this.pictureBoxWebCam.Name = "pictureBoxWebCam";
-            this.pictureBoxWebCam.Size = new System.Drawing.Size(661, 478);
+            this.pictureBoxWebCam.Size = new System.Drawing.Size(1464, 1005);
             this.pictureBoxWebCam.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxWebCam.TabIndex = 0;
             this.pictureBoxWebCam.TabStop = false;
@@ -109,9 +109,9 @@
             // 
             // pictureBoxEffect
             // 
-            this.pictureBoxEffect.Location = new System.Drawing.Point(865, 325);
+            this.pictureBoxEffect.Location = new System.Drawing.Point(1584, 325);
             this.pictureBoxEffect.Name = "pictureBoxEffect";
-            this.pictureBoxEffect.Size = new System.Drawing.Size(680, 440);
+            this.pictureBoxEffect.Size = new System.Drawing.Size(1398, 1005);
             this.pictureBoxEffect.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxEffect.TabIndex = 5;
             this.pictureBoxEffect.TabStop = false;
@@ -135,7 +135,7 @@
             this.groupBox1.Controls.Add(this.btnFPS);
             this.groupBox1.Location = new System.Drawing.Point(96, 206);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1430, 100);
+            this.groupBox1.Size = new System.Drawing.Size(2250, 100);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Controls";
@@ -146,7 +146,7 @@
             this.groupBox2.Controls.Add(this.dpdnConnect);
             this.groupBox2.Location = new System.Drawing.Point(96, 46);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(1430, 142);
+            this.groupBox2.Size = new System.Drawing.Size(2250, 142);
             this.groupBox2.TabIndex = 8;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Setup";
@@ -183,7 +183,7 @@
             this.groupBox3.Controls.Add(this.txtYOut);
             this.groupBox3.Controls.Add(this.txtROut);
             this.groupBox3.Controls.Add(this.txtXOut);
-            this.groupBox3.Location = new System.Drawing.Point(96, 823);
+            this.groupBox3.Location = new System.Drawing.Point(96, 1336);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(661, 237);
             this.groupBox3.TabIndex = 11;
@@ -258,7 +258,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1625, 1103);
+            this.ClientSize = new System.Drawing.Size(3020, 1612);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);

@@ -3,12 +3,15 @@
   "WorkspaceRootPath": "C:\\Users\\mikeh\\Mech-421-3-Final-Project\\Project\\Data Infrastructure Form\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{6DA4C7D3-4401-41FB-9801-7589ADE4EEC3}|Data Infrastructure Form.csproj|c:\\users\\mikeh\\mech-421-3-final-project\\project\\data infrastructure form\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{6DA4C7D3-4401-41FB-9801-7589ADE4EEC3}|Data Infrastructure Form.csproj|C:\\Users\\mikeh\\Mech-421-3-Final-Project\\Project\\Data Infrastructure Form\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6DA4C7D3-4401-41FB-9801-7589ADE4EEC3}|Data Infrastructure Form.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{6DA4C7D3-4401-41FB-9801-7589ADE4EEC3}|Data Infrastructure Form.csproj|C:\\Users\\mikeh\\Mech-421-3-Final-Project\\Project\\Data Infrastructure Form\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{6DA4C7D3-4401-41FB-9801-7589ADE4EEC3}|Data Infrastructure Form.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\mikeh\\Mech-421-3-Final-Project\\Project\\Final Software\\CrokinoleRobotSoftware\\Form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,17 +21,30 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Form1.cs",
+              "DocumentMoniker": "C:\\Users\\mikeh\\Mech-421-3-Final-Project\\Project\\Final Software\\CrokinoleRobotSoftware\\Form1.cs",
+              "RelativeDocumentMoniker": "..\\Final Software\\CrokinoleRobotSoftware\\Form1.cs",
+              "ToolTip": "C:\\Users\\mikeh\\Mech-421-3-Final-Project\\Project\\Final Software\\CrokinoleRobotSoftware\\Form1.cs",
+              "RelativeToolTip": "..\\Final Software\\CrokinoleRobotSoftware\\Form1.cs",
+              "ViewState": "AgIAAFcAAAAAAAAAAAAAAHUAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-23T01:04:03.519Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "Form1.cs",
               "DocumentMoniker": "C:\\Users\\mikeh\\Mech-421-3-Final-Project\\Project\\Data Infrastructure Form\\Form1.cs",
               "RelativeDocumentMoniker": "Form1.cs",
-              "ToolTip": "C:\\Users\\mikeh\\Mech-421-3-Final-Project\\Project\\Data Infrastructure Form\\Form1.cs",
-              "RelativeToolTip": "Form1.cs",
-              "ViewState": "AgIAAJ0AAAAAAAAAAAAnwHEAAAARAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\mikeh\\Mech-421-3-Final-Project\\Project\\Data Infrastructure Form\\Form1.cs*",
+              "RelativeToolTip": "Form1.cs*",
+              "ViewState": "AgIAAHkAAAAAAAAAAAAawI4AAAA4AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-01-14T21:01:18.792Z",
               "EditorCaption": ""
@@ -39,8 +55,8 @@
               "Title": "Form1.cs [Design]",
               "DocumentMoniker": "C:\\Users\\mikeh\\Mech-421-3-Final-Project\\Project\\Data Infrastructure Form\\Form1.cs",
               "RelativeDocumentMoniker": "Form1.cs",
-              "ToolTip": "C:\\Users\\mikeh\\Mech-421-3-Final-Project\\Project\\Data Infrastructure Form\\Form1.cs [Design]",
-              "RelativeToolTip": "Form1.cs [Design]",
+              "ToolTip": "C:\\Users\\mikeh\\Mech-421-3-Final-Project\\Project\\Data Infrastructure Form\\Form1.cs [Design]*",
+              "RelativeToolTip": "Form1.cs [Design]*",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-01-14T20:33:28.459Z",
               "EditorCaption": " [Design]"

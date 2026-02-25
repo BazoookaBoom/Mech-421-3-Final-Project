@@ -140,7 +140,7 @@ namespace Data_Infrastructure_Form
 
                 if (_hough)
                 {
-                    Cv2.MedianBlur(newImage, newImage, 5);
+                    Cv2.MedianBlur(newImage, newImage, 1);
                     Cv2.CvtColor(newImage, newImageGrey, ColorConversionCodes.BGR2GRAY);
                     var circles = Cv2.HoughCircles(newImageGrey, HoughModes.GradientAlt, 1, 5, 300, 0.9, 5, 50);
                     

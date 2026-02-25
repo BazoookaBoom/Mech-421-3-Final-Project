@@ -28,6 +28,10 @@ namespace CrokinoleRobotSoftware
         private Logic _logicHelper;
         private StateMachine _SM;
 
+        // Track Scores
+        int blackScore = 0;
+        int whiteScore = 0;
+
 
         public Form1()
         {
@@ -47,7 +51,7 @@ namespace CrokinoleRobotSoftware
             Heartbeat.Start();
             Task.Run(() => InitializeHardware());
 
-            _logicHelper.NextState(); // Startup & Load complete
+            _SM.NextState(); // Startup & Load complete
 
         }
         private void InitializeHardware()
@@ -83,17 +87,24 @@ namespace CrokinoleRobotSoftware
 
         private void ButtDiffSel_Click(object sender, EventArgs e)
         {
-            switch (ComboBxDiff.Text)
+            if(_SM.GetState() == 2)
             {
-                case "Easy": _logicHelper.SetDifficulty(0); break;
-                case "Medium": _logicHelper.SetDifficulty(1); break;
-                case "Hard": _logicHelper.SetDifficulty(2); break;
-                case "Just Plain Mean": _logicHelper.SetDifficulty(3); break;
+                bool proceedFlag = false;
+
+                switch (ComboBxDiff.Text)
+                {
+                    case "Easy": _logicHelper.SetDifficulty(0); proceedFlag = true; break;
+                    case "Medium": _logicHelper.SetDifficulty(1); proceedFlag = true; break;
+                    case "Hard": _logicHelper.SetDifficulty(2); proceedFlag = true; break;
+                    case "Just Plain Mean": _logicHelper.SetDifficulty(3); proceedFlag = true; break;
+                }
+
+                if (proceedFlag) {
+                    _SM.NextState(); // Move to next state
+                    tabControl1.SelectedIndex = 1; // Load the start screen
+                }
+                
             }
-
-            _SM.NextState();
-
-
         }
 
         public void ActionMgr()
@@ -103,38 +114,37 @@ namespace CrokinoleRobotSoftware
                 case 0:
                     // Actions done in Form1_load and Form1 class initialization
                     break;
-                case 1:
-                    // Load the start screen
-                    tabControl1.SelectedIndex = 0;
-                    break;
-                case 2: // Wait for player to input difficulty
-                    ButtDiffSel.Enabled = true;
+                case 1: // Wait for difficulty selection
+                    tabControl1.SelectedIndex = 0; // Load the start screen
+                    ButtDiffSel.Enabled = true; // Enable difficulty selection button
                     break;
 
+                // In-Game
+                case 2: 
+                    // Move to state 3 when player turn completed
+                    break;
+                case 3: // Calculate target and instructions, send to MCU
+                    List<Vec4f> discs = _visionHelper.AnalyseFrame(camFrame);
+                    Point2f target = _logicHelper.DetermineStrategy(discs);
+                    Vec3f instructions = _logicHelper.CalculateShot(discs, target);
+                    _TxHelper.SendPacket((ushort) instructions.Item0, (byte) instructions.Item1, (byte) instructions.Item2);
 
-                case 3: // Wait for user to complete turn
+                    _SM.NextState();
                     break;
-                case 4: // Determine which strategy to use. Capture board state
+                case 4:
+                    // Proceed to next state only after acknowledgement of shot. See serialPort1_DataReceived
                     break;
-                case 5: // Calculate the desired shot
-                    break;
-                case 6: // Calculate MCU instructions
-                    break;
-                case 7: // Transmit Instructions
-                    break;
+                case 5: // End of round, load round end screen
+                    tabControl1.SelectedIndex = 3;
+                    WhtGameScore.Text = whiteScore.ToString();
+                    BlkGameScore.Text = blackScore.ToString();
 
+                    break;
+                case 6: // 
 
-                case 8:
+                // End-Game
                     break;
-                case 9:
-                    break;
-                case 10:
-                    break;
-
-
-                case 11:
-                    break;
-                case 12:
+                case 7: 
                     break;
 
 
@@ -148,5 +158,34 @@ namespace CrokinoleRobotSoftware
             _SM.NextState(); // Proceeed to state 4:
         }
 
+        private void serialPort1_DataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
+        {
+
+        }
+
+        private void RoundEndProceedButt_Click(object sender, EventArgs e)
+        {
+
+
+            if (int.TryParse(WhtRoundScore.Text.Trim(), out int valueWht))
+            {
+                whiteScore += valueWht;
+            }
+            if (int.TryParse(BlkRoundScore.Text.Trim(), out int valueBlk))
+            {
+                blackScore += valueBlk;
+            }
+
+            if (whiteScore >= 100 || blackScore >= 100)
+            {
+                _SM.NextState(1);
+            }
+            else
+            {
+                _SM.NextState();
+            }
+            
+
+        }
     }
 }
