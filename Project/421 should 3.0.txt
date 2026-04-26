@@ -1,0 +1,26 @@
+421 should 3.0
+	423 T1 Y4 good idea
+Cannot be same year unless 4th year
+	Ma should not have to pull double time
+
+18.14
+30.2
+4.9
+
+Gear bottom is 17 off stepper wall bottom
+
+25 down from center of wheel
+23 after groove accounted for
+
+Add 25 for the other half of the wheel going up
+
+48 from groove top to top of wheel
+31 from bottom of thing to stepper wall
+
+Really, its 
+
+
+69.715 mm from wheel groove center to back of extrusion support
+27 from extrusion end to support
+
+Top of servo without horn to board 87.1mm

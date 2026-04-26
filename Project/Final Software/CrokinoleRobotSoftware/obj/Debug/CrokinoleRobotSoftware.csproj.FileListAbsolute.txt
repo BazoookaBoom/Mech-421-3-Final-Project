@@ -29,3 +29,11 @@ C:\Users\mikeh\Mech-421-3-Final-Project\Project\Final Software\CrokinoleRobotSof
 C:\Users\mikeh\Mech-421-3-Final-Project\Project\Final Software\CrokinoleRobotSoftware\bin\Debug\dll\x64\OpenCvSharpExtern.dll
 C:\Users\mikeh\Mech-421-3-Final-Project\Project\Final Software\CrokinoleRobotSoftware\bin\Debug\dll\x64\opencv_videoio_ffmpeg4130_64.dll
 C:\Users\mikeh\Mech-421-3-Final-Project\Project\Final Software\CrokinoleRobotSoftware\obj\Debug\CrokinoleRobotSoftware.exe.config
+C:\Users\Centr\Documents\GitHub\Mech-421-3-Final-Project\Project\Final Software\CrokinoleRobotSoftware\obj\Debug\CrokinoleRobotSoftware.csproj.AssemblyReference.cache
+C:\Users\Centr\Documents\GitHub\Mech-421-3-Final-Project\Project\Final Software\CrokinoleRobotSoftware\obj\Debug\CrokinoleRobotSoftware.exe.config
+C:\Users\Centr\Documents\GitHub\Mech-421-3-Final-Project\Project\Final Software\CrokinoleRobotSoftware\obj\Debug\CrokinoleRobotSoftware.Form1.resources
+C:\Users\Centr\Documents\GitHub\Mech-421-3-Final-Project\Project\Final Software\CrokinoleRobotSoftware\obj\Debug\CrokinoleRobotSoftware.Properties.Resources.resources
+C:\Users\Centr\Documents\GitHub\Mech-421-3-Final-Project\Project\Final Software\CrokinoleRobotSoftware\obj\Debug\CrokinoleRobotSoftware.csproj.GenerateResource.cache
+C:\Users\Centr\Documents\GitHub\Mech-421-3-Final-Project\Project\Final Software\CrokinoleRobotSoftware\obj\Debug\CrokinoleRobotSoftware.csproj.CoreCompileInputs.cache
+C:\Users\Centr\Documents\GitHub\Mech-421-3-Final-Project\Project\Final Software\CrokinoleRobotSoftware\obj\Debug\CrokinoleRobotSoftware.exe
+C:\Users\Centr\Documents\GitHub\Mech-421-3-Final-Project\Project\Final Software\CrokinoleRobotSoftware\obj\Debug\CrokinoleRobotSoftware.pdb

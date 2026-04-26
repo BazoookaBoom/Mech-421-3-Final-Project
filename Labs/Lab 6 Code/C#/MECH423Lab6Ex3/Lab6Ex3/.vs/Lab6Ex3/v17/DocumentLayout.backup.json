@@ -3,7 +3,7 @@
   "WorkspaceRootPath": "C:\\Users\\Centr\\Documents\\GitHub\\Mech-421-3-Final-Project\\Labs\\Lab 6 Code\\C#\\MECH423Lab6Ex3\\Lab6Ex3\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{EF967FAA-385C-4190-872D-8FBF4B654FD3}|Lab6Ex3\\Lab6Ex3.csproj|C:\\Users\\Centr\\Documents\\GitHub\\Mech-421-3-Final-Project\\Labs\\Lab 6 Code\\C#\\MECH423Lab6Ex3\\Lab6Ex3\\lab6ex3\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{EF967FAA-385C-4190-872D-8FBF4B654FD3}|Lab6Ex3\\Lab6Ex3.csproj|c:\\users\\centr\\documents\\github\\mech-421-3-final-project\\labs\\lab 6 code\\c#\\mech423lab6ex3\\lab6ex3\\lab6ex3\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EF967FAA-385C-4190-872D-8FBF4B654FD3}|Lab6Ex3\\Lab6Ex3.csproj|solutionrelative:lab6ex3\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -30,8 +30,8 @@
               "Title": "Form1.cs [Design]",
               "DocumentMoniker": "C:\\Users\\Centr\\Documents\\GitHub\\Mech-421-3-Final-Project\\Labs\\Lab 6 Code\\C#\\MECH423Lab6Ex3\\Lab6Ex3\\Lab6Ex3\\Form1.cs",
               "RelativeDocumentMoniker": "Lab6Ex3\\Form1.cs",
-              "ToolTip": "C:\\Users\\Centr\\Documents\\GitHub\\Mech-421-3-Final-Project\\Labs\\Lab 6 Code\\C#\\MECH423Lab6Ex3\\Lab6Ex3\\Lab6Ex3\\Form1.cs [Design]*",
-              "RelativeToolTip": "Lab6Ex3\\Form1.cs [Design]*",
+              "ToolTip": "C:\\Users\\Centr\\Documents\\GitHub\\Mech-421-3-Final-Project\\Labs\\Lab 6 Code\\C#\\MECH423Lab6Ex3\\Lab6Ex3\\Lab6Ex3\\Form1.cs [Design]",
+              "RelativeToolTip": "Lab6Ex3\\Form1.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-01-23T23:20:55.919Z",
               "IsPinned": true,
@@ -56,8 +56,8 @@
               "Title": "Form1.cs",
               "DocumentMoniker": "C:\\Users\\Centr\\Documents\\GitHub\\Mech-421-3-Final-Project\\Labs\\Lab 6 Code\\C#\\MECH423Lab6Ex3\\Lab6Ex3\\Lab6Ex3\\Form1.cs",
               "RelativeDocumentMoniker": "Lab6Ex3\\Form1.cs",
-              "ToolTip": "C:\\Users\\Centr\\Documents\\GitHub\\Mech-421-3-Final-Project\\Labs\\Lab 6 Code\\C#\\MECH423Lab6Ex3\\Lab6Ex3\\Lab6Ex3\\Form1.cs*",
-              "RelativeToolTip": "Lab6Ex3\\Form1.cs*",
+              "ToolTip": "C:\\Users\\Centr\\Documents\\GitHub\\Mech-421-3-Final-Project\\Labs\\Lab 6 Code\\C#\\MECH423Lab6Ex3\\Lab6Ex3\\Lab6Ex3\\Form1.cs",
+              "RelativeToolTip": "Lab6Ex3\\Form1.cs",
               "ViewState": "AgIAAC8AAAAAAAAAAAAewD0AAAB9AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-01-23T23:22:24.847Z",
